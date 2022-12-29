@@ -1,0 +1,11 @@
+body {
+    font-size: 1.2rem;
+    /* FIXME: temporary styles  */
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
+
+/* Recommended by rehype-pretty-code (https://rehype-pretty-code.netlify.app) */
+pre > code {
+    display: grid;
+}

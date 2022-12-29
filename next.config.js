@@ -1,3 +1,12 @@
+const prettyCode = require("rehype-pretty-code")
+
+// DOCS: https://rehype-pretty-code.netlify.app/
+/** @type {import('rehype-pretty-code').Options} */
+const prettyCodeOptions = {
+    theme: "github-dark",
+}
+const rehypePrettyCode = [prettyCode, prettyCodeOptions]
+
 const withMDX = require("@next/mdx")({
     extension: /\.mdx?$/,
     options: {
@@ -5,7 +14,7 @@ const withMDX = require("@next/mdx")({
         // as the package is ESM only
         // https://github.com/remarkjs/remark-gfm#install
         remarkPlugins: [],
-        rehypePlugins: [],
+        rehypePlugins: [rehypePrettyCode],
         // If you use `MDXProvider`, uncomment the following line.
         providerImportSource: "@mdx-js/react",
     },
