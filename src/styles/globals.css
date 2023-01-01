@@ -3,10 +3,49 @@
 @tailwind utilities;
 
 body {
-    font-size: 1.2rem;
     /* FIXME: temporary styles  */
     background-color: rgb(32, 32, 32);
     color: white;
+}
+
+/* Global styles for basic elements */
+h1 {
+    @apply text-5xl;
+}
+h2 {
+    @apply text-4xl;
+}
+h3 {
+    @apply text-3xl;
+}
+h4 {
+    @apply text-2xl;
+}
+h5 {
+    @apply text-xl;
+}
+h6 {
+    @apply text-lg;
+}
+
+blockquote {
+    @apply my-2 border-l-4 border-gray-300 text-gray-300 pl-4 text-xl;
+}
+
+ol {
+    @apply list-decimal space-y-3 pl-8;
+}
+
+ul {
+    @apply list-disc space-y-3 pl-8;
+}
+
+hr {
+    @apply border-t-2 pb-8;
+}
+
+a {
+    @apply underline;
 }
 
 /* Recommended by rehype-pretty-code (https://rehype-pretty-code.netlify.app) */

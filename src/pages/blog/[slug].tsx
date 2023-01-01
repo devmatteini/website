@@ -17,7 +17,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
             </Head>
             <article>
                 <div className="mb-6">
-                    <h1 className="mb-1 text-3xl font-bold">{post.title}</h1>
+                    <h1 className="mb-1 font-bold">{post.title}</h1>
                     <p className="text-sm">{formatDate(post.date)}</p>
                 </div>
                 <MDXContent />

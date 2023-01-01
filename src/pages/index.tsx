@@ -5,7 +5,7 @@ import Link from "next/link"
 const Home: React.FC = () => {
     return (
         <>
-            <h1 className="text-3xl font-bold mb-5">website</h1>
+            <h1 className="font-bold mb-5">website</h1>
 
             <h2>Posts:</h2>
             {allPosts.map((post) => (
