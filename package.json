@@ -5,13 +5,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run cleanup && next dev",
+    "build": "npm run cleanup && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --ignore-path .gitignore --write src/",
     "typecheck": "tsc --noEmit",
-    "typecheck:w": "npm run typecheck -- --watch"
+    "typecheck:w": "npm run typecheck -- --watch",
+    "cleanup": "rm -rf .next .contentlayer"
   },
   "dependencies": {
     "next": "13.1.1",
