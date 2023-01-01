@@ -1,38 +1,11 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files"
-import prettyCode, { Options as PrettyCodeOptions } from "rehype-pretty-code"
-
-export const Post = defineDocumentType(() => ({
-    name: "Post",
-    filePathPattern: "**/*.mdx",
-    contentType: "mdx",
-    fields: {
-        title: {
-            type: "string",
-            description: "The title of the post",
-            required: true,
-        },
-        date: {
-            type: "date",
-            description: "The date of the post",
-            required: true,
-        },
-    },
-    computedFields: {
-        url: {
-            type: "string",
-            resolve: (post) => `/blog/${post._raw.flattenedPath}`,
-        },
-    },
-}))
-
-// DOCS: https://rehype-pretty-code.netlify.app/
-const prettyCodeOptions: Partial<PrettyCodeOptions> = {
-    theme: "github-dark",
-}
+import { makeSource } from "contentlayer/source-files"
+import prettyCode from "rehype-pretty-code"
+import { documentTypes } from "./config/contentlayer"
+import { prettyCodeOptions } from "./config/pretty-code"
 
 export default makeSource({
     contentDirPath: "posts",
-    documentTypes: [Post],
+    documentTypes,
     mdx: {
         rehypePlugins: [[prettyCode, prettyCodeOptions]],
     },
