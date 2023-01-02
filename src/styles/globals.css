@@ -29,6 +29,15 @@ h6 {
     @apply text-lg;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply mt-6 mb-4;
+}
+
 blockquote {
     @apply my-2 border-l-4 border-gray-300 text-gray-300 pl-4 text-xl;
 }
