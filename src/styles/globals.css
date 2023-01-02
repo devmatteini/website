@@ -58,6 +58,11 @@ ul {
     @apply list-disc space-y-3 pl-8;
 }
 
+ol,
+ul {
+    @apply mb-4;
+}
+
 hr {
     @apply border-t-2 pb-8;
 }
