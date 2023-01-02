@@ -15,7 +15,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
             <Head>
                 <title>{post.title}</title>
             </Head>
-            <article>
+            <article className="p-4">
                 <div className="mb-6">
                     <h1 className="mb-1 font-bold">{post.title}</h1>
                     <p className="text-sm">{formatDate(post.date)}</p>
