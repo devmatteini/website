@@ -32,7 +32,9 @@ A paragraph, introducing a thematic break:
 
 ---
 
-```rust
+Code block:
+
+```rust showLineNumbers
 pub fn get_release(
     client: &GithubClient,
     repository: &Repository,
@@ -47,6 +49,23 @@ pub fn get_release(
         .and_then(deserialize)
         .map(to_release(repository))
 }
+```
+
+Code block with title:
+
+```js title="foo.js"
+const foo () => "foo"
+```
+
+Code block with highlighted lines and line numbers:
+
+```js {1,4} showLineNumbers
+const foo () =>
+    F.pipe(
+        [1, 2, 3, 4, 5, 6],
+        A.filter(isEven),
+        A.map(multiplyBy(2)),
+    )
 ```
 
 a [link](https://example.com), some _emphasis_,

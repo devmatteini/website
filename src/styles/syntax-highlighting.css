@@ -1,0 +1,63 @@
+/* Code block wrapper */
+div[data-rehype-pretty-code-fragment] {
+    overflow: hidden;
+
+    background-color: rgb(255, 255, 255, 0.1);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+div[data-rehype-pretty-code-fragment] pre {
+    /* Enable horizontal scrolling for long lines of code */
+    overflow-x: auto;
+
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    line-height: 1.5rem;
+}
+
+/* Ensures spans fill the full width of a horizontally-scrollable code block */
+div[data-rehype-pretty-code-fragment] code {
+    display: grid;
+}
+
+/* Title */
+div[data-rehype-pretty-code-title] {
+    margin-bottom: 0.125rem;
+    background-color: rgb(255, 228, 230, 0.1);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    line-height: 1rem;
+}
+
+div[data-rehype-pretty-code-fragment] .line {
+    padding-left: 0.5rem;
+    padding-right: 0.75rem;
+
+    border-left-width: 4px;
+    border-left-color: transparent;
+}
+
+/* line--highlighted is set on config/pretty-code.ts */
+div[data-rehype-pretty-code-fragment] .line--highlighted {
+    border-left-color: rgb(255, 255, 255, 0.7);
+    background-color: rgb(254, 205, 211, 0.1);
+}
+
+/* Line numbers */
+code[data-line-numbers] {
+    counter-reset: lineNumber;
+}
+
+code[data-line-numbers] .line::before {
+    counter-increment: lineNumber;
+    content: counter(lineNumber);
+    display: inline-block;
+    text-align: right;
+
+    margin-right: 0.75rem;
+    width: 1rem;
+    color: rgb(255, 255, 255, 0.2);
+}

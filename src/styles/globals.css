@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./syntax-highlighting.css";
 
 body {
     /* FIXME: temporary styles  */
@@ -46,9 +47,4 @@ hr {
 
 a {
     @apply underline;
-}
-
-/* Recommended by rehype-pretty-code (https://rehype-pretty-code.netlify.app) */
-pre > code {
-    display: grid;
 }
