@@ -1,3 +1,5 @@
+/* ------------Code block------------ */
+
 /* Code block wrapper */
 div[data-rehype-pretty-code-fragment] {
     overflow: hidden;
@@ -5,6 +7,7 @@ div[data-rehype-pretty-code-fragment] {
     background-color: rgb(255, 255, 255, 0.1);
     margin-top: 1rem;
     margin-bottom: 1rem;
+    border-radius: 0.5rem;
 }
 
 div[data-rehype-pretty-code-fragment] pre {
@@ -19,11 +22,14 @@ div[data-rehype-pretty-code-fragment] pre {
 /* Ensures spans fill the full width of a horizontally-scrollable code block */
 div[data-rehype-pretty-code-fragment] code {
     display: grid;
+    /* This prevents to show background-color set for inline code */
+    background-color: transparent;
 }
 
 /* Title */
 div[data-rehype-pretty-code-title] {
     margin-bottom: 0.125rem;
+    border-radius: 0.375rem;
     background-color: rgb(255, 228, 230, 0.1);
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -60,4 +66,13 @@ code[data-line-numbers] .line::before {
     margin-right: 0.75rem;
     width: 1rem;
     color: rgb(255, 255, 255, 0.2);
+}
+
+/* ---------------------------------- */
+
+/* Inline code (e.g `this is inline code`) */
+code {
+    padding: 0.2rem 0.4rem;
+    background-color: rgb(254, 205, 211, 0.1);
+    border-radius: 6px;
 }
