@@ -61,7 +61,7 @@ hr {
     @apply border-t-2 pb-8;
 }
 
-a {
+article a {
     @apply border-b-2 border-b-orange;
 }
 
