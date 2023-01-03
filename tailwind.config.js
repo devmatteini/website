@@ -2,7 +2,11 @@
 module.exports = {
     content: ["./src/pages/**/*.{ts,tsx}", "./posts/**/*.mdx"],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                black: "#202229",
+            },
+        },
     },
     plugins: [],
 }

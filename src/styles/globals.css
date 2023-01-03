@@ -3,12 +3,6 @@
 @tailwind utilities;
 @import "./syntax-highlighting.css";
 
-body {
-    /* FIXME: temporary styles  */
-    background-color: rgb(32, 32, 32);
-    color: white;
-}
-
 /* Global styles for basic elements */
 h1 {
     @apply text-5xl;
