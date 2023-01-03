@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "npm run cleanup && next dev",
+    "dev": "npm run cleanup:dev && next dev",
     "build": "npm run cleanup && next build",
     "build:content": "contentlayer build --clearCache",
     "start": "next start",
@@ -14,7 +14,8 @@
     "format:check": "prettier --check **/*.{js,ts,tsx}",
     "typecheck": "tsc --noEmit",
     "typecheck:w": "npm run typecheck -- --watch",
-    "cleanup": "rm -rf .next"
+    "cleanup": "rm -rf .next",
+    "cleanup:dev": "rm -rf .next .contentlayer"
   },
   "dependencies": {
     "next": "13.1.1",
@@ -24,7 +25,9 @@
     "contentlayer": "0.2.9",
     "next-contentlayer": "0.2.9",
     "rehype-pretty-code": "0.6.0",
-    "shiki": "0.12.1"
+    "shiki": "0.12.1",
+    "rehype-slug": "5.1.0",
+    "rehype-autolink-headings": "6.1.1"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

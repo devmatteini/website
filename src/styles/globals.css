@@ -62,9 +62,9 @@ hr {
 }
 
 a {
-    @apply underline;
+    @apply border-b-2 border-b-orange;
 }
 
 a:hover {
-    color: #ffa657;
+    @apply text-orange;
 }
