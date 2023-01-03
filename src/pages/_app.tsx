@@ -1,13 +1,18 @@
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import { Inter } from "@next/font/google"
+import Footer from "../components/footer"
 
 const font = Inter({ subsets: ["latin"] })
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
-        <main className={font.className}>
-            <Component {...pageProps} />
-        </main>
+        // This <div> with flex is needed for sticky footer
+        <div className="flex flex-col min-h-screen">
+            <main className={`${font.className} flex-grow`}>
+                <Component {...pageProps} />
+            </main>
+            <Footer />
+        </div>
     )
 }
