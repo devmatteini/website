@@ -7,9 +7,11 @@
   "scripts": {
     "dev": "npm run cleanup && next dev",
     "build": "npm run cleanup && next build",
+    "build:content": "contentlayer build --clearCache",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --ignore-path .gitignore --write src/",
+    "format:check": "prettier --check src/",
     "typecheck": "tsc --noEmit",
     "typecheck:w": "npm run typecheck -- --watch",
     "cleanup": "rm -rf .next .contentlayer"
