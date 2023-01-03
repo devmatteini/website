@@ -10,8 +10,8 @@
     "build:content": "contentlayer build --clearCache",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --ignore-path .gitignore --write src/",
-    "format:check": "prettier --check src/",
+    "format": "prettier --write **/*.{js,ts,tsx}",
+    "format:check": "prettier --check **/*.{js,ts,tsx}",
     "typecheck": "tsc --noEmit",
     "typecheck:w": "npm run typecheck -- --watch",
     "cleanup": "rm -rf .next"
