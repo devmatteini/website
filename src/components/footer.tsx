@@ -1,4 +1,5 @@
 import React from "react"
+import ExternalLink from "./external-link"
 import { GithubIcon, MastodonIcon, TwitterIcon } from "./icons"
 
 const Footer: React.FC = () => {
@@ -6,13 +7,13 @@ const Footer: React.FC = () => {
         <footer className="bg-darkBlue p-4">
             <div className="flex flex-col w-52 mx-auto">
                 <div className="flex justify-around">
-                    <ExternalLink href="https://github.com/devmatteini/">
+                    <ExternalLink className="text-2xl" href="https://github.com/devmatteini/">
                         <GithubIcon />
                     </ExternalLink>
-                    <ExternalLink href="https://twitter.com/MatteiniCosimo">
+                    <ExternalLink className="text-2xl" href="https://twitter.com/MatteiniCosimo">
                         <TwitterIcon />
                     </ExternalLink>
-                    <ExternalLink href="https://hachyderm.io/@cosimomatteini">
+                    <ExternalLink className="text-2xl" href="https://hachyderm.io/@cosimomatteini">
                         <MastodonIcon />
                     </ExternalLink>
                 </div>
@@ -21,15 +22,5 @@ const Footer: React.FC = () => {
         </footer>
     )
 }
-
-type ExternalLinkProps = {
-    href: string
-}
-
-const ExternalLink: React.FC<React.PropsWithChildren<ExternalLinkProps>> = ({ href, children }) => (
-    <a className="text-2xl" href={href} target="_blank" rel="noreferrer">
-        {children}
-    </a>
-)
 
 export default Footer
