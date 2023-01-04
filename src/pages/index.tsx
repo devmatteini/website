@@ -1,21 +1,23 @@
 import React from "react"
-import { allPosts } from "contentlayer/generated"
-import Link from "next/link"
+import Image from "next/image"
+import profileImg from "../../public/profile.webp"
 
 const Home: React.FC = () => {
     return (
-        <>
-            <h1 className="font-bold mb-5">website</h1>
-
-            <h2>Posts:</h2>
-            {allPosts.map((post) => (
-                <div key={post._id} className="mb-6">
-                    <Link href={post.url} className="text-blue-700 hover:text-blue-900">
-                        {post.title}
-                    </Link>
+        <div className="w-4/5 mx-auto flex flex-col items-center">
+            <div>
+                <div className="flex justify-between">
+                    <Image className="w-24 rounded-full" src={profileImg} alt="Cosimo Matteini" />
+                    <h1 className="font-bold mb-5">Cosimo Matteini</h1>
                 </div>
-            ))}
-        </>
+                <div className="mt-5">
+                    <h2 className="my-0 text-2xl">
+                        Software developer building things with linux,
+                    </h2>
+                    <h2 className="my-0 text-2xl">typescript, rust and functional programming.</h2>
+                </div>
+            </div>
+        </div>
     )
 }
 
