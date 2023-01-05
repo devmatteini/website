@@ -3,8 +3,8 @@ import Image from "next/image"
 import profileImg from "../../public/profile.webp"
 import { allPosts, first3 } from "../shared/posts"
 import Link from "next/link"
-import { formatDate } from "../shared/helpers/date"
 import { BoxArrowInRightIcon } from "../components/icons"
+import PostCard from "../components/post-card"
 
 const Home: React.FC = () => {
     return (
@@ -27,15 +27,7 @@ const Home: React.FC = () => {
 
                 <h3 className="mt-8">Recent posts</h3>
                 {first3(allPosts).map((post) => (
-                    <Link key={post._id} href={post.url}>
-                        {/* This div is needed to create the effect of gradient border for the inner div */}
-                        <div className="mb-6 rounded p-1 bg-gradient-to-r from-[#0038a6] to-[#c60c30]">
-                            <div className="p-3 bg-black rounded">
-                                <h4 className="text-xl my-0 font-bold">{post.title}</h4>
-                                <p className="mb-0">{formatDate(post.date)}</p>
-                            </div>
-                        </div>
-                    </Link>
+                    <PostCard key={post._id} post={post} />
                 ))}
 
                 <h3>
