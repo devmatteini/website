@@ -8,11 +8,11 @@ import { BoxArrowInRightIcon } from "../components/icons"
 
 const Home: React.FC = () => {
     return (
-        <div className="w-4/5 mx-auto flex flex-col items-center">
-            <div>
-                <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:text-left">
+        <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
+            <div className="w-full">
+                <div className="flex flex-col items-center text-center md:flex-row md:text-left">
                     <Image
-                        className="w-20 h-20 rounded-full"
+                        className="w-20 h-20 rounded-full md:mr-4"
                         src={profileImg}
                         alt="Cosimo Matteini"
                     />
