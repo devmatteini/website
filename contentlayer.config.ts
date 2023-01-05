@@ -9,6 +9,7 @@ import { prettyCodeOptions } from "./config/pretty-code"
 export default makeSource({
     contentDirPath: "posts",
     documentTypes,
+    disableImportAliasWarning: true,
     mdx: {
         rehypePlugins: [
             [prettyCode, prettyCodeOptions],
