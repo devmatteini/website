@@ -3,7 +3,8 @@ import Image from "next/image"
 import profileImg from "../../public/profile.webp"
 import { allPosts, first3 } from "../shared/posts"
 import Link from "next/link"
-import { formatDate } from "src/shared/helpers/date"
+import { formatDate } from "../shared/helpers/date"
+import { BoxArrowInRightIcon } from "../components/icons"
 
 const Home: React.FC = () => {
     return (
@@ -36,7 +37,13 @@ const Home: React.FC = () => {
                         </div>
                     </Link>
                 ))}
-                {/* TODO: add "See more" that redirects to /blog */}
+
+                <h3>
+                    <Link href="/blog" className="flex items-center">
+                        All posts
+                        <BoxArrowInRightIcon className="ml-2" />
+                    </Link>
+                </h3>
             </div>
         </div>
     )
