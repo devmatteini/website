@@ -1,8 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import type { GetStaticProps, InferGetStaticPropsType } from "next"
-// TODO: use shared/posts
-import { allPosts, Post } from "contentlayer/generated"
+import { allPosts, Post } from "../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../shared/helpers/date"
 import { mdxComponents } from "../../components/mdx"
@@ -41,7 +40,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps<{ post: Post }> = async ({ params }) => {
-    const post = allPosts.find((post) => post._raw.flattenedPath === params?.slug)
+    const post = allPosts.find((post) => post.slug === params?.slug)
 
     if (!post) return { notFound: true }
 
