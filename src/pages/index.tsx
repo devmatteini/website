@@ -1,7 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import profileImg from "../../public/profile.webp"
-import { allPosts, first3, firstN } from "../shared/posts"
+import { allPosts, first3 } from "../shared/posts"
 import Link from "next/link"
 import { formatDate } from "src/shared/helpers/date"
 

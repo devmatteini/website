@@ -1,10 +1,12 @@
 import React from "react"
 import Head from "next/head"
 import type { GetStaticProps, InferGetStaticPropsType } from "next"
+// TODO: use shared/posts
 import { allPosts, Post } from "contentlayer/generated"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../shared/helpers/date"
 import { mdxComponents } from "../../components/mdx"
+import BlogHeader from "../../components/blog-header"
 
 type PostProps = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -16,13 +18,16 @@ const Post: React.FC<PostProps> = ({ post }) => {
             <Head>
                 <title>{post.title}</title>
             </Head>
-            <article className="p-6">
-                <div className="mb-6">
-                    <h1 className="mb-1 font-bold">{post.title}</h1>
-                    <p className="text-sm">{formatDate(post.date)}</p>
-                </div>
-                <MDXContent components={mdxComponents} />
-            </article>
+            <div className="p-6 pt-0">
+                <BlogHeader />
+                <article>
+                    <div className="mb-6">
+                        <h1 className="mb-1 font-bold">{post.title}</h1>
+                        <p className="text-sm">{formatDate(post.date)}</p>
+                    </div>
+                    <MDXContent components={mdxComponents} />
+                </article>
+            </div>
         </>
     )
 }
