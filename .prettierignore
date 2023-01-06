@@ -16,5 +16,3 @@ out/
 public/
 .github/
 package-lock.json
-
-*.md
