@@ -1,6 +1,7 @@
 import Link from "next/link"
 import React from "react"
 import { formatDate } from "../shared/helpers/date"
+import { ellipse } from "../shared/helpers/string"
 import { Post } from "../shared/posts"
 import Optional from "./optional"
 
@@ -21,6 +22,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                         </Optional>
                     </h4>
                     <p className="mb-0">{formatDate(post.date)}</p>
+                    <p className="mt-2 break-words">{ellipse(post.description, 100)}</p>
                 </div>
             </div>
         </Link>
