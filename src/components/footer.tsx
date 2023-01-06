@@ -7,13 +7,25 @@ const Footer: React.FC = () => {
         <footer className="bg-darkBlue p-4">
             <div className="flex flex-col w-52 mx-auto">
                 <div className="flex justify-around">
-                    <ExternalLink className="text-2xl" href="https://github.com/devmatteini/">
+                    <ExternalLink
+                        className="text-2xl"
+                        href="https://github.com/devmatteini/"
+                        ariaLabel="GitHub"
+                    >
                         <GithubIcon />
                     </ExternalLink>
-                    <ExternalLink className="text-2xl" href="https://twitter.com/MatteiniCosimo">
+                    <ExternalLink
+                        className="text-2xl"
+                        href="https://twitter.com/MatteiniCosimo"
+                        ariaLabel="Twitter"
+                    >
                         <TwitterIcon />
                     </ExternalLink>
-                    <ExternalLink className="text-2xl" href="https://hachyderm.io/@cosimomatteini">
+                    <ExternalLink
+                        className="text-2xl"
+                        href="https://hachyderm.io/@cosimomatteini"
+                        ariaLabel="Mastodon"
+                    >
                         <MastodonIcon />
                     </ExternalLink>
                 </div>
