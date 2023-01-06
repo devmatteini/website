@@ -12,6 +12,10 @@ const Home: React.FC = () => {
         <>
             <Head>
                 <title>Cosimo Matteini</title>
+                <meta
+                    name="description"
+                    content="Software developer, TypeScript, Rust and Functional programming enthusiast"
+                />
             </Head>
             <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">

@@ -9,6 +9,7 @@ const Blog: React.FC = () => {
         <>
             <Head>
                 <title>Blog</title>
+                <meta name="description" content="All blog posts" />
             </Head>
             <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">

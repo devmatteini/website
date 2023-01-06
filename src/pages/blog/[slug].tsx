@@ -16,6 +16,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
         <>
             <Head>
                 <title>{post.title}</title>
+                <meta name="description" content={post.description} />
             </Head>
             <div className="p-6 pt-0">
                 <BlogHeader />
