@@ -13,6 +13,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({}) => {
                     className="w-12 h-12 rounded-full mr-3"
                     src={profileImg}
                     alt="Cosimo Matteini"
+                    priority
                 />
                 Cosimo Matteini
             </Link>
