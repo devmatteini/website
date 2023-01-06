@@ -1,10 +1,8 @@
-const currentLocale = undefined
-
-export const formatDate = (rawDate: string, locale?: string | string[]) => {
+export const formatDate = (rawDate: string) => {
     const date = new Date(rawDate)
-    const formatter = new Intl.DateTimeFormat(locale || currentLocale, {
+    const formatter = new Intl.DateTimeFormat("en-GB", {
         year: "numeric",
-        month: "short",
+        month: "long",
         day: "numeric",
     })
     return formatter.format(date)
