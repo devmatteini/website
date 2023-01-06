@@ -22,6 +22,11 @@ const Post = defineDocumentType(() => ({
             description: "The status of the post",
             required: true,
         },
+        description: {
+            type: "string",
+            description: "The short description of the post",
+            required: true,
+        },
     },
     computedFields: {
         slug: {
