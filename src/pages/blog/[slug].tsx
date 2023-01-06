@@ -18,15 +18,17 @@ const Post: React.FC<PostProps> = ({ post }) => {
                 <title>{post.title}</title>
                 <meta name="description" content={post.description} />
             </Head>
-            <div className="p-6 pt-0">
-                <BlogHeader />
-                <article>
-                    <div className="mb-6">
-                        <h1 className="mb-1 font-bold">{post.title}</h1>
-                        <p className="text-sm">{formatDate(post.date)}</p>
-                    </div>
-                    <MDXContent components={mdxComponents} />
-                </article>
+            <div className="max-w-6xl px-4 mx-auto flex flex-col items-center">
+                <div className="w-full">
+                    <BlogHeader />
+                    <article>
+                        <div className="mb-6">
+                            <h1 className="mb-1 font-bold">{post.title}</h1>
+                            <p className="text-sm">{formatDate(post.date)}</p>
+                        </div>
+                        <MDXContent components={mdxComponents} />
+                    </article>
+                </div>
             </div>
         </>
     )
