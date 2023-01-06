@@ -20,6 +20,7 @@ const Home: React.FC = () => {
                             className="w-20 h-20 rounded-full md:mr-4"
                             src={profileImg}
                             alt="Cosimo Matteini"
+                            sizes="33vw"
                             priority
                         />
                         <h1 className="font-bold mb-5">Cosimo Matteini</h1>
