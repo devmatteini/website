@@ -31,10 +31,8 @@ const Home: React.FC = () => {
                     </div>
                     <div className="mt-5 text-center md:text-left">
                         <h2 className="my-0 text-2xl">
-                            Software developer building things with linux,
-                        </h2>
-                        <h2 className="my-0 text-2xl">
-                            typescript, rust and functional programming.
+                            Software developer building things with linux, typescript, rust and
+                            functional programming.
                         </h2>
                     </div>
 
