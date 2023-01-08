@@ -12,7 +12,7 @@ const NotFound: React.FC = () => {
                 <h1 className="text-3xl md:text-5xl font-bold text-center">404 - Page not found</h1>
                 <p className="text-center">
                     It seems you&apos;ve found something that used to exist, or you spelled
-                    something wrong. Can you double check that URL?
+                    something wrong. Can you check the URL?
                 </p>
                 <Link href="/" className="p-4 rounded-md bg-darkBlue">
                     Return Home
