@@ -11,10 +11,10 @@ type PostCardProps = {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
     return (
-        <Link href={post.url}>
-            {/* This div is needed to create the effect of gradient border for the inner div */}
-            <div className="mb-6 rounded p-1 bg-gradient-to-r from-[#0038a6] to-[#c60c30]">
-                <div className="p-3 bg-black rounded">
+        // This div is needed to create the effect of gradient border for the inner div *
+        <div className="mb-6 rounded p-1 bg-gradient-to-r from-[#0038a6] to-[#c60c30]">
+            <div className="p-3 bg-black rounded">
+                <Link href={post.url}>
                     <h4 className="text-xl my-0 font-bold">
                         {post.title}
                         <Optional condition={post.status === "draft"}>
@@ -23,10 +23,10 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     </h4>
                     <p className="mb-0">{formatDate(post.date)}</p>
                     <p className="mt-2 break-words">{ellipse(post.description, 100)}</p>
-                    <Tags tags={post.tags} />
-                </div>
+                </Link>
+                <Tags tags={post.tags} />
             </div>
-        </Link>
+        </div>
     )
 }
 
