@@ -15,12 +15,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <div className="mb-6 rounded p-1 bg-gradient-to-r from-[#0038a6] to-[#c60c30]">
             <div className="p-3 bg-black rounded">
                 <Link href={post.url}>
-                    <h4 className="text-xl my-0 font-bold">
+                    <p className="text-xl my-0 font-bold">
                         {post.title}
                         <Optional condition={post.status === "draft"}>
                             <span className="ml-2">[DRAFT]</span>
                         </Optional>
-                    </h4>
+                    </p>
                     <p className="mb-0">{formatDate(post.date)}</p>
                     <p className="mt-2 break-words">{ellipse(post.description, 100)}</p>
                 </Link>
