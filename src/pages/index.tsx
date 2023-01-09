@@ -5,18 +5,19 @@ import { allPosts, first3 } from "../shared/posts"
 import Link from "next/link"
 import { BoxArrowInRightIcon } from "../components/icons"
 import PostCard from "../components/post-card"
-import Head from "next/head"
+import CHead from "../components/head"
+import { useRouter } from "next/router"
 
 const Home: React.FC = () => {
+    const router = useRouter()
+
     return (
         <>
-            <Head>
-                <title>Cosimo Matteini</title>
-                <meta
-                    name="description"
-                    content="Software developer, TypeScript, Rust and Functional programming enthusiast"
-                />
-            </Head>
+            <CHead
+                title="Cosimo Matteini"
+                description="Software developer, TypeScript, Rust and Functional programming enthusiast"
+                route={router.pathname}
+            />
             <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">
                     <div className="flex flex-col items-center text-center md:flex-row md:text-left">

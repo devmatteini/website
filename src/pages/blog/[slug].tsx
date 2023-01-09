@@ -1,11 +1,11 @@
 import React from "react"
-import Head from "next/head"
 import type { GetStaticProps, InferGetStaticPropsType } from "next"
 import { allPosts, Post } from "../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../shared/helpers/date"
 import { mdxComponents } from "../../components/mdx"
 import BlogHeader from "../../components/blog-header"
+import CHead from "../../components/head"
 
 type PostProps = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -14,10 +14,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
 
     return (
         <>
-            <Head>
-                <title>{post.title}</title>
-                <meta name="description" content={post.description} />
-            </Head>
+            <CHead title={post.title} description={post.description} route={post.url} />
             <div className="max-w-6xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">
                     <BlogHeader />
