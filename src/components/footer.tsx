@@ -1,6 +1,6 @@
 import React from "react"
 import ExternalLink from "./external-link"
-import Link from "next/link"
+import NextLink from "next/link"
 import { GithubIcon, MastodonIcon, TwitterIcon } from "./icons"
 
 const Footer: React.FC = () => {
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                     </ExternalLink>
                 </div>
                 <p className="mt-3 mb-0 text-center">
-                    ©{new Date().getFullYear()} <Link href="/">Cosimo Matteini</Link>
+                    ©{new Date().getFullYear()} <NextLink href="/">Cosimo Matteini</NextLink>
                 </p>
             </div>
         </footer>

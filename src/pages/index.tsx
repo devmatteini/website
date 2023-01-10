@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 import profileImg from "../../public/profile.webp"
 import { allPosts, first3 } from "../shared/posts"
-import Link from "next/link"
+import NextLink from "next/link"
 import { BoxArrowInRightIcon } from "../components/icons"
 import PostCard from "../components/post-card"
 import CHead from "../components/head"
@@ -43,10 +43,10 @@ const Home: React.FC = () => {
                     ))}
 
                     <h3>
-                        <Link href="/blog" className="flex items-center">
+                        <NextLink href="/blog" className="flex items-center">
                             All posts
                             <BoxArrowInRightIcon className="ml-2" />
-                        </Link>
+                        </NextLink>
                     </h3>
                 </div>
             </div>

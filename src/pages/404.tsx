@@ -1,5 +1,5 @@
 import Head from "next/head"
-import Link from "next/link"
+import NextLink from "next/link"
 import React from "react"
 
 const NotFound: React.FC = () => {
@@ -14,9 +14,9 @@ const NotFound: React.FC = () => {
                     It seems you&apos;ve found something that used to exist, or you spelled
                     something wrong. Can you check the URL?
                 </p>
-                <Link href="/" className="p-4 rounded-md bg-darkBlue">
+                <NextLink href="/" className="p-4 rounded-md bg-darkBlue">
                     Return Home
-                </Link>
+                </NextLink>
             </div>
         </>
     )
