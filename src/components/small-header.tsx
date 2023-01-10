@@ -3,9 +3,9 @@ import Image from "next/image"
 import profileImg from "../../public/profile.webp"
 import NextLink from "next/link"
 
-type BlogHeaderProps = {}
+type SmallHeaderProps = {}
 
-const BlogHeader: React.FC<BlogHeaderProps> = ({}) => {
+const SmallHeader: React.FC<SmallHeaderProps> = ({}) => {
     return (
         <h1 className="mt-0 text-xl font-bold">
             <NextLink href="/" className="flex items-center">
@@ -22,4 +22,4 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({}) => {
     )
 }
 
-export default BlogHeader
+export default SmallHeader

@@ -4,7 +4,7 @@ import { allPosts, Post } from "../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../shared/helpers/date"
 import { mdxComponents } from "../../components/mdx"
-import BlogHeader from "../../components/blog-header"
+import SmallHeader from "../../components/small-header"
 import CHead from "../../components/head"
 
 type PostProps = InferGetStaticPropsType<typeof getStaticProps>
@@ -17,7 +17,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
             <CHead title={post.title} description={post.description} route={post.url} />
             <div className="max-w-6xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">
-                    <BlogHeader />
+                    <SmallHeader />
                     <article>
                         <div className="mb-6">
                             <h1 className="mb-1 font-bold">{post.title}</h1>

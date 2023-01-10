@@ -1,5 +1,5 @@
 import React from "react"
-import BlogHeader from "../../components/blog-header"
+import SmallHeader from "../../components/small-header"
 import PostCard from "../../components/post-card"
 import { allPosts } from "../../shared/posts"
 import CHead from "../../components/head"
@@ -13,7 +13,7 @@ const Blog: React.FC = () => {
             <CHead title="Blog" description="All blog posts" route={router.pathname} />
             <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">
-                    <BlogHeader />
+                    <SmallHeader />
                     <h1 className="mt-8">All posts</h1>
                     <div>
                         {allPosts.map((post) => (
