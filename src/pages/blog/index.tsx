@@ -14,7 +14,7 @@ const Blog: React.FC = () => {
             <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
                 <div className="w-full">
                     <SmallHeader />
-                    <h1 className="mt-8">All posts</h1>
+                    <h1 className="font-bold mb-5">All posts</h1>
                     <div>
                         {allPosts.map((post) => (
                             <PostCard key={post._id} post={post} />
