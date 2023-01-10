@@ -2,6 +2,7 @@ import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import { Inter } from "@next/font/google"
 import Footer from "../components/footer"
+import { Analytics } from "@vercel/analytics/react"
 
 const font = Inter({ subsets: ["latin"] })
 
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="flex flex-col min-h-screen">
             <main className={`${font.className} flex-grow mt-8`}>
                 <Component {...pageProps} />
+                <Analytics />
             </main>
             <Footer />
         </div>
