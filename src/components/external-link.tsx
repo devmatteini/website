@@ -2,7 +2,7 @@ import React from "react"
 
 type ExternalLinkProps = React.PropsWithChildren<{
     href: string
-    ariaLabel: string
+    ariaLabel?: string
     className?: string
 }>
 
