@@ -31,6 +31,7 @@ const Post = defineDocumentType(() => ({
             type: "list",
             of: { type: "string" },
             description: "The list of tags to help understand what a post talks about",
+            default: [],
             required: false,
         },
     },
