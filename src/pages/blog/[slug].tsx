@@ -17,10 +17,10 @@ const Post: React.FC<PostProps> = ({ post }) => {
             <CHead title={post.title} description={post.description} route={post.url} />
             <Header />
             <article>
-                <div className="mb-6">
+                <header className="mb-6">
                     <h1 className="mb-1 font-bold">{post.title}</h1>
                     <p className="text-sm">{formatDate(post.date)}</p>
-                </div>
+                </header>
                 <MDXContent components={mdxComponents} />
             </article>
         </>
