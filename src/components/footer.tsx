@@ -2,11 +2,12 @@ import React from "react"
 import ExternalLink from "./external-link"
 import NextLink from "next/link"
 import { GithubIcon, MastodonIcon, TwitterIcon } from "./icons"
+import Container from "./container"
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-darkBlue p-4">
-            <div className="flex flex-col max-w-2xl sm:px-4 mx-auto">
+        <footer className="bg-darkBlue py-4">
+            <Container>
                 <div className="flex flex-col sm:flex-row sm:justify-between">
                     <NextLink className="text-lg" href="/">
                         Home
@@ -45,7 +46,7 @@ const Footer: React.FC = () => {
                 <p className="mt-3 mb-0 sm:text-center">
                     ©{new Date().getFullYear()} <NextLink href="/">Cosimo Matteini</NextLink>
                 </p>
-            </div>
+            </Container>
         </footer>
     )
 }

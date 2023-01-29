@@ -11,15 +11,13 @@ const Blog: React.FC = () => {
     return (
         <>
             <CHead title="Blog" description="All blog posts" route={router.pathname} />
-            <div className="max-w-2xl px-4 mx-auto flex flex-col items-center">
-                <div className="w-full">
-                    <SmallHeader />
-                    <h1 className="font-bold mb-5">All posts</h1>
-                    <div>
-                        {allPosts.map((post) => (
-                            <PostCard key={post._id} post={post} />
-                        ))}
-                    </div>
+            <div className="w-full">
+                <SmallHeader />
+                <h1 className="font-bold mb-5">All posts</h1>
+                <div>
+                    {allPosts.map((post) => (
+                        <PostCard key={post._id} post={post} />
+                    ))}
                 </div>
             </div>
         </>
