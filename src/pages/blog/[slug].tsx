@@ -15,16 +15,14 @@ const Post: React.FC<PostProps> = ({ post }) => {
     return (
         <>
             <CHead title={post.title} description={post.description} route={post.url} />
-            <div className="w-full">
-                <Header />
-                <article>
-                    <div className="mb-6">
-                        <h1 className="mb-1 font-bold">{post.title}</h1>
-                        <p className="text-sm">{formatDate(post.date)}</p>
-                    </div>
-                    <MDXContent components={mdxComponents} />
-                </article>
-            </div>
+            <Header />
+            <article>
+                <div className="mb-6">
+                    <h1 className="mb-1 font-bold">{post.title}</h1>
+                    <p className="text-sm">{formatDate(post.date)}</p>
+                </div>
+                <MDXContent components={mdxComponents} />
+            </article>
         </>
     )
 }
