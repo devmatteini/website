@@ -1,12 +1,11 @@
 import React from "react"
-import Image from "next/image"
-import profileImg from "../../public/profile.webp"
 import { allPosts, first3 } from "../shared/posts"
 import NextLink from "next/link"
 import { BoxArrowInRightIcon } from "../components/icons"
 import PostCard from "../components/post-card"
 import CHead from "../components/head"
 import { useRouter } from "next/router"
+import Header from "../components/header"
 
 const Home: React.FC = () => {
     const router = useRouter()
@@ -19,16 +18,7 @@ const Home: React.FC = () => {
                 route={router.pathname}
             />
             <div className="w-full">
-                <div className="flex flex-col items-center text-center md:flex-row md:text-left">
-                    <Image
-                        className="w-20 h-20 rounded-full md:mr-4"
-                        src={profileImg}
-                        alt="Cosimo Matteini"
-                        sizes="33vw"
-                        priority
-                    />
-                    <h1 className="font-bold mb-5">Cosimo Matteini</h1>
-                </div>
+                <Header size="medium" />
                 <div className="mt-5 text-center md:text-left">
                     <h2 className="my-0 text-2xl">
                         Software developer building things with linux, typescript, rust and

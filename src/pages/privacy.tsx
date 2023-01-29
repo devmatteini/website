@@ -1,7 +1,7 @@
 import React from "react"
 import CHead from "../components/head"
 import { useRouter } from "next/router"
-import SmallHeader from "../components/small-header"
+import Header from "../components/header"
 import ExternalLink from "../components/external-link"
 
 const Privacy: React.FC = () => {
@@ -11,7 +11,7 @@ const Privacy: React.FC = () => {
         <>
             <CHead title="Privacy" description="Privacy" route={router.pathname} />
             <div className="w-full">
-                <SmallHeader />
+                <Header />
                 <h1 className="font-bold mb-5">Privacy</h1>
                 <h2 className="text-2xl">Your privacy is important to me, as is mine.</h2>
                 <p>
