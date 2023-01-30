@@ -28,7 +28,7 @@
     "contentlayer": "0.3.0",
     "next-contentlayer": "0.3.0",
     "rehype-pretty-code": "0.9.2",
-    "shiki": "0.12.1",
+    "shiki": "0.14.0",
     "rehype-slug": "5.1.0",
     "rehype-autolink-headings": "6.1.1",
     "@vercel/analytics": "0.1.8",
