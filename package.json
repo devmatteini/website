@@ -31,7 +31,7 @@
     "shiki": "0.14.1",
     "rehype-slug": "5.1.0",
     "rehype-autolink-headings": "6.1.1",
-    "@vercel/analytics": "0.1.8",
+    "@vercel/analytics": "0.1.10",
     "clsx": "1.2.1"
   },
   "devDependencies": {
