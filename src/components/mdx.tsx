@@ -1,6 +1,7 @@
 import React from "react"
 import type { MDXComponents } from "mdx/types"
 import NextLink from "next/link"
+import NextImage from "next/image"
 
 const Link: MDXComponents["a"] = ({ href, ...props }) => {
     const isInternalLink = !!href && (href.startsWith("/") || href.startsWith("#"))
@@ -20,4 +21,5 @@ const Link: MDXComponents["a"] = ({ href, ...props }) => {
 
 export const mdxComponents: MDXComponents = {
     a: Link,
+    Image: NextImage,
 }
