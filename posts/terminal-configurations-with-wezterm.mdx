@@ -13,7 +13,7 @@ Every day having to go through the same process: open a terminal, create tabs an
 command to run for each project (luckily shell history with [fzf](https://github.com/junegunn/fzf)
 helps here!).
 
-So my journey to automate terminal configurations begun!
+So my journey to automate terminal configurations has begun!
 
 ## Bash & keyboard simulation
 
@@ -121,8 +121,14 @@ layout {
 }
 ```
 
-{/* TODO: set img to use NextJs image component */}
-This is the result: ![website zellij layout](/blog/terminal-configurations-with-wezterm/website-zellij.webp)
+This is the result:
+
+<Image
+    src="/blog/terminal-configurations-with-wezterm/website-zellij.webp"
+    alt="website zellij layout"
+    width={736}
+    height={399}
+/>
 
 I used zellij for a couple of weeks, and worked pretty nice!
 The main disadvantage that made me look for something else, was the `command` in the layout file:
@@ -188,7 +194,12 @@ return {
 
 Now if I open a new terminal, this configuration will be created automatically!
 
-![WezTerm website terminal configuration](/blog/terminal-configurations-with-wezterm/wezterm-website.webp)
+<Image
+    src="/blog/terminal-configurations-with-wezterm/wezterm-website.webp"
+    alt="WezTerm website terminal configuration"
+    width={736}
+    height={383}
+/>
 
 ### Different projects configurations
 
