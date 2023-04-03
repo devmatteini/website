@@ -8,7 +8,7 @@ tags:
     - wezterm
 ---
 
-In the last few months I've been trying to improve the automation of terminal configuration for my work/personal projects.
+In the last few months I've been trying to automate my terminal configuration for my work/personal projects.
 Every day having to go through the same process: open a terminal, create tabs and panes, and try to remember which
 command to run for each project (luckily shell history with [fzf](https://github.com/junegunn/fzf)
 helps here!).
@@ -225,6 +225,7 @@ But if I run this command to start a new terminal, it will be properly created:
 
 ```bash
 WZ_PROJECT=website wezterm start --always-new-process &
+# NOTE: without '--always-new-process', the gui-startup event will not be triggered again
 ```
 
 Every time I need a new project configuration, I can add a new if statement with the configuration setup.
@@ -295,7 +296,7 @@ wezterm.on('gui-startup', function()
 end)
 ```
 
-Next, we need to create the `base_dir` directory and then we can create a file inside it called `website.lua`:
+Next, we need to create the `base_dir` directory (which in my case resolves to `~/.config/wezterm/projects/`) and then we can create a file inside it called `website.lua`:
 
 ```lua title="~/.config/wezterm/projects/website.lua" showLineNumbers
 local function startup(wezterm)
