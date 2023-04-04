@@ -224,7 +224,7 @@ If I open a new terminal, nothing gets created since `WZ_PROJECT` is not set.
 But if I run this command to start a new terminal, it will be properly created:
 
 ```bash
-WZ_PROJECT=website wezterm start --always-new-process &
+WZ_PROJECT=website.lua wezterm start --always-new-process &
 # NOTE: without '--always-new-process', the gui-startup event will not be triggered again
 ```
 
@@ -328,16 +328,72 @@ return {
 Now open a new terminal and run the same command as before:
 
 ```bash
-WZ_PROJECT=website wezterm start --always-new-process &
+WZ_PROJECT=website.lua wezterm start --always-new-process &
 ```
 
 We did it 🎉!
 We decoupled the code that chooses which project to configure and the actual project configuration.
 
+## Refactoring: Part II (4 april 2023)
+
+After publishing this article, the [WezTerm creator](https://github.com/wez) suggested [some changes](https://github.com/wez/wezterm/discussions/3236#discussioncomment-5514540)
+to further simplify the `project.lua` script by avoiding to manually check if the project file exists:
+
+```lua title="~/.config/wezterm/project.lua" showLineNumbers /projects_module/1 {6,7,8,9,10,11,12,13,14,15,16}
+local startup = function(env_var, projects_module, wezterm)
+    local project = os.getenv(env_var)
+
+    if project == nil then return end
+
+    local status, project_module = pcall(function()
+        return require(projects_module .. "." .. project)
+        -- lua will automatically convert `projects.<project>` into `~/.config/wezterm/projects/<project>.lua`
+        -- when processing this require statement
+    end)
+    if not status then
+        -- in the failure case, project_module is the error message
+        wezterm.log_error("Unable to import " .. project_module)
+        return
+    end
+    local project_startup = project_module.startup
+
+    if project_startup == nil or type(project_startup) ~= "function" then
+        wezterm.log_error("Project " ..
+            project .. " has no exported 'startup' function (type is " .. type(project_startup) .. ")")
+        return
+    end
+
+    project_startup(wezterm)
+end
+
+return {
+    startup = startup
+}
+```
+
+There is a minor change to do for `wezterm.lua` as well:
+
+```lua title="~/.config/wezterm/wezterm.lua" showLineNumbers /projects/2
+local project = require "project"
+
+wezterm.on('gui-startup', function()
+    -- we no longer need to pass the full path, just the module name
+    project.startup("WZ_PROJECT", "projects", wezterm)
+end)
+```
+
+The last change is to how we set the `WZ_PROJECT` environment variable because we no longer have to pass the `.lua` file extension:
+
+```bash /website/
+WZ_PROJECT=website wezterm start --always-new-process &
+```
+
+## Source code
+
 Here you can find the files we modified/created:
 
--   [wezterm.lua](https://github.com/devmatteini/dotfiles/blob/e05024cf7c2f5a60887f7393106b6bf974d55368/config/wezterm/wezterm.lua)
--   [project.lua](https://github.com/devmatteini/dotfiles/blob/e05024cf7c2f5a60887f7393106b6bf974d55368/config/wezterm/project.lua)
+-   [wezterm.lua](https://github.com/devmatteini/dotfiles/blob/07ac0ad3a7afe527aeaf93a83b8810ec494203b0/config/wezterm/wezterm.lua)
+-   [project.lua](https://github.com/devmatteini/dotfiles/blob/07ac0ad3a7afe527aeaf93a83b8810ec494203b0/config/wezterm/project.lua)
 
 ## Bonus: wzp
 
