@@ -24,4 +24,3 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh pr merge --auto --rebase "$PR_URL"
-

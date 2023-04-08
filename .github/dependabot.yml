@@ -10,7 +10,7 @@ updates:
     open-pull-requests-limit: 5
     ignore:
       - dependency-name: "*"
-        update-types: [ "version-update:semver-major" ]
+        update-types: ["version-update:semver-major"]
       - dependency-name: "next"
       - dependency-name: "@next/font"
       - dependency-name: "eslint-config-next"

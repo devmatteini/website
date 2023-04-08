@@ -11,7 +11,7 @@
 
 1. Install [vercel cli](https://vercel.com/docs/cli#installing-vercel-cli)
 2. Login with `vercel login`
-3. Create new project with `vercel link` 
+3. Create new project with `vercel link`
 4. Add `.vercel/` to `.gitignore`
 5. Inside `.vercel/project.json` you can find projectId and orgId
 6. Create [access token](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token#creating-an-access-token)

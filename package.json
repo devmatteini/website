@@ -1,53 +1,53 @@
 {
-  "name": "website",
-  "author": "Cosimo Matteini <dev.matteini@gmail.com>",
-  "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "dev": "npm run cleanup:dev && next dev",
-    "build": "npm run cleanup && next build",
-    "build:content": "contentlayer build --clearCache",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write **/*.{js,ts,tsx}",
-    "format:check": "prettier --check **/*.{js,ts,tsx}",
-    "typecheck": "tsc --noEmit",
-    "typecheck:w": "npm run typecheck -- --watch",
-    "ci:setup-vercel": "vercel pull --yes --environment production --token \"$VERCEL_TOKEN\"",
-    "ci:build": "vercel build --yes --prod --token \"$VERCEL_TOKEN\"",
-    "ci:deploy": "vercel deploy --prebuilt --prod --token \"$VERCEL_TOKEN\"",
-    "cleanup": "rm -rf .next",
-    "cleanup:dev": "rm -rf .next .contentlayer"
-  },
-  "dependencies": {
-    "next": "13.1.6",
-    "@next/font": "13.1.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "contentlayer": "0.3.1",
-    "next-contentlayer": "0.3.1",
-    "rehype-pretty-code": "0.9.4",
-    "shiki": "0.14.1",
-    "rehype-slug": "5.1.0",
-    "rehype-autolink-headings": "6.1.1",
-    "@vercel/analytics": "0.1.11",
-    "clsx": "1.2.1"
-  },
-  "devDependencies": {
-    "@types/node": "18.15.11",
-    "@types/react": "18.0.31",
-    "@types/react-dom": "18.0.11",
-    "prettier": "2.8.7",
-    "eslint": "8.37.0",
-    "eslint-config-next": "13.1.6",
-    "eslint-config-prettier": "8.8.0",
-    "typescript": "4.9.5",
-    "tailwindcss": "3.3.1",
-    "postcss": "8.4.21",
-    "autoprefixer": "10.4.14"
-  },
-  "engines": {
-    "node": "18"
-  }
+    "name": "website",
+    "author": "Cosimo Matteini <dev.matteini@gmail.com>",
+    "version": "0.1.0",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev": "npm run cleanup:dev && next dev",
+        "build": "npm run cleanup && next build",
+        "build:content": "contentlayer build --clearCache",
+        "start": "next start",
+        "lint": "next lint",
+        "format": "prettier --write **/*.{js,ts,tsx}",
+        "format:check": "prettier --check **/*.{js,ts,tsx}",
+        "typecheck": "tsc --noEmit",
+        "typecheck:w": "npm run typecheck -- --watch",
+        "ci:setup-vercel": "vercel pull --yes --environment production --token \"$VERCEL_TOKEN\"",
+        "ci:build": "vercel build --yes --prod --token \"$VERCEL_TOKEN\"",
+        "ci:deploy": "vercel deploy --prebuilt --prod --token \"$VERCEL_TOKEN\"",
+        "cleanup": "rm -rf .next",
+        "cleanup:dev": "rm -rf .next .contentlayer"
+    },
+    "dependencies": {
+        "next": "13.1.6",
+        "@next/font": "13.1.6",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "contentlayer": "0.3.1",
+        "next-contentlayer": "0.3.1",
+        "rehype-pretty-code": "0.9.4",
+        "shiki": "0.14.1",
+        "rehype-slug": "5.1.0",
+        "rehype-autolink-headings": "6.1.1",
+        "@vercel/analytics": "0.1.11",
+        "clsx": "1.2.1"
+    },
+    "devDependencies": {
+        "@types/node": "18.15.11",
+        "@types/react": "18.0.31",
+        "@types/react-dom": "18.0.11",
+        "prettier": "2.8.7",
+        "eslint": "8.37.0",
+        "eslint-config-next": "13.1.6",
+        "eslint-config-prettier": "8.8.0",
+        "typescript": "4.9.5",
+        "tailwindcss": "3.3.1",
+        "postcss": "8.4.21",
+        "autoprefixer": "10.4.14"
+    },
+    "engines": {
+        "node": "18"
+    }
 }
