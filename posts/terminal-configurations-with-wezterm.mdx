@@ -339,7 +339,7 @@ We decoupled the code that chooses which project to configure and the actual pro
 After publishing this article, the [WezTerm creator](https://github.com/wez) suggested [some changes](https://github.com/wez/wezterm/discussions/3236#discussioncomment-5514540)
 to further simplify the `project.lua` script by avoiding to manually check if the project file exists:
 
-```lua title="~/.config/wezterm/project.lua" showLineNumbers /projects_module/1 {6,7,8,9,10,11,12,13,14,15,16}
+```lua title="~/.config/wezterm/project.lua" showLineNumbers /projects_module/1 {6-16}
 local startup = function(env_var, projects_module, wezterm)
     local project = os.getenv(env_var)
 
