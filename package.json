@@ -10,7 +10,7 @@
         "build:content": "contentlayer build --clearCache",
         "start": "next start",
         "lint": "next lint",
-        "format": "prettier --write **/*.{js,ts,tsx}",
+        "format": "prettier -w .",
         "format:check": "prettier --check **/*.{js,ts,tsx}",
         "typecheck": "tsc --noEmit",
         "typecheck:w": "npm run typecheck -- --watch",
