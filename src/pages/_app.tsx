@@ -1,6 +1,6 @@
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
-import { Inter } from "@next/font/google"
+import { Inter } from "next/font/google"
 import Footer from "../components/footer"
 import { Analytics } from "@vercel/analytics/react"
 import Container from "../components/container"
