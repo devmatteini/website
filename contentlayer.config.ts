@@ -17,27 +17,23 @@ const isDivTag = (node: any) => isTagName(node, "div")
 
 const extractContentFromCodeBlocks = (tree: any) => {
     visit(tree, (node) => {
-        if (isElementType(node) && isPreTag(node)) {
-            const [codeEl] = node.children
+        if (!(isElementType(node) && isPreTag(node))) return
 
-            if (!isTagName(codeEl, "code")) return
+        const [codeEl] = node.children
+        if (!isTagName(codeEl, "code")) return
 
-            node[__rawContent__] = codeEl.children?.[0].value
-        }
+        node[__rawContent__] = codeEl.children?.[0].value
     })
 }
 
 const injectCodeBlocksWithContentAfterSyntaxHighlight = (tree: any) => {
     visit(tree, (node) => {
-        if (isElementType(node) && isDivTag(node)) {
-            if (!("data-rehype-pretty-code-fragment" in node.properties)) {
-                return
-            }
+        if (!(isElementType(node) && isDivTag(node))) return
+        if (!("data-rehype-pretty-code-fragment" in node.properties)) return
 
-            for (const child of node.children) {
-                if (isPreTag(child)) {
-                    child.properties[__rawContent__] = node[__rawContent__]
-                }
+        for (const child of node.children) {
+            if (isPreTag(child)) {
+                child.properties[__rawContent__] = node[__rawContent__]
             }
         }
     })
