@@ -6,6 +6,7 @@
 
 /* Code block wrapper */
 div[data-rehype-pretty-code-fragment] {
+    position: relative;
     overflow: hidden;
 
     background-color: rgb(var(--code-bg-color), 0.1);

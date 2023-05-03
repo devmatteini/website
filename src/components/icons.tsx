@@ -42,3 +42,24 @@ export const BoxArrowInRightIcon: ReactIcon = (props) => (
         />
     </svg>
 )
+
+export const CopyIcon: ReactIcon = (props) => (
+    <svg
+        {...basicProps}
+        viewBox="0 0 24 24"
+        fill="none"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        {...props}
+    >
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+)
+
+export const CheckIcon: ReactIcon = (props) => (
+    <svg {...basicProps} fill="currentColor" viewBox="0 0 16 16" {...props}>
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+    </svg>
+)
