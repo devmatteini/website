@@ -9,12 +9,18 @@ import { visit } from "unist-util-visit"
 
 const __rawContent__ = "__rawContent__"
 
+const isType = (node: any, expectedType: string) => node?.type === expectedType
+const isElementType = (node: any) => isType(node, "element")
+const isTagName = (node: any, expectedTagName: string) => node?.tagName === expectedTagName
+const isPreTag = (node: any) => isTagName(node, "pre")
+const isDivTag = (node: any) => isTagName(node, "div")
+
 const extractContentFromCodeBlocks = (tree: any) => {
     visit(tree, (node) => {
-        if (node?.type === "element" && node?.tagName === "pre") {
+        if (isElementType(node) && isPreTag(node)) {
             const [codeEl] = node.children
 
-            if (codeEl.tagName !== "code") return
+            if (!isTagName(codeEl, "code")) return
 
             node[__rawContent__] = codeEl.children?.[0].value
         }
@@ -23,13 +29,13 @@ const extractContentFromCodeBlocks = (tree: any) => {
 
 const injectCodeBlocksWithContentAfterSyntaxHighlight = (tree: any) => {
     visit(tree, (node) => {
-        if (node?.type === "element" && node?.tagName === "div") {
+        if (isElementType(node) && isDivTag(node)) {
             if (!("data-rehype-pretty-code-fragment" in node.properties)) {
                 return
             }
 
             for (const child of node.children) {
-                if (child.tagName === "pre") {
+                if (isPreTag(child)) {
                     child.properties[__rawContent__] = node[__rawContent__]
                 }
             }
