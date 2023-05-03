@@ -7,6 +7,8 @@ import { documentTypes } from "./config/contentlayer"
 import { prettyCodeOptions } from "./config/pretty-code"
 import { visit } from "unist-util-visit"
 
+const __rawContent__ = "__rawContent__"
+
 const extractContentFromCodeBlocks = (tree: any) => {
     visit(tree, (node) => {
         if (node?.type === "element" && node?.tagName === "pre") {
@@ -14,7 +16,7 @@ const extractContentFromCodeBlocks = (tree: any) => {
 
             if (codeEl.tagName !== "code") return
 
-            node.__rawContent__ = codeEl.children?.[0].value
+            node[__rawContent__] = codeEl.children?.[0].value
         }
     })
 }
@@ -28,7 +30,7 @@ const injectCodeBlocksWithContentAfterSyntaxHighlight = (tree: any) => {
 
             for (const child of node.children) {
                 if (child.tagName === "pre") {
-                    child.properties["__rawContent__"] = node.__rawContent__
+                    child.properties[__rawContent__] = node[__rawContent__]
                 }
             }
         }
