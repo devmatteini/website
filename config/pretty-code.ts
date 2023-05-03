@@ -26,7 +26,7 @@ const extractContentFromCodeBlocks = (tree: any) => {
         if (!(isElementType(node) && isPreTag(node))) return
 
         const [codeEl] = node.children
-        if (!isTagName(codeEl, "code")) return
+        if (!isCodeTag(codeEl)) return
 
         node[__rawContent__] = codeEl.children?.[0].value
     })
@@ -57,3 +57,4 @@ const isElementType = (node: any) => isType(node, "element")
 const isTagName = (node: any, expectedTagName: string) => node?.tagName === expectedTagName
 const isPreTag = (node: any) => isTagName(node, "pre")
 const isDivTag = (node: any) => isTagName(node, "div")
+const isCodeTag = (node: any) => isTagName(node, "code")
