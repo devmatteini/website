@@ -11,7 +11,7 @@ div[data-rehype-pretty-code-fragment] {
     background-color: rgb(var(--code-bg-color), 0.1);
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
 }
 
 div[data-rehype-pretty-code-fragment] pre {
