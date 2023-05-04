@@ -29,7 +29,7 @@ const CopyButton: React.FC<Props> = ({ text, className }) => {
             onClick={copy}
         >
             <span className="sr-only">Copy</span>
-            {isCopied ? <CheckIcon /> : <CopyIcon />}
+            {isCopied ? <CheckIcon className="text-green-600" /> : <CopyIcon />}
         </button>
     )
 }
