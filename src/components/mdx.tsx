@@ -28,12 +28,12 @@ const Image: React.FC<NextImageProps> = (props) => {
 type PreProps = React.HTMLAttributes<HTMLPreElement> & { __rawContent__?: string }
 const Pre: React.FC<PreProps> = ({ children, __rawContent__, ...props }) => {
     return (
-        <>
+        <div className="mt-1 relative">
             <pre {...props}>{children}</pre>
             {__rawContent__ && (
-                <CopyButton className="absolute right-4 top-4" text={__rawContent__} />
+                <CopyButton className="absolute right-2 top-2" text={__rawContent__} />
             )}
-        </>
+        </div>
     )
 }
 
