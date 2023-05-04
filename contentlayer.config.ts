@@ -9,6 +9,7 @@ export default makeSource({
     contentDirPath: "posts",
     documentTypes,
     disableImportAliasWarning: true,
+    onMissingOrIncompatibleData: "fail",
     mdx: {
         rehypePlugins: [
             rehypeSlug,
