@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Container>
                     <Component {...pageProps} />
                 </Container>
-                <Analytics />
+                <Analytics debug={process.env.ANALYTICS_DEBUG === "true"} />
             </main>
             <Footer />
         </div>
