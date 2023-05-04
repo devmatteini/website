@@ -9,8 +9,7 @@ div[data-rehype-pretty-code-fragment] {
     overflow: hidden;
 
     background-color: rgb(var(--code-bg-color), 0.1);
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     border-radius: 0.25rem;
 }
 
@@ -18,8 +17,7 @@ div[data-rehype-pretty-code-fragment] pre {
     /* Enable horizontal scrolling for long lines of code */
     overflow-x: auto;
 
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 0;
     line-height: 1.5rem;
 }
 
@@ -34,16 +32,12 @@ div[data-rehype-pretty-code-fragment] code {
 div[data-rehype-pretty-code-title] {
     margin-bottom: 0.125rem;
     background-color: rgb(var(--code-bg-color), 0.1);
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding: 0.25rem 0.75rem;
     line-height: 1rem;
 }
 
 div[data-rehype-pretty-code-fragment] .line {
-    padding-left: 0.5rem;
-    padding-right: 0.75rem;
+    padding: 0 0.25rem;
 
     border-left-width: 4px;
     border-left-color: transparent;
@@ -60,7 +54,7 @@ div[data-rehype-pretty-code-fragment] .word--highlighted {
     background-color: rgb(0 103 163 / 56%);
     color: rgb(175 255 255 / 100%);
     padding: 0.2rem;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
 }
 
 /* Line numbers */
@@ -74,7 +68,7 @@ code[data-line-numbers] .line::before {
     display: inline-block;
     text-align: right;
 
-    margin-right: 0.75rem;
+    margin-right: 0.5rem;
     width: 1rem;
     color: rgb(var(--code-bg-color), 0.2);
 }
@@ -85,5 +79,5 @@ code[data-line-numbers] .line::before {
 code {
     padding: 0.2rem 0.4rem;
     @apply bg-inlineCode;
-    border-radius: 6px;
+    border-radius: 0.25rem;
 }
