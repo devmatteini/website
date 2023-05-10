@@ -6,9 +6,9 @@ import clsx from "clsx"
 import CopyButton from "./copy-button"
 
 const Link: MDXComponents["a"] = ({ href, ...props }) => {
-    const isInternalLink = !!href && (href.startsWith("/") || href.startsWith("#"))
+    if (!href) return null
 
-    if (isInternalLink) {
+    if (href.startsWith("/")) {
         // a.ref and Link.ref types are incompatible, so let's just leave it out :)
         const { ref, ...rest } = props
         return (
@@ -17,6 +17,7 @@ const Link: MDXComponents["a"] = ({ href, ...props }) => {
             </NextLink>
         )
     }
+    if (href.startsWith("#")) return <a href={href} {...props} />
 
     return <a target="_blank" rel="noopener noreferrer" href={href} {...props} />
 }
