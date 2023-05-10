@@ -27,6 +27,7 @@ export const createMetadata = ({
 }: CreateMetadata): Metadata => ({
     title,
     description,
+    // TODO: missing url. How can we implement has in old <Head> component?
     metadataBase: new URL(baseUrl()),
     openGraph: {
         type: "website",
