@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react"
 import { CheckIcon, CopyIcon } from "./icons"
 import clsx from "clsx"
