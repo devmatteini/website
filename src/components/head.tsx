@@ -1,26 +1,12 @@
 import React from "react"
 import NextHead from "next/head"
-
-type MetaTagImage = {
-    src: string
-    alt: string
-}
+import { MetaTagImage, defaultImage, websiteUrl } from "../shared/metadata"
 
 type HeadProps = {
     title: string
     description: string
     route: string
     image?: MetaTagImage
-}
-
-const websiteUrl = (route: string) =>
-    process.env.NODE_ENV === "development"
-        ? `http://localhost:3000${route}`
-        : `https://cosimomatteini.com${route}`
-
-const defaultImage: MetaTagImage = {
-    src: websiteUrl("/base-og.jpg"),
-    alt: "cosimomatteini.com",
 }
 
 const CHead: React.FC<HeadProps> = ({ title, description, route, image = defaultImage }) => {
