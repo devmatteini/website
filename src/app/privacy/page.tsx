@@ -1,15 +1,16 @@
 import React from "react"
-import CHead from "../components/head"
-import { useRouter } from "next/router"
-import Header from "../components/header"
-import ExternalLink from "../components/external-link"
+import Header from "../../components/header"
+import ExternalLink from "../../components/external-link"
+import { createMetadata } from "../../shared/metadata"
+
+export const metadata = createMetadata({
+    title: "Privacy",
+    description: "Privacy",
+})
 
 const Privacy: React.FC = () => {
-    const router = useRouter()
-
     return (
         <>
-            <CHead title="Privacy" description="Privacy" route={router.pathname} />
             <Header />
             <h1 className="font-bold mb-5">Privacy</h1>
             <h2 className="text-2xl">Your privacy is important to me, as is mine.</h2>
