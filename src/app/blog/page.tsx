@@ -2,15 +2,16 @@ import React from "react"
 import Header from "../../components/header"
 import PostCard from "../../components/post-card"
 import { allPosts } from "../../shared/posts"
-import CHead from "../../components/head"
-import { useRouter } from "next/router"
+import { createMetadata } from "../../shared/metadata"
+
+export const metadata = createMetadata({
+    title: "Blog",
+    description: "All blog posts",
+})
 
 const Blog: React.FC = () => {
-    const router = useRouter()
-
     return (
         <>
-            <CHead title="Blog" description="All blog posts" route={router.pathname} />
             <Header />
             <h1 className="font-bold mb-5">All posts</h1>
             <div>
