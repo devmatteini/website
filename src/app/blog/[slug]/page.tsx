@@ -14,7 +14,7 @@ type Param = {
 // https://nextjs.org/docs/app/api-reference/functions/generate-static-params#returns
 export const generateStaticParams = (): Param[] =>
     allPosts.map((post) => ({
-        slug: post.url,
+        slug: post.slug,
     }))
 
 // NOTE: params type is ReturnType<typeof generateStaticParams>[0]
