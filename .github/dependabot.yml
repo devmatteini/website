@@ -8,6 +8,11 @@ updates:
       time: "18:00"
       timezone: Europe/Rome
     open-pull-requests-limit: 5
+    groups:
+      contentlayer:
+        patterns:
+          - contentlayer
+          - next-contentlayer
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
