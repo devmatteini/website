@@ -26,6 +26,7 @@ const CopyButton: React.FC<Props> = ({ text, className }) => {
             className={clsx(
                 className,
                 "z-20 w-6 h-6 inline-flex items-center justify-center transition-all rounded-md hover:border focus:outline-none",
+                isCopied && "border-green-600",
             )}
             disabled={isCopied}
             onClick={copy}
