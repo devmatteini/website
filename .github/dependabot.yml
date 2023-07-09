@@ -11,8 +11,12 @@ updates:
     groups:
       contentlayer:
         patterns:
-          - contentlayer
-          - next-contentlayer
+          - "contentlayer"
+          - "next-contentlayer"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
