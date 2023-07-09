@@ -56,13 +56,13 @@ pub fn get_release(
 Code block with title:
 
 ```js title="foo.js"
-const foo () => "foo"
+const foo = () => "foo"
 ```
 
 Code block with highlighted lines and line numbers:
 
 ```js {1,4} showLineNumbers
-const foo () =>
+const foo = () =>
     F.pipe(
         [1, 2, 3, 4, 5, 6],
         A.filter(isEven),
@@ -73,7 +73,7 @@ const foo () =>
 Code block with highlighted words:
 
 ```js /foo/ /filter/
-const foo () =>
+const foo = () =>
     F.pipe(
         [1, 2, 3, 4, 5, 6],
         A.filter(isEven),

@@ -12,7 +12,7 @@ const CopyButton: React.FC<Props> = ({ text, className }) => {
     const [isCopied, setIsCopied] = useState(false)
 
     const copy = async () => {
-        await navigator.clipboard.writeText(text)
+        await copyToClipboard(text)
         setIsCopied(true)
 
         // Reset state after 2s after copying text
@@ -35,6 +35,14 @@ const CopyButton: React.FC<Props> = ({ text, className }) => {
             {isCopied ? <CheckIcon className="text-green-600" /> : <CopyIcon />}
         </button>
     )
+}
+
+const copyToClipboard = async (text: string) => {
+    try {
+        await navigator.clipboard.writeText(text)
+    } catch (error) {
+        console.error("Cannot write to clipboard", error)
+    }
 }
 
 export default CopyButton
