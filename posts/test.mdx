@@ -70,6 +70,17 @@ const foo () =>
     )
 ```
 
+Code block with highlighted words:
+
+```js /foo/ /filter/
+const foo () =>
+    F.pipe(
+        [1, 2, 3, 4, 5, 6],
+        A.filter(isEven),
+        A.map(multiplyBy(2)),
+    )
+```
+
 a [link](https://example.com), some _emphasis_,
 something **strong**, and finally a little `code()`.
 
