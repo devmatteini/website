@@ -1,11 +1,12 @@
 import React from "react"
-import { allPosts } from "../../../shared/posts"
+import { allPosts, findPost } from "../../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../../shared/helpers/date"
 import { mdxComponents } from "../../../components/mdx"
 import Header from "../../../components/header"
 import { createMetadata } from "../../../shared/metadata"
 import { notFound } from "next/navigation"
+import { NextPrevPosts } from "./next-prev-posts"
 
 type Param = {
     slug: string
@@ -28,28 +29,31 @@ export const generateMetadata = ({ params }: Props) => {
 }
 
 const Post: React.FC<Props> = ({ params }) => {
-    const post = allPosts.find((post) => post.slug === params?.slug)
-    if (!post) notFound()
+    const { previous, current, next } = findPost(params.slug, allPosts)
+    if (!current) notFound()
 
-    const MDXContent = useMDXComponent(post.body.code)
+    const MDXContent = useMDXComponent(current.body.code)
 
     return (
         <>
             <Header />
             <article>
                 <header className="mb-6">
-                    <h1 className="mb-1 font-bold">{post.title}</h1>
+                    <h1 className="mb-1 font-bold">{current.title}</h1>
                     <div className="flex gap-2 text-sm">
-                        <p className="mb-0">{formatDate(post.date)}</p>
-                        {post.updatedOn && (
+                        <p className="mb-0">{formatDate(current.date)}</p>
+                        {current.updatedOn && (
                             <>
                                 <span>&bull;</span>
-                                <p className="mb-0">Updated on {formatDate(post.updatedOn)}</p>
+                                <p className="mb-0">Updated on {formatDate(current.updatedOn)}</p>
                             </>
                         )}
                     </div>
                 </header>
                 <MDXContent components={mdxComponents} />
+                <footer className="mt-8 mb-2">
+                    <NextPrevPosts previous={previous} next={next} />
+                </footer>
             </article>
         </>
     )

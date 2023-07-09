@@ -14,3 +14,16 @@ export const allPosts = generatedPosts.filter(readyToPublish(isDev)).sort(byMost
 
 export const firstN = (n: number) => (posts: Post[]) => posts.slice(0, n)
 export const first3 = firstN(3)
+
+export const findPost = (
+    slug: string,
+    posts: Post[],
+): { previous: Post | undefined; current: Post | undefined; next: Post | undefined } => {
+    const currentIndex = posts.findIndex((x) => x.slug === slug)
+
+    const current = posts[currentIndex]
+    const previous = posts[currentIndex + 1]
+    const next = posts[currentIndex - 1]
+
+    return { previous, current, next }
+}

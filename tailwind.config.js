@@ -14,6 +14,7 @@ module.exports = {
                 darkBlue: "#18181e",
                 orange: "#ffa657",
                 inlineCode: "#37393f",
+                gray2: "#BBBBBB",
             },
         },
     },
