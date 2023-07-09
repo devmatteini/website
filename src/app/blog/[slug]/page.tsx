@@ -39,7 +39,15 @@ const Post: React.FC<Props> = ({ params }) => {
             <article>
                 <header className="mb-6">
                     <h1 className="mb-1 font-bold">{post.title}</h1>
-                    <p className="text-sm">{formatDate(post.date)}</p>
+                    <div className="flex gap-2 text-sm">
+                        <p className="mb-0">{formatDate(post.date)}</p>
+                        {post.updatedOn && (
+                            <>
+                                <span>&bull;</span>
+                                <p className="mb-0">Updated on {formatDate(post.updatedOn)}</p>
+                            </>
+                        )}
+                    </div>
                 </header>
                 <MDXContent components={mdxComponents} />
             </article>

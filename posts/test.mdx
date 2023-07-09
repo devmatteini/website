@@ -1,6 +1,7 @@
 ---
 title: MDX Test
 date: 2023-01-01
+updatedOn: 2023-07-09
 status: draft
 description: "This is a very long description to test that ellipse works and doesn't break anything on the post card"
 ---
@@ -64,6 +65,7 @@ Code block with highlighted lines and line numbers:
 ```js {1,4} showLineNumbers
 const foo = () =>
     F.pipe(
+        // keep new line
         [1, 2, 3, 4, 5, 6],
         A.filter(isEven),
         A.map(multiplyBy(2)),
@@ -75,6 +77,7 @@ Code block with highlighted words:
 ```js /foo/ /filter/
 const foo = () =>
     F.pipe(
+        // keep new line
         [1, 2, 3, 4, 5, 6],
         A.filter(isEven),
         A.map(multiplyBy(2)),

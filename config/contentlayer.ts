@@ -16,6 +16,10 @@ const Post = defineDocumentType(() => ({
             description: "The date of the post",
             required: true,
         },
+        updatedOn: {
+            type: "date",
+            description: "The date the post was updated",
+        },
         status: {
             type: "enum",
             options: ["draft", "published"],
