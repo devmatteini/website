@@ -7,6 +7,7 @@ import Header from "../../../components/header"
 import { createMetadata } from "../../../shared/metadata"
 import { notFound } from "next/navigation"
 import { NextPrevPosts } from "./next-prev-posts"
+import { Comments } from "./comments"
 
 type Param = {
     slug: string
@@ -52,6 +53,7 @@ const Post: React.FC<Props> = ({ params }) => {
                 </header>
                 <MDXContent components={mdxComponents} />
                 <footer className="mt-8 mb-2">
+                    <Comments post={current} />
                     <NextPrevPosts previous={previous} next={next} />
                 </footer>
             </article>
