@@ -31,7 +31,8 @@
         "rehype-slug": "5.1.0",
         "rehype-autolink-headings": "6.1.1",
         "@vercel/analytics": "1.0.1",
-        "clsx": "1.2.1"
+        "clsx": "1.2.1",
+        "tailwind-merge": "1.14.0"
     },
     "devDependencies": {
         "@types/node": "18.16.19",
