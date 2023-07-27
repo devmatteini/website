@@ -2,8 +2,8 @@ import React from "react"
 import type { MDXComponents } from "mdx/types"
 import NextLink from "next/link"
 import NextImage, { ImageProps as NextImageProps } from "next/image"
-import clsx from "clsx"
 import CopyButton from "./copy-button"
+import { cn } from "../shared/cn"
 
 const Link: MDXComponents["a"] = ({ href, ...props }) => {
     if (!href) return null
@@ -23,7 +23,7 @@ const Link: MDXComponents["a"] = ({ href, ...props }) => {
 }
 
 const Image: React.FC<NextImageProps> = (props) => {
-    return <NextImage {...props} className={clsx("mb-4", props.className)} />
+    return <NextImage {...props} className={cn("mb-4", props.className)} />
 }
 
 type PreProps = React.HTMLAttributes<HTMLPreElement> & { __rawContent__?: string }

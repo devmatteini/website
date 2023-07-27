@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useState } from "react"
+import { cn } from "../shared/cn"
 import { CheckIcon, CopyIcon } from "./icons"
-import clsx from "clsx"
 
 type Props = {
     text: string
@@ -23,7 +23,7 @@ const CopyButton: React.FC<Props> = ({ text, className }) => {
 
     return (
         <button
-            className={clsx(
+            className={cn(
                 className,
                 "z-20 w-6 h-6 inline-flex items-center justify-center transition-all rounded-md hover:border focus:outline-none",
                 isCopied && "border-green-600",

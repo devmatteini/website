@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 import profileImg from "../../public/profile.webp"
 import NextLink from "next/link"
-import clsx from "clsx"
+import { cn } from "../shared/cn"
 
 const defaultStyle = ""
 
@@ -28,10 +28,10 @@ type HeaderProps = {
 }
 const Header: React.FC<HeaderProps> = ({ size = "small" }) => {
     return (
-        <h1 className={clsx("mt-0 font-bold", h1SizeStyle[size])}>
+        <h1 className={cn("mt-0 font-bold", h1SizeStyle[size])}>
             <NextLink href="/" className={linkStyle[size]}>
                 <Image
-                    className={clsx("rounded-full mr-3", imageSizeStyle[size])}
+                    className={cn("rounded-full mr-3", imageSizeStyle[size])}
                     src={profileImg}
                     alt="Cosimo Matteini"
                     sizes="33vw"
