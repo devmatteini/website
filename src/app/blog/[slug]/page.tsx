@@ -52,7 +52,8 @@ const Post: React.FC<Props> = ({ params }) => {
                     </div>
                 </header>
                 <MDXContent components={mdxComponents} />
-                <footer className="mt-8 mb-2">
+                <hr className="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
+                <footer className="mb-2">
                     <Comments post={current} />
                     <NextPrevPosts previous={previous} next={next} />
                 </footer>
