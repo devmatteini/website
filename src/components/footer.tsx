@@ -10,13 +10,13 @@ const Footer: React.FC = () => {
             <Container>
                 <div className="flex flex-col sm:flex-row sm:justify-between">
                     <NextLink className="text-lg" href="/">
-                        Home
+                        /home
                     </NextLink>
                     <NextLink className="text-lg" href="/blog">
-                        All posts
+                        /blog
                     </NextLink>
                     <NextLink className="text-lg" href="/privacy">
-                        Privacy
+                        /privacy
                     </NextLink>
                     <ExternalLink
                         className="flex items-center gap-x-2 text-lg"
