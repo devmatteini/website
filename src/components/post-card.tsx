@@ -11,9 +11,9 @@ type PostCardProps = {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
     return (
-        // This div is needed to create the effect of gradient border for the inner div *
-        <div className="mb-6 rounded p-1 bg-gradient-to-r from-[#0038a6] to-[#c60c30]">
-            <article className="p-3 bg-black rounded">
+        <div className="mb-6 flex">
+            <span className="p-[2px] bg-gradient-to-b from-[#0038a6] to-[#c60c30]"></span>
+            <article className="px-2 bg-black">
                 <header>
                     <NextLink href={post.url}>
                         <p className="text-xl my-0 font-bold">
