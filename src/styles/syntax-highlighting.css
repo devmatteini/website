@@ -1,5 +1,6 @@
 :root {
-    --code-bg-color: 255, 255, 255;
+    --code-bg-color: 13, 17, 23;
+    --line-highlighted-color: 255, 255, 255;
 }
 
 /* ------------Code block------------ */
@@ -8,7 +9,7 @@
 div[data-rehype-pretty-code-fragment] {
     overflow: hidden;
 
-    background-color: rgb(var(--code-bg-color), 0.1);
+    background-color: rgb(var(--code-bg-color));
     margin: 1rem 0;
     border-radius: 0.25rem;
 }
@@ -31,7 +32,7 @@ div[data-rehype-pretty-code-fragment] code {
 /* Title */
 div[data-rehype-pretty-code-title] {
     margin-bottom: 0.125rem;
-    background-color: rgb(var(--code-bg-color), 0.1);
+    background-color: #161b22;
     padding: 0.25rem 0.75rem;
     line-height: 1rem;
 }
@@ -45,8 +46,8 @@ div[data-rehype-pretty-code-title] {
 }
 
 [data-highlighted-line] {
-    border-left-color: rgb(var(--code-bg-color), 0.7);
-    background-color: rgb(var(--code-bg-color), 0.1);
+    border-left-color: rgba(var(--line-highlighted-color), 0.7);
+    background-color: rgba(var(--line-highlighted-color), 0.1);
 }
 
 /* Word highlighted */
@@ -70,7 +71,7 @@ code[data-line-numbers] > [data-line]::before {
 
     margin-right: 0.5rem;
     width: 1rem;
-    color: rgb(var(--code-bg-color), 0.2);
+    color: #6e7681;
 }
 
 /* ---------------------------------- */
