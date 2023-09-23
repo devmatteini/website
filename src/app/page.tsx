@@ -8,6 +8,7 @@ import Header from "../components/header"
 
 export const metadata = createMetadata({
     title: "Cosimo Matteini",
+    showFullTitle: false,
     description: "Software developer, TypeScript, Rust and Functional programming enthusiast",
 })
 
