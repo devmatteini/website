@@ -1,10 +1,12 @@
-import type { Metadata } from "next"
 import NextLink from "next/link"
 import React from "react"
+import { createMetadata } from "../shared/metadata"
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
     title: "404 - Page not found",
-}
+    description:
+        "It seems you've found something that used to exist, or you spelled something wrong. Can you check the URL?",
+})
 
 const NotFound: React.FC = () => {
     return (
