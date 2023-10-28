@@ -3,7 +3,6 @@ import React from "react"
 import { formatDate } from "../shared/helpers/date"
 import { ellipse } from "../shared/helpers/string"
 import { Post } from "../shared/posts"
-import Optional from "./optional"
 
 type PostCardProps = {
     post: Post
@@ -18,12 +17,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                     <NextLink href={post.url}>
                         <p className="text-xl my-0 font-bold">
                             {post.title}
-                            <Optional condition={post.status === "draft"}>
-                                <span className="ml-2">[DRAFT]</span>
-                            </Optional>
-                            <Optional condition={post.status === "preview"}>
-                                <span className="ml-2">[PREVIEW]</span>
-                            </Optional>
+                            {PostStatus[post.status]}
                         </p>
                         <p className="mb-0">{formatDate(post.date)}</p>
                     </NextLink>
@@ -33,6 +27,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
             </article>
         </div>
     )
+}
+
+const PostStatus: Record<Post["status"], React.ReactNode> = {
+    published: null,
+    draft: <span className="ml-2">[DRAFT]</span>,
+    preview: <span className="ml-2">[PREVIEW]</span>,
 }
 
 type TagsProps = { tags: Post["tags"] }
