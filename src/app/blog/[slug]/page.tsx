@@ -1,5 +1,5 @@
 import React from "react"
-import { publishedOrPreviewPosts, findPost } from "../../../shared/posts"
+import { publishedOrPreviewPosts, findPost, Post } from "../../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../../shared/helpers/date"
 import { mdxComponents } from "../../../components/mdx"
@@ -8,6 +8,7 @@ import { createMetadata } from "../../../shared/metadata"
 import { notFound } from "next/navigation"
 import { NextPrevPosts } from "./next-prev-posts"
 import { Comments } from "./comments"
+import { cn } from "../../../shared/cn"
 
 type Param = {
     slug: string
@@ -41,7 +42,8 @@ const Post: React.FC<Props> = ({ params }) => {
             <article>
                 <header className="mb-6">
                     <h1 className="mb-1 font-bold">{current.title}</h1>
-                    <div className="flex gap-2 text-sm">
+                    <div className="flex gap-2 text-sm items-center flex-wrap">
+                        <PostStatus status={current.status} />
                         <p className="mb-0">{formatDate(current.date)}</p>
                         {current.updatedOn && (
                             <>
@@ -59,6 +61,20 @@ const Post: React.FC<Props> = ({ params }) => {
                 </footer>
             </article>
         </>
+    )
+}
+
+const PostStatus: React.FC<{ status: Post["status"] }> = ({ status }) => {
+    if (status === "published") return null
+    return (
+        <p
+            className={cn("m-0 py-1 px-2 rounded-md uppercase font-bold", {
+                "bg-red-500": status === "draft",
+                "bg-blue-500": status === "preview",
+            })}
+        >
+            {status}
+        </p>
     )
 }
 
