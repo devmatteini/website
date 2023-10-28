@@ -1,7 +1,7 @@
 import React from "react"
 import Header from "../../components/header"
 import PostCard from "../../components/post-card"
-import { allPosts } from "../../shared/posts"
+import { publishedPosts } from "../../shared/posts"
 import { createMetadata } from "../../shared/metadata"
 
 export const metadata = createMetadata({
@@ -15,7 +15,7 @@ const Blog: React.FC = () => {
             <Header />
             <h1 className="font-bold mb-5">All posts</h1>
             <div>
-                {allPosts.map((post) => (
+                {publishedPosts.map((post) => (
                     <PostCard key={post._id} post={post} />
                 ))}
             </div>

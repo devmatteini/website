@@ -21,6 +21,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                             <Optional condition={post.status === "draft"}>
                                 <span className="ml-2">[DRAFT]</span>
                             </Optional>
+                            <Optional condition={post.status === "preview"}>
+                                <span className="ml-2">[PREVIEW]</span>
+                            </Optional>
                         </p>
                         <p className="mb-0">{formatDate(post.date)}</p>
                     </NextLink>

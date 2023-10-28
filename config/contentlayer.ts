@@ -22,7 +22,7 @@ const Post = defineDocumentType(() => ({
         },
         status: {
             type: "enum",
-            options: ["draft", "published"],
+            options: ["draft", "preview", "published"],
             description: "The status of the post",
             required: true,
         },

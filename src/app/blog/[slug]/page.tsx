@@ -1,5 +1,5 @@
 import React from "react"
-import { allPosts, findPost } from "../../../shared/posts"
+import { publishedOrPreviewPosts, findPost } from "../../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
 import { formatDate } from "../../../shared/helpers/date"
 import { mdxComponents } from "../../../components/mdx"
@@ -15,7 +15,7 @@ type Param = {
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-static-params#returns
 export const generateStaticParams = (): Param[] =>
-    allPosts.map((post) => ({
+    publishedOrPreviewPosts.map((post) => ({
         slug: post.slug,
     }))
 
@@ -24,13 +24,13 @@ type Props = { params: Param }
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata#parameters
 export const generateMetadata = ({ params }: Props) => {
-    const post = allPosts.find((post) => post.slug === params.slug)
+    const post = publishedOrPreviewPosts.find((post) => post.slug === params.slug)
     if (!post) return
     return createMetadata({ title: post.title, description: post.description })
 }
 
 const Post: React.FC<Props> = ({ params }) => {
-    const { previous, current, next } = findPost(params.slug, allPosts)
+    const { previous, current, next } = findPost(params.slug, publishedOrPreviewPosts)
     if (!current) notFound()
 
     const MDXContent = useMDXComponent(current.body.code)
@@ -54,7 +54,7 @@ const Post: React.FC<Props> = ({ params }) => {
                 <MDXContent components={mdxComponents} />
                 <hr className="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
                 <footer className="mb-2">
-                    <Comments post={current} />
+                    {current.status === "published" && <Comments post={current} />}
                     <NextPrevPosts previous={previous} next={next} />
                 </footer>
             </article>

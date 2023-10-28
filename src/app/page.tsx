@@ -1,5 +1,5 @@
 import React from "react"
-import { allPosts, first3 } from "../shared/posts"
+import { publishedPosts, first3 } from "../shared/posts"
 import NextLink from "next/link"
 import { BoxArrowInRightIcon } from "../components/icons"
 import PostCard from "../components/post-card"
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
                 </h2>
             </div>
             <h3 className="mt-8">Recent posts</h3>
-            {first3(allPosts).map((post) => (
+            {first3(publishedPosts).map((post) => (
                 <PostCard key={post._id} post={post} />
             ))}
             <h3>
