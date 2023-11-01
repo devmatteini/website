@@ -35,7 +35,7 @@
         "tailwind-merge": "1.14.0"
     },
     "devDependencies": {
-        "@types/node": "18.18.1",
+        "@types/node": "18.18.8",
         "@types/react": "18.2.24",
         "@types/react-dom": "18.2.14",
         "prettier": "2.8.8",
