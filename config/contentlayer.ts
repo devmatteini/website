@@ -46,7 +46,10 @@ const Post = defineDocumentType(() => ({
         },
         url: {
             type: "string",
-            resolve: (post) => `/blog/${post._raw.flattenedPath}`,
+            resolve: (post) => {
+                if (post.status === "preview") return `/blog/preview/${post._raw.flattenedPath}`
+                return `/blog/${post._raw.flattenedPath}`
+            },
         },
     },
 }))
