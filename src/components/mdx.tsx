@@ -4,6 +4,7 @@ import NextLink from "next/link"
 import NextImage, { ImageProps as NextImageProps } from "next/image"
 import CopyButton from "./copy-button"
 import { cn } from "../shared/cn"
+import Alert from "./alert"
 
 const Link: MDXComponents["a"] = ({ href, ...props }) => {
     if (!href) return null
@@ -42,4 +43,5 @@ export const mdxComponents: MDXComponents = {
     a: Link,
     Image: Image,
     pre: Pre,
+    Alert: Alert,
 }
