@@ -74,6 +74,23 @@ code[data-line-numbers] > [data-line]::before {
     color: #6e7681;
 }
 
+/* Group highlighted chars by id */
+[data-chars-id="purple"] {
+    @apply bg-purple-800/50;
+}
+
+[data-chars-id="yellow"] {
+    @apply bg-yellow-600/50;
+}
+
+[data-chars-id="green"] {
+    @apply bg-green-600/60;
+}
+
+[data-chars-id="red"] {
+    @apply bg-red-700/80;
+}
+
 /* ---------------------------------- */
 
 /* Inline code (e.g `this is inline code`) */
