@@ -12,7 +12,7 @@ module.exports = {
             colors: {
                 black: "#202229",
                 darkBlue: "#18181e",
-                orange: "#ffa657",
+                orange2: "#ffa657",
                 inlineCode: "#37393f",
                 gray2: "#BBBBBB",
             },

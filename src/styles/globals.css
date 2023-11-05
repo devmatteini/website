@@ -62,9 +62,9 @@ hr {
 }
 
 article a {
-    @apply border-b-2 border-b-orange;
+    @apply border-b-2 border-b-orange2;
 }
 
 a:hover {
-    @apply text-orange;
+    @apply text-orange2;
 }
