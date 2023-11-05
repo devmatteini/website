@@ -20,7 +20,7 @@ const Alert: React.FC<PropsWithChildren<Props>> = ({ children, variant }) => {
             })}
         >
             <div className="text-base mr-4">{icon[variant]}</div>
-            <div className="w-full text-sm">{children}</div>
+            <div className="w-full min-w-0 text-sm">{children}</div>
         </div>
     )
 }
