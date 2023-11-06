@@ -91,6 +91,10 @@ code[data-line-numbers] > [data-line]::before {
     @apply bg-red-700/80;
 }
 
+[data-highlighted-chars][data-chars-id="error"] {
+    @apply bg-inherit underline decoration-wavy decoration-red-600;
+}
+
 /* ---------------------------------- */
 
 /* Inline code (e.g `this is inline code`) */
