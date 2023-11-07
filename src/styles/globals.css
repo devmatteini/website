@@ -68,3 +68,7 @@ article a {
 a:hover {
     @apply text-orange2;
 }
+
+details summary {
+    @apply cursor-pointer;
+}
