@@ -69,6 +69,10 @@ a:hover {
     @apply text-orange2;
 }
 
+details {
+    @apply mb-4;
+}
+
 details summary {
     @apply cursor-pointer;
 }
