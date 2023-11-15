@@ -197,7 +197,7 @@ Now if we run the application, both football matches and calendar events are ret
 ## Controlled concurrency
 
 If you have a closer look at the order of the logs (and the timestamps) we can see that they are executed sequentially.
-This is the default behavior of every effects.
+This is the default behavior of every effect.
 
 Even though this two effects are quite fast, we can easily experiment and try to run them concurrently.
 
@@ -634,7 +634,7 @@ We started exploring Effect and there is a lot more to see and try.
 What we just did is a very common workflow: retrieve data from external sources, do some business logic and save the results to a database.
 
 What I like about Effect is that you can experiment, iterate and refactor with confidence that your application won't break.
-Effect leverage the type system to make things explicit: errors and requirements. No more looking at code to understand what errors it may produce.
+Effect leverage the type system to make things explicit: errors and requirements. Although we only covered the requirements part, you should check out [error handling](https://www.effect.website/docs/error-management/two-error-types).
 
 The learning curve may seem high at first, but from my experience I can say that it was worth it because I enjoy writing TypeScript with Effect much more.
 
