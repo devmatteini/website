@@ -127,8 +127,8 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, 
 If we run the application, we can see that `loadMatchesByTeam` is executed!
 
 ```
-{"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:11:45.178Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
-{"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:11:46.186Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+{"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:31:45.178Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+{"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:31:46.186Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
 ```
 
 <Alert variant="info">
@@ -285,7 +285,7 @@ And as we run the application, we can see the log and the annotations we added.
 ```json {6-7,9}
 {
     "message": "Commands to execute",
-    "timestamp": "2023-11-05T17:08:34.477Z",
+    "timestamp": "2023-11-05T15:50:34.477Z",
     "level": "INFO",
     "fiberId": "#0",
     "create": "31",
@@ -396,10 +396,10 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, 
 Finally we can see that we are creating new calendar events!
 
 ```
-{"message":"Calendar event created","timestamp":"2023-11-05T22:21:14.599Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-12T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Bologna","matchId":"1052363"}
-{"message":"Calendar event created","timestamp":"2023-11-05T22:21:15.524Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-26T00:00:00.000Z","competition":"Serie A","teamId":"502","match":"AC Milan-Fiorentina","matchId":"1052380"}
-{"message":"Calendar event created","timestamp":"2023-11-05T22:21:16.747Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-03T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Salernitana","matchId":"1052383"}
-{"message":"Calendar event created","timestamp":"2023-11-05T22:21:17.671Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-10T19:45:00.000Z","competition":"Serie A","teamId":"502","match":"AS Roma-Fiorentina","matchId":"1052401"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:14.599Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-12T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Bologna","matchId":"1052363"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:15.524Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-26T00:00:00.000Z","competition":"Serie A","teamId":"502","match":"AC Milan-Fiorentina","matchId":"1052380"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:16.747Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-03T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Salernitana","matchId":"1052383"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:17.671Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-10T19:45:00.000Z","competition":"Serie A","teamId":"502","match":"AS Roma-Fiorentina","matchId":"1052401"}
 // ...
 ```
 
@@ -423,10 +423,10 @@ F.pipe(
 Let's run the application and see how much time it takes.
 
 ```json /Error: Rate Limit Exceeded/#red
-{"message":"Commands to execute","timestamp":"2023-11-05T22:38:52.022Z","level":"INFO","fiberId":"#0","create":"31","update":"0","teamId":"502","nothingChanged":"0"}
+{"message":"Commands to execute","timestamp":"2023-11-05T16:02:52.022Z","level":"INFO","fiberId":"#0","create":"31","update":"0","teamId":"502","nothingChanged":"0"}
 {
     "message": "Unexpected application error",
-    "timestamp": "2023-11-05T22:38:52.664Z",
+    "timestamp": "2023-11-05T16:02:52.664Z",
     "level": "ERROR",
     "cause": "Error: Unable to insert google calendar event: Error: Rate Limit Exceeded (...omitting stack trace...)",
     "teamId": 502
