@@ -24,7 +24,11 @@ type Props = { params: Param }
 export const generateMetadata = ({ params }: Props) => {
     const { current } = findPost(params.slug, previewPosts)
     if (!current) return
-    return createMetadata({ title: current.title, description: current.description })
+    return createMetadata({
+        title: current.title,
+        description: current.description,
+        keywords: current.tags,
+    })
 }
 
 const PreviewPostPage: React.FC<Props> = ({ params }) => {
