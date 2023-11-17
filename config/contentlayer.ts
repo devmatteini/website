@@ -1,4 +1,5 @@
 import { defineDocumentType } from "contentlayer/source-files"
+import readingTime from "reading-time"
 
 // https://www.contentlayer.dev/docs/sources/files/mapping-document-types
 const Post = defineDocumentType(() => ({
@@ -49,6 +50,13 @@ const Post = defineDocumentType(() => ({
             resolve: (post) => {
                 if (post.status === "preview") return `/blog/preview/${post._raw.flattenedPath}`
                 return `/blog/${post._raw.flattenedPath}`
+            },
+        },
+        readingTime: {
+            type: "string",
+            resolve: (post) => {
+                const result = readingTime(post.body.raw)
+                return result.text
             },
         },
     },
