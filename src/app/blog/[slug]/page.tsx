@@ -8,6 +8,7 @@ import { createMetadata } from "../../../shared/metadata"
 import { notFound } from "next/navigation"
 import { NextPrevPosts } from "./next-prev-posts"
 import { Comments } from "./comments"
+import { CalendarIcon, ClockIcon, PenEditIcon } from "../../../components/icons"
 
 type Param = {
     slug: string
@@ -44,15 +45,16 @@ const PostPage: React.FC<Props> = ({ params }) => {
             <Header />
             <article>
                 <header className="mb-6">
-                    <h1 className="mb-1 font-bold">{current.title}</h1>
+                    <h1 className="mb-3 font-bold">{current.title}</h1>
                     <div className="flex gap-2 text-sm items-center flex-wrap">
-                        <p className="mb-0">{formatDate(current.date)}</p>
+                        <HeaderTag icon={<CalendarIcon />} text={formatDate(current.date)} />
                         {current.updatedOn && (
-                            <>
-                                <span>&bull;</span>
-                                <p className="mb-0">Updated on {formatDate(current.updatedOn)}</p>
-                            </>
+                            <HeaderTag
+                                icon={<PenEditIcon />}
+                                text={`Updated on ${formatDate(current.updatedOn)}`}
+                            />
                         )}
+                        <HeaderTag icon={<ClockIcon />} text={current.readingTime} />
                     </div>
                 </header>
                 <MDXContent components={mdxComponents} />
@@ -63,6 +65,15 @@ const PostPage: React.FC<Props> = ({ params }) => {
                 </footer>
             </article>
         </>
+    )
+}
+
+const HeaderTag: React.FC<{ icon: React.ReactNode; text: string }> = ({ icon, text }) => {
+    return (
+        <p className="mb-0 py-1 px-2 rounded-md bg-inlineCode flex items-center gap-1">
+            {icon}
+            {text}
+        </p>
     )
 }
 
