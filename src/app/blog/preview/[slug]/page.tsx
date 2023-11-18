@@ -1,7 +1,6 @@
 import React from "react"
 import { previewPosts, findPost } from "../../../../shared/posts"
 import { useMDXComponent } from "next-contentlayer/hooks"
-import { formatDate } from "../../../../shared/helpers/date"
 import { mdxComponents } from "../../../../components/mdx"
 import Header from "../../../../components/header"
 import { createMetadata } from "../../../../shared/metadata"
@@ -42,18 +41,11 @@ const PreviewPostPage: React.FC<Props> = ({ params }) => {
             <Header />
             <article>
                 <header className="mb-6">
-                    <h1 className="mb-1 font-bold">{current.title}</h1>
-                    <div className="flex gap-2 text-sm items-center flex-wrap">
+                    <h1 className="mb-3 font-bold">{current.title}</h1>
+                    <div className="flex gap-2 text-sm flex-wrap">
                         <p className="m-0 py-1 px-2 rounded-md uppercase font-bold bg-blue-500">
                             {current.status}
                         </p>
-                        <p className="mb-0">{formatDate(current.date)}</p>
-                        {current.updatedOn && (
-                            <>
-                                <span>&bull;</span>
-                                <p className="mb-0">Updated on {formatDate(current.updatedOn)}</p>
-                            </>
-                        )}
                     </div>
                 </header>
                 <MDXContent components={mdxComponents} />
