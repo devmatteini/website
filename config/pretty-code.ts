@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // DOCS: https://rehype-pretty-code.netlify.app/
 import type { Options } from "rehype-pretty-code"
 import prettyCode from "rehype-pretty-code"

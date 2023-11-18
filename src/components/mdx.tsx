@@ -11,7 +11,7 @@ const Link: MDXComponents["a"] = ({ href, ...props }) => {
 
     if (href.startsWith("/")) {
         // a.ref and Link.ref types are incompatible, so let's just leave it out :)
-        const { ref, ...rest } = props
+        const { ref: _, ...rest } = props
         return (
             <NextLink href={href} {...rest}>
                 {props.children}
