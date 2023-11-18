@@ -1,5 +1,5 @@
 import React from "react"
-import type { MDXComponents } from "mdx/types"
+import type { MDXComponents, Component } from "mdx/types"
 import NextLink from "next/link"
 import NextImage, { ImageProps as NextImageProps } from "next/image"
 import CopyButton from "./copy-button"
@@ -39,9 +39,13 @@ const Pre: React.FC<PreProps> = ({ children, __rawContent__, ...props }) => {
     )
 }
 
+// NOTE: this type is needed because the mdx type for functional component is wrong
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyComponent = Component<any>
+
 export const mdxComponents: MDXComponents = {
     a: Link,
-    Image: Image,
-    pre: Pre,
-    Alert: Alert,
+    Image: Image as AnyComponent,
+    pre: Pre as AnyComponent,
+    Alert: Alert as AnyComponent,
 }
