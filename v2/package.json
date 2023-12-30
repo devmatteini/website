@@ -17,6 +17,7 @@
     "dependencies": {
         "@astrojs/tailwind": "5.1.0",
         "astro": "4.0.8",
+        "@astrojs/mdx": "2.0.3",
         "astro-icon": "1.0.1",
         "clsx": "2.0.0",
         "tailwind-merge": "2.0.0",
