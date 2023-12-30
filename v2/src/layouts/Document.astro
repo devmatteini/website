@@ -1,5 +1,6 @@
 ---
 import "../styles/globals.css"
+import "@fontsource-variable/inter"
 import Container from "../components/Container.astro"
 import Footer from "../components/Footer.astro"
 ---
@@ -13,8 +14,7 @@ import Footer from "../components/Footer.astro"
         <body class="bg-black text-white">
             {/* This <div> with flex is needed for sticky footer */}
             <div class="flex flex-col min-h-screen">
-                <!-- TODO: setup Inter font -->
-                <main class={`flex-grow mt-8`}>
+                <main class="flex-grow mt-8">
                     <Container><slot /></Container>
                     <!-- TODO: <Analytics debug={process.env.ANALYTICS_DEBUG === "true"} /> -->
                 </main>

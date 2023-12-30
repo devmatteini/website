@@ -19,7 +19,8 @@
         "astro": "4.0.8",
         "astro-icon": "1.0.1",
         "clsx": "2.0.0",
-        "tailwind-merge": "2.0.0"
+        "tailwind-merge": "2.0.0",
+        "@fontsource-variable/inter": "5.0.16"
     },
     "devDependencies": {
         "@astrojs/check": "0.3.4",
