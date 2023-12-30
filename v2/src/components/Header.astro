@@ -1,0 +1,40 @@
+---
+import { cn } from "../shared/cn"
+
+const defaultStyle = ""
+
+type HeaderSize = "small" | "medium"
+
+const imageSizeStyle: Record<HeaderSize, string> = {
+    small: "w-12 h-12",
+    medium: "w-20 h-20",
+}
+
+const h1SizeStyle: Record<HeaderSize, string> = {
+    small: "text-xl",
+    medium: defaultStyle,
+}
+
+const linkStyle: Record<HeaderSize, string> = {
+    small: "flex items-center",
+    medium: "flex flex-col items-center text-center md:flex-row md:text-left",
+}
+
+type Props = {
+    size?: HeaderSize
+}
+
+const { size = "small" } = Astro.props
+---
+
+<h1 class={cn("mt-0 font-bold", h1SizeStyle[size])}>
+    <a href="/" class={linkStyle[size]}>
+        <img
+            class={cn("rounded-full mr-3", imageSizeStyle[size])}
+            src="/profile.webp"
+            alt="Cosimo Matteini"
+            sizes="33vw"
+        />
+        Cosimo Matteini
+    </a>
+</h1>
