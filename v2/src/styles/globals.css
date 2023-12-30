@@ -1,0 +1,73 @@
+/* Global styles for basic elements */
+h1 {
+    @apply text-5xl;
+}
+h2 {
+    @apply text-4xl;
+}
+h3 {
+    @apply text-3xl;
+}
+h4 {
+    @apply text-2xl;
+}
+h5 {
+    @apply text-xl;
+}
+h6 {
+    @apply text-lg;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply mt-6 mb-4;
+}
+
+p {
+    @apply mb-4;
+}
+
+blockquote {
+    @apply mb-4 border-l-4 border-gray-300 text-gray-300 pl-4 text-xl;
+}
+
+blockquote p {
+    margin-bottom: 0;
+}
+
+ol {
+    @apply list-decimal space-y-3 pl-8;
+}
+
+ul {
+    @apply list-disc space-y-3 pl-8;
+}
+
+ol,
+ul {
+    @apply mb-4;
+}
+
+hr {
+    @apply border-t-2 pb-8;
+}
+
+article a {
+    @apply border-b-2 border-b-orange2;
+}
+
+a:hover {
+    @apply text-orange2;
+}
+
+details {
+    @apply mb-4;
+}
+
+details summary {
+    @apply cursor-pointer;
+}
