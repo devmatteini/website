@@ -1,3 +1,5 @@
+@import "./syntax-highlighting.css";
+
 /* Global styles for basic elements */
 h1 {
     @apply text-5xl;
