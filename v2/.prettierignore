@@ -1,0 +1,17 @@
+node_modules/
+
+# Build directories
+.next/
+build/
+.contentlayer
+coverage/
+.vercel
+out/
+
+# ide/editors
+.idea/
+.vscode/
+
+# Misc
+public/
+package-lock.json
