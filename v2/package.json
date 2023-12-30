@@ -1,0 +1,21 @@
+{
+  "name": "v2",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "typecheck": "tsc --noEmit",
+    "typecheck:w": "npm run typecheck -- --watch",
+    "check": "astro check",
+    "check:w": "npm run check -- --watch"
+  },
+  "dependencies": {
+    "astro": "4.0.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.3.4",
+    "typescript": "5.3.3"
+  }
+}
