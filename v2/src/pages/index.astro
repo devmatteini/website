@@ -2,6 +2,10 @@
 import Header from "../components/Header.astro"
 import Document from "../layouts/Document.astro"
 import { Icon } from "astro-icon/components"
+import { first3, publishedPosts } from "../shared/posts"
+import PostCard from "../components/blog/PostCard.astro"
+
+const posts = await publishedPosts()
 ---
 
 <!-- TODO: add SEO metadata -->
@@ -14,9 +18,7 @@ import { Icon } from "astro-icon/components"
         </h2>
     </div>
     <h3 class="mt-8">Recent posts</h3>
-    <!-- TODO: add first 3 posts {first3(publishedPosts).map((post) => (
-        <PostCard key={post._id} post={post} />
-    ))} -->
+    {first3(posts).map((post) => <PostCard post={post.data} />)}
     <h3>
         <a href="/blog" class="flex items-center">
             All posts
