@@ -1,0 +1,11 @@
+---
+type Props = {
+    text: string
+}
+const { text } = Astro.props
+---
+
+<p class="mb-0 py-1 px-2 rounded-md bg-inlineCode flex items-center gap-1">
+    <slot name="icon" />
+    {text}
+</p>

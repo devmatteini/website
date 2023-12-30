@@ -1,0 +1,28 @@
+---
+import type { Post } from "../../shared/posts"
+
+type Props = {
+    previous: Post["data"] | undefined
+    next: Post["data"] | undefined
+}
+const { previous, next } = Astro.props
+---
+
+<div class="flex gap-2 items-center text-gray2">
+    {(previous || next) && <>&#8227;</>}
+    {
+        previous && (
+            <a class="border-b-0" href={previous.url}>
+                cd previous
+            </a>
+        )
+    }
+    {previous && next && <span>&#47;</span>}
+    {
+        next && (
+            <a class="border-b-0" href={next.url}>
+                cd next
+            </a>
+        )
+    }
+</div>

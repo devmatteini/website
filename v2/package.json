@@ -21,7 +21,8 @@
         "astro-icon": "1.0.1",
         "clsx": "2.0.0",
         "tailwind-merge": "2.0.0",
-        "@fontsource-variable/inter": "5.0.16"
+        "@fontsource-variable/inter": "5.0.16",
+        "reading-time": "1.5.0"
     },
     "devDependencies": {
         "@astrojs/check": "0.3.4",

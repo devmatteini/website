@@ -1,6 +1,12 @@
 ---
+import { Icon } from "astro-icon/components"
+import Header from "../../components/Header.astro"
+import HeaderTag from "../../components/blog/HeaderTag.astro"
 import Document from "../../layouts/Document.astro"
-import { publishedPosts, type Post } from "../../shared/posts"
+import { formatDate } from "../../shared/date"
+import { publishedPosts, type Post, findPost } from "../../shared/posts"
+import Comments from "../../components/blog/Comments.astro"
+import NextPrevPosts from "../../components/blog/NextPrevPosts.astro"
 
 export async function getStaticPaths() {
     const posts = await publishedPosts()
@@ -11,10 +17,43 @@ export async function getStaticPaths() {
 }
 type Props = Post
 
+const posts = await publishedPosts()
+
 const post = Astro.props
+const current = post.data
+const { previous, next } = findPost(post.slug, posts)
 const { Content } = await post.render()
 ---
 
+<!-- TODO: add SEO metadata -->
 <Document>
-    <Content />
+    <Header />
+    <article>
+        <header class="mb-6">
+            <h1 class="mb-3 font-bold">{current.title}</h1>
+            <div class="flex gap-2 text-sm items-center flex-wrap">
+                <HeaderTag text={formatDate(current.date)}>
+                    <Icon slot="icon" name="calendar" />
+                </HeaderTag>
+                {
+                    current.updatedOn && (
+                        <HeaderTag text={`Updated on ${formatDate(current.updatedOn)}`}>
+                            <Icon slot="icon" name="pencil-square" />
+                        </HeaderTag>
+                    )
+                }
+                <HeaderTag text={current.readingTime}>
+                    <Icon slot="icon" name="clock" />
+                </HeaderTag>
+            </div>
+        </header>
+        <!-- TODO: add custom MDX components -->
+        <Content />
+        <hr class="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
+        <footer class="mb-2">
+            {current.status === "published" && <Comments post={current} />}
+			<!-- TODO: check if this works fine when we have more posts -->
+            <NextPrevPosts previous={previous?.data} next={next?.data} />
+        </footer>
+    </article>
 </Document>
