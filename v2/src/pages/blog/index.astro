@@ -1,15 +1,17 @@
 ---
 import Header from "../../components/Header.astro"
+import PostCard from "../../components/blog/PostCard.astro"
 import Document from "../../layouts/Document.astro"
+import { publishedPosts } from "../../shared/posts"
+
+const posts = await publishedPosts()
 ---
 
 <!-- TODO: add SEO metadata -->
 <Document>
     <Header />
     <h1 class="font-bold mb-5">All posts</h1>
-    <!-- TODO: list of blog posts <div>
-        {publishedPosts.map((post) => (
-            <PostCard key={post._id} post={post} />
-        ))}
-    </div> -->
+    <div>
+        {posts.map((post) => <PostCard post={post.data} />)}
+    </div>
 </Document>

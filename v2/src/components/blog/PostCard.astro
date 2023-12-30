@@ -1,0 +1,35 @@
+---
+import { formatDate } from "../../shared/date"
+import type { Post } from "../../shared/posts"
+import { ellipse } from "../../shared/string"
+import Tags from "./Tags.astro"
+
+type Props = {
+    post: Post["data"]
+}
+
+const { post } = Astro.props
+
+const statusLabel: Record<Post["data"]["status"], string | null> = {
+    published: null,
+    draft: "[DRAFT]",
+}
+const status = statusLabel[post.status]
+---
+
+<div class="mb-6 flex">
+    <span class="p-[2px] bg-gradient-to-b from-[#0038a6] to-[#c60c30]"></span>
+    <article class="px-2 bg-black">
+        <header>
+            <a href={post.url}>
+                <p class="text-xl my-0 font-bold">
+                    {post.title}
+                    {status && <span class="ml-2">{status}</span>}
+                </p>
+                <p class="mb-0">{formatDate(post.date)}</p>
+            </a>
+        </header>
+        <p class="mt-2 break-words">{ellipse(post.description, 100)}</p>
+        <Tags tags={post.tags} />
+    </article>
+</div>

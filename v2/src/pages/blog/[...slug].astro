@@ -52,7 +52,7 @@ const { Content } = await post.render()
         <hr class="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
         <footer class="mb-2">
             {current.status === "published" && <Comments post={current} />}
-			<!-- TODO: check if this works fine when we have more posts -->
+            <!-- TODO: check if this works fine when we have more posts -->
             <NextPrevPosts previous={previous?.data} next={next?.data} />
         </footer>
     </article>
