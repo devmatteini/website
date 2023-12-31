@@ -3,6 +3,38 @@ import "../styles/globals.css"
 import "@fontsource-variable/inter"
 import Container from "../components/Container.astro"
 import Footer from "../components/Footer.astro"
+import { websiteDomain, websiteUrl } from "../shared/metadata"
+
+type MetaTagImage = {
+    src: string
+    alt: string
+}
+const defaultImage: MetaTagImage = {
+    src: websiteUrl("/base-og.jpg"),
+    alt: websiteDomain,
+}
+
+type Metadata = {
+    title: string
+    description: string
+    image?: MetaTagImage
+    showFullTitle?: boolean
+    keywords?: string[]
+}
+
+type Props = {
+    metadata: Metadata
+}
+
+const withDefaults = (metadata: Metadata): Required<Metadata> => ({
+    ...metadata,
+    showFullTitle: metadata.showFullTitle ?? true,
+    keywords: metadata.keywords ?? [],
+    image: metadata.image ?? defaultImage
+})
+
+const metadata = withDefaults(Astro.props.metadata)
+const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : metadata.title
 ---
 
 <!doctype html>
@@ -11,6 +43,23 @@ import Footer from "../components/Footer.astro"
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://hachyderm.io/@cosimomatteini" rel="me" />
+
+        <title>{title}</title>
+        <meta name="description" content={metadata.description} />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={metadata.description} />
+        <meta property="og:image" content={metadata.image.src} />
+        <meta property="og:image:alt" content={metadata.image.alt} />
+        <meta property="og:type" content="website" />
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={metadata.description} />
+        <meta name="twitter:image" content={metadata.image.src} />
+        <meta name="twitter:image:alt" content={metadata.image.alt} />
     </head>
     <body class="bg-black text-white">
         {/* This <div> with flex is needed for sticky footer */}

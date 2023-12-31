@@ -4,8 +4,12 @@ import Header from "../components/Header.astro"
 import Document from "../layouts/Document.astro"
 ---
 
-<!-- TODO: add SEO metadata -->
-<Document>
+<Document
+    metadata={{
+        title: "Privacy",
+        description: "Privacy",
+    }}
+>
     <Header />
     <h1 class="font-bold mb-5">Privacy</h1>
     <h2 class="text-2xl">Your privacy is important to me, as is mine.</h2>

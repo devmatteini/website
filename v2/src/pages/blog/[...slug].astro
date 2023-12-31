@@ -26,8 +26,13 @@ const { previous, next } = findPrevNextPosts(post.slug, posts)
 const { Content } = await post.render()
 ---
 
-<!-- TODO: add SEO metadata -->
-<Document>
+<Document
+    metadata={{
+        title: current.title,
+        description: current.description,
+        keywords: current.tags,
+    }}
+>
     <Header />
     <article>
         <header class="mb-6">
@@ -52,7 +57,6 @@ const { Content } = await post.render()
         <hr class="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
         <footer class="mb-2">
             {current.status === "published" && <Comments post={current} />}
-            <!-- TODO: check if this works fine when we have more posts -->
             <NextPrevPosts previous={previous?.data} next={next?.data} />
         </footer>
     </article>
