@@ -1,0 +1,110 @@
+---
+title: DRA, a year after the first release
+date: 2023-01-10
+status: published
+description: "A retrospective about developing and releasing DRA, a rust CLI to download release assets from GitHub."
+tags:
+    - rust
+    - cli
+    - open-source
+---
+
+It's been a year since I released the first version of my open source project [dra](https://github.com/devmatteini/dra), a command line tool to download release assets from GitHub.
+
+This is the side project I've been working on for the longest time, and I'm really happy of how it turned out!
+
+In this article, I'll have a look at past, present and future of dra.
+
+## Why?
+
+Everything started while refactoring my [dotfiles](https://github.com/devmatteini/dotfiles) and was annoyed by some packages from GitHub release with fixed version in the url, that I needed to update occasionally to download the latest release.
+
+```bash
+curl -L -o bat.deb https://github.com/sharkdp/bat/releases/download/v0.18.3/bat_0.18.3_amd64.deb
+#                                                                    ~~~~~~     ~~~~~~
+#                                                                    ^ the latest release is 0.22.1!
+```
+
+So I built this CLI tool called `dra` that allows to download the latest release asset from a repository (with interactive and non-interactive modes).
+
+```bash
+dra download -o bat.deb -s "bat_{tag}_amd64.deb" sharkdp/bat
+#                       ~~~~~~~~~~~~~~~~~~~~~~~
+#                       ^ non-interactive mode
+```
+
+You can find more examples in the [usage docs](https://github.com/devmatteini/dra#usage) section.
+
+## State of the Project
+
+The GitHub repository is slowly reaching 100 stars (currently at 78) and the total downloads of all releases is close to 600 🎉.
+
+<br />
+`dra` was initially created for Linux (x86_64), but since `0.4.0` it's available on macOS and Windows
+as well. From the latest release `0.4.2`, it's also available for Linux on armv6 and arm64.
+
+<br />
+The platform that downloaded the most `dra` was Linux with 547 downloads (x86_64 and arm).
+
+For the time being, it seems that fewer users are interested on macOS and Windows versions (12 downloads combined).
+
+On the other hand, Linux arm versions have 31 downloads combined with just one release!
+
+## Rust
+
+I chose Rust as the programming language to build `dra` for a couple of reasons:
+
+-   Keep exploring this language that I was already learning
+-   It's really nice to write Rust once you get used to it (especially CLI)
+-   Creates a single binary that is easy to distribute
+
+I use different languages (mostly typescript) at work, but every time I had to write some code for `dra` I was surprised that Rust didn't get it the way but made coding a great experience!
+
+Although Rust is not a functional programming language, you can find a lot of nice things from the functional world like immutability, Option, Result (similar to Either), etc. that allowed me to follow my usual programming style. The main takeaway I have is to avoid trying to write pure FP because Rust is not suitable for it, but instead combine FP with the Rust way.
+
+Since I'm not using Rust every day, I had to pay more attention to the borrow checker, that makes you think about what you're writing more carefully than in other languages.
+
+There are some things for the cross-platform work that I didn't like, but this could also be for my lack of experience and knowledge on these topics.
+
+For example, one feature of `dra` allows extracting an executable file from a compressed archive (tar or zip), and I had two different implementation for Unix and Windows:
+
+```rust
+#[cfg(target_family = "unix")]
+fn is_executable_file(path: &Path, metadata: std::fs::Metadata) -> bool {
+	// ...
+}
+
+#[cfg(target_os = "windows")]
+fn is_executable_file(path: &Path, metadata: std::fs::Metadata) -> bool {
+	// ...
+}
+```
+
+If you omit the function with `target_os = "windows"` you won't have an error until you compile on Windows. As I develop on Ubuntu, sometimes it happened that I forgot to add the Windows function and only found out later when the Windows CI was broken!
+
+I'm wondering if there could be a better way to tell the developer “Hey, you miss this function X for the target Y” and reduce the feedback loop time.
+
+## Open source
+
+One of the thing I liked the most about this project is that there were a [couple of persons](https://github.com/devmatteini/dra/graphs/contributors) that contributed to `dra`.
+
+When you see other developers improving something you created is always a great feeling and moves forward the project with ideas you didn't event think about. Thanks to everyone who contributed in any way to `dra` :)
+
+Here are some features that were added:
+
+-   Distributing `dra` on Arch Linux ([#2](https://github.com/devmatteini/dra/pull/2) and [#63](https://github.com/devmatteini/dra/pull/63))
+-   Download assets from a specific release ([#5](https://github.com/devmatteini/dra/pull/5))
+-   Improve UX by showing download progress ([#18](https://github.com/devmatteini/dra/pull/18))
+-   Download source code archives ([#59](https://github.com/devmatteini/dra/pull/59))
+
+## Future plans
+
+I still have a couple of ideas to further improve `dra`, especially after using it for a year.
+
+One of the thing I observed when using `dra` in scripts, is that it becomes noisy due to the long list of options you can pass to the CLI, for example:
+
+```bash
+dra download -i -s "bat-v{tag}-x86_64-unknown-linux-gnu.tar.gz" -o ~/.local/bin sharkdp/bat
+```
+
+This is just one example that come to mind, if you have any suggestion feel free to open a [discussion](https://github.com/devmatteini/dra/discussions/new) or an [issue](https://github.com/devmatteini/dra/issues/new) on the GitHub repository!

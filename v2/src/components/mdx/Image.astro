@@ -1,0 +1,8 @@
+---
+import { Image } from "astro:assets"
+import { cn } from "../../shared/cn"
+
+const props = Astro.props
+---
+
+<Image {...props} class={cn("mb-4", props.class)} />

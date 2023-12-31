@@ -1,0 +1,652 @@
+---
+title: Build applications with Effect
+date: 2023-11-16
+status: published
+description: "An introduction to Effect, a TypeScript library for creating complex and composable applications"
+tags:
+    - EffectTS
+    - TypeScript
+    - FP
+---
+
+Since the beginning of the year, I've been using a new TypeScript library called [Effect](https://www.effect.website/) on personal and work projects at [doubleloop.io](https://doubleloop.io/).
+
+Effect solves common problems we face every day in software development, such as concurrency, composability, and making things explicit with the power of TypeScript type system.
+
+I wrote this article based on the [talk](https://github.com/devmatteini/socrates-2023/blob/9f9c4348caeddecbf23fcb1325ddd036f97770af/effect-talk/build-applications-with-effect.pdf) I presented at [SoCraTes Italy 2023](https://www.socrates-conference.it/).
+
+## What is Effect?
+
+Effect allows to build composable applications with a strong focus on type safety and error handling.
+
+Yes, this is quite a generic and broad definition.
+I like that this library provides you all the building blocks to create your application without compromising on anything important.
+
+The image below summarize some of the core features part of the ecosystem:
+
+<Image
+    src="/blog/build-applications-with-effect/effect-features.webp"
+    alt="Map of Effect features"
+    width={864}
+    height={435}
+/>
+
+On this article I'm going to focus on `Concurrency`, `Dependency Injection` and a little bit of `Observability`.
+
+## Let's build an application
+
+We're going to rebuild the main workflow of my personal project [football-calendar](https://github.com/devmatteini/football-calendar/).
+
+I created this application to sync google calendar with football matches of my favorite team to solve a problem I was facing using different football mobile apps.
+
+I retrieve football matches from [api-football.com](https://www.api-football.com/) and I use Google Calendar as database and front end to display football matches as events.
+
+The workflow of the app is:
+
+-   Retrieve football matches from `api-football.com` and calendar events from `Google Calendar`
+-   Elaborate those data and produce a list of commands (for example, to create a new calendar event or update an existing one)
+-   Execute the commands to update the database
+
+<Image
+    src="/blog/build-applications-with-effect/football-calendar-architecture.webp"
+    alt="Map of Effect features"
+    width={864}
+    height={250}
+/>
+
+Let's start from an empty function, `footballMatchEventsHandler`, that given a `teamId` will execute the workflow of the app:
+
+```ts title="src/football-match-events-handler.ts" showLineNumbers
+export const footballMatchEventsHandler = (teamId: number) => {
+    throw new Error("TBI")
+}
+```
+
+What should be the return type of this function? The `Effect<R, E, A>` type!
+
+### The `Effect` type
+
+`Effect<R, E, A>` type is lazy and immutable description of a workflow.
+
+-   `R` or `Requirements` type parameter: the dependencies that the Effect needs to be executed
+-   `E` or `Error` type parameter: the expected errors that this Effect may produce
+-   `A` or `Value` type parameter: the value of the succeeded Effect
+
+We can say that `footballMatchEventsHandler` function returns a `Effect<never, never, void>` which means that this effect has no requirements (`R = never`), doesn't produce any expected error (`E = never`) and also doesn't return any value (`A = void`).
+
+```ts showLineNumbers
+import * as Effect from "effect/Effect"
+
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<never, never, void> => {
+    throw new Error("TBI")
+}
+```
+
+## Retrieve football matches
+
+Let's start by retrieving the football matches. We need to pass a `loadMatchesByTeam` function to `footballMatchEventsHandler` and for this we can use the `Requirements` of the `Effect` type.
+
+We need to create a type or interface where we can define all requirements.
+
+```ts showLineNumbers
+export type Deps = {
+    loadMatchesByTeam: (teamId: number) => Effect.Effect<never, never, readonly FootballMatch[]>
+}
+```
+
+Then we need to create a representation of `Deps` at value-level using a `Tag`:
+
+```ts showLineNumbers
+import * as Context from "effect/Context"
+
+export type Deps = {...}
+export const Deps = Context.Tag<Deps>()
+```
+
+Now that we have defined the `Deps` type, let's change the return type of `footballMatchEventsHandler`
+
+```ts showLineNumbers /Deps/
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> => {
+    throw new Error("TBI")
+}
+```
+
+To use the requirements we have to start our pipeline (in alternative you can use [generators](https://www.effect.website/docs/essentials/using-generators)) to extract and invoke `loadMatchesByTeam`:
+
+```ts showLineNumbers
+import * as F from "effect/Function"
+
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+    F.pipe(
+        Deps, // 👈 Tags can be used as an Effect
+        Effect.flatMap(({ loadMatchesByTeam }) => loadMatchesByTeam(teamId)),
+        //     👆 flatMap allows to access the `A` of the previous `Effect` and return an new `Effect<R | R1, E | E1, B>`
+    )
+```
+
+If we run the application, we can see that `loadMatchesByTeam` is executed!
+
+```
+{"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:31:45.178Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+{"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:31:46.186Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+```
+
+<Alert variant="info">
+    I'm using a [custom
+    logger](https://www.effect.website/docs/observability/logging#custom-loggers) to have structured
+    logs in json
+</Alert>
+
+## Retrieve calendar events
+
+This should be easier, we know what we have to do.
+
+First we add `loadCalendarEventsByTeam` function to `Deps`.
+
+```ts showLineNumbers
+export type Deps = {
+    loadMatchesByTeam: (teamId: number) => Effect.Effect<never, never, readonly FootballMatch[]>
+    loadCalendarEventsByTeam: (
+        teamId: number,
+    ) => Effect.Effect<never, never, readonly CalendarEvent[]>
+}
+```
+
+Then to always have the requirements in scope we have to create a _second pipeline_.
+
+```ts {5} showLineNumbers /loadCalendarEventsByTeam/
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+    F.pipe(
+        Deps,
+        Effect.flatMap(({ loadMatchesByTeam, loadCalendarEventsByTeam }) =>
+            F.pipe(loadMatchesByTeam(teamId)),
+        ),
+    )
+```
+
+We are already invoking `loadMatchesByTeam` but we also want to invoke `loadCalendarEventsByTeam`.
+
+How can we combine many effects into one? Using `Effect.all`.
+
+```ts {6-9} showLineNumbers
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+    F.pipe(
+        Deps,
+        Effect.flatMap(({ loadMatchesByTeam, loadCalendarEventsByTeam }) =>
+            F.pipe(
+                Effect.all({
+                    matches: loadMatchesByTeam(teamId),
+                    calendarEvents: loadCalendarEventsByTeam(teamId),
+                }),
+            ),
+        ),
+    )
+```
+
+In TypeScript you would have used `Promise.all`, but with `Effect.all` you gain proper type safe error handling and more interesting behaviors we'll see in the next section.
+
+Now if we run the application, both football matches and calendar events are retrieved.
+
+```
+{"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:40:50.688Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+{"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:40:51.715Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+{"message":"start loadCalendarEventsByTeam","timestamp":"2023-11-05T15:40:51.715Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+{"message":"loadCalendarEventsByTeam done","timestamp":"2023-11-05T15:40:52.647Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
+```
+
+## Controlled concurrency
+
+If you have a closer look at the order of the logs (and the timestamps) we can see that they are executed sequentially.
+This is the default behavior of every effect.
+
+Even though this two effects are quite fast, we can easily experiment and try to run them concurrently.
+
+`Effect.all` accepts a second parameter where we can specify the concurrency, in this case we only have two effects so we can set it to 2.
+
+From now onwards, the code snippets are going to focus on the second pipeline.
+
+```ts {7} showLineNumbers
+F.pipe(
+    Effect.all(
+        {
+            matches: loadMatchesByTeam(teamId),
+            calendarEvents: loadCalendarEventsByTeam(teamId),
+        },
+        { concurrency: 2 },
+    ),
+)
+```
+
+And now the output changes as both effects starts concurrently:
+
+```text /loadMatchesByTeam/#purple /loadCalendarEventsByTeam/#green
+{"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:44:38.195Z","level":"DEBUG","fiberId":"#3","teamId":"502"}
+{"message":"start loadCalendarEventsByTeam","timestamp":"2023-11-05T15:44:38.251Z","level":"DEBUG","fiberId":"#4","teamId":"502"}
+{"message":"loadCalendarEventsByTeam done","timestamp":"2023-11-05T15:44:39.538Z","level":"DEBUG","fiberId":"#4","teamId":"502"}
+{"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:44:39.669Z","level":"DEBUG","fiberId":"#3","teamId":"502"}
+```
+
+## Create commands and observability
+
+Now that we have both football matches and calendar events we can produce the list of commands to execute.
+
+```ts {9} showLineNumbers
+F.pipe(
+    Effect.all(
+        {
+            matches: loadMatchesByTeam(teamId),
+            calendarEvents: loadCalendarEventsByTeam(teamId),
+        },
+        { concurrency: 2 },
+    ),
+    Effect.map(elaborateData),
+    //    👆 map allows to access the `A` of the previous `Effect` and return `B` as Effect Value
+)
+
+// The union type of commands
+type FootballMatchEvent =
+    | CreateFootballMatchEvent
+    | UpdateFootballMatchEvent
+    | NothingChangedFootballMatchEvent
+
+// We're not going into domain specific details
+declare const elaborateData: (_: {
+    matches: readonly FootballMatch[]
+    calendarEvents: readonly CalendarEvent[]
+}) => readonly FootballMatchEvent[]
+```
+
+Great! But what if I would like to know how many `Create` or `Update` commands needs to be executed?
+
+We can use the built-in logger and `Effect.tap` function.
+
+```ts {4-13} showLineNumbers
+F.pipe(
+    // ...
+    Effect.map(elaborateData),
+    Effect.tap((commands) =>
+        // 👆 tap allows to "execute" an Effect without changing the `A` type
+        F.pipe(
+            // Use built-in logger to log a string
+            Effect.logInfo("Commands to execute"),
+            // And then we can enrich our log with
+            // additional data, for example a summary of our commands
+            Effect.annotateLogs(toSummary(commands)),
+        ),
+    ),
+)
+
+type Summary = { create: number; update: number; nothingChanged: number }
+declare const toSummary: (commands: readonly FootballMatchEvent[]) => Summary
+```
+
+And as we run the application, we can see the log and the annotations we added.
+
+```json {6-7,9}
+{
+    "message": "Commands to execute",
+    "timestamp": "2023-11-05T15:50:34.477Z",
+    "level": "INFO",
+    "fiberId": "#0",
+    "create": "31",
+    "update": "0",
+    "teamId": "502",
+    "nothingChanged": "0"
+}
+```
+
+<Alert variant="info">
+    You may have noticed that `teamId` was always present in all logs. Once you annotate an Effect, every log inside that Effect will be
+    annotated.
+
+    ```ts
+    // application entry point
+    F.pipe(
+        // keep new line
+        footballMatchEventsHandler(teamId),
+        Effect.annotateLogs({ teamId }),
+    )
+    ```
+
+</Alert>
+
+## Execute commands
+
+We're almost done. This is the last part and our application will be completed!
+We have to execute the commands to update the database (Google Calendar).
+
+We don't need to do anything for commands of type `NothingChanged`, so let's filter them out of the list.
+
+```ts {6} showLineNumbers
+F.pipe(
+    // ...
+    Effect.tap((commands) =>
+        F.pipe(Effect.logInfo("Commands to execute"), Effect.annotateLogs(toSummary(commands))),
+    ),
+    Effect.map(filterCreateOrUpdateEvents),
+)
+
+type CreateOrUpdateEvent = Exclude<FootballMatchEvent, { _tag: "NOTHING_CHANGED" }>
+declare const filterCreateOrUpdateEvents: (
+    events: readonly FootballMatchEvent[],
+) => CreateOrUpdateEvent[]
+```
+
+To create or update calendar events we need two new requirements: `createCalendarEvent` and `updateCalendarEvent`.
+
+```ts showLineNumbers
+export type Deps = {
+    // ...
+    createCalendarEvent: (command: CreateFootballMatchEvent) => Effect.Effect<never, never, void>
+    updateCalendarEvent: (command: UpdateFootballMatchEvent) => Effect.Effect<never, never, void>
+}
+```
+
+What is left to do now is to invoke `createCalendarEvent` or `updateCalendarEvent` based on the command type.
+Here comes handy the `Match` module that allows to do exhaustive pattern matching (like [ts-pattern](https://github.com/gvergnaud/ts-pattern), but deeply integrated into the Effect ecosystem and conventions).
+
+```ts showLineNumbers
+import * as Match from "effect/Match"
+
+const createOrUpdate = (create: Deps["createCalendarEvent"], update: Deps["updateCalendarEvent"]) =>
+    F.pipe(
+        Match.type<CreateOrUpdateEvent>(),
+        Match.tag("CREATE", (x) => create(x)),
+        //    👆 Effect convention is to use `_tag` as tag/discriminant property.
+        //       For example `type CreateFootballMatchEvent = { _tag: "CREATE", ... }`
+        Match.tag("UPDATE", (x) => update(x)),
+        Match.exhaustive,
+    )
+```
+
+And inside `footballMatchEventsHandler` we can use it like this:
+
+```ts showLineNumbers {11-12,17-26}
+import * as ROA from "effect/ReadonlyArray"
+//          👆 Shorthand for ReadonlyArray (coming from fp-ts, old habits die hard 😄)
+
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+    F.pipe(
+        Deps,
+        Effect.flatMap(
+            ({
+                loadMatchesByTeam,
+                loadCalendarEventsByTeam,
+                createCalendarEvent,
+                updateCalendarEvent,
+            }) =>
+                F.pipe(
+                    // ...
+                    Effect.map(filterCreateOrUpdateEvents),
+                    Effect.flatMap((commands) => {
+                        // Effect.Effect<never, never, void>[]
+                        const effects = ROA.map(
+                            commands,
+                            createOrUpdate(createCalendarEvent, updateCalendarEvent),
+                        )
+                        // You can also pass an array of Effects instead of an object to `Effect.all`
+                        return Effect.all(effects, { discard: true })
+                        //                          👆 This sets the `A` to void, since we don't care about the array of results
+                    }),
+                ),
+        ),
+    )
+```
+
+Finally we can see that we are creating new calendar events!
+
+```
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:14.599Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-12T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Bologna","matchId":"1052363"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:15.524Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-26T00:00:00.000Z","competition":"Serie A","teamId":"502","match":"AC Milan-Fiorentina","matchId":"1052380"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:16.747Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-03T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Salernitana","matchId":"1052383"}
+{"message":"Calendar event created","timestamp":"2023-11-05T15:55:17.671Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-10T19:45:00.000Z","competition":"Serie A","teamId":"502","match":"AS Roma-Fiorentina","matchId":"1052401"}
+// ...
+```
+
+The whole process to create 31 calendar events took 40 seconds. Let's see if we can improve it using concurrency like before.
+
+## Uncontrolled concurrency
+
+Until now we always specified a fixed number of concurrent effects, but we can also use `unbounded` to run as many effects as possible concurrently. Let's try it!
+
+```ts {6} showLineNumbers /unbounded/
+F.pipe(
+    // ...
+    Effect.map(filterCreateOrUpdateEvents),
+    Effect.flatMap((commands) => {
+        const effects = ROA.map(commands, createOrUpdate(createCalendarEvent, updateCalendarEvent))
+        return Effect.all(effects, { discard: true, concurrency: "unbounded" })
+    }),
+)
+```
+
+Let's run the application and see how much time it takes.
+
+```json /Error: Rate Limit Exceeded/#red
+{"message":"Commands to execute","timestamp":"2023-11-05T16:02:52.022Z","level":"INFO","fiberId":"#0","create":"31","update":"0","teamId":"502","nothingChanged":"0"}
+{
+    "message": "Unexpected application error",
+    "timestamp": "2023-11-05T16:02:52.664Z",
+    "level": "ERROR",
+    "cause": "Error: Unable to insert google calendar event: Error: Rate Limit Exceeded (...omitting stack trace...)",
+    "teamId": 502
+}
+```
+
+Oh no, we broke the application! As you can see from the error message the Google Calendar API responded with a "Rate Limit Exceeded" because we were doing too many requests concurrently.
+We can say that using concurrency `unbounded` can be a double-edged sword and we have to be careful when to use it.
+
+We can fix this issue in two way:
+
+1. Using controlled concurrency
+2. Using the [Scheduling](https://www.effect.website/docs/scheduling/introduction) module, [retrying](https://www.effect.website/docs/error-management/retrying) to insert/update a calendar event following a policy we define (for example with exponential backoff when we exceed the rate limit)
+
+Since this application is simple I chose option 1, as having 5 concurrent effects is absolutely fine for this scenario.
+
+We made it! We re-implemented the whole workflow of my app 🎉!
+
+## Run an Effect and provide Requirements
+
+I'm sure you still have questions/doubts about what we did, for example how do I provide the implementation of the requirements? How do you actually execute an Effect? And many more...
+
+I'll try to answer some of those questions by writing a test.
+
+To run an Effect we can use:
+
+-   `Effect.runPromise` returns a Promise that may reject if the Effect produce an error
+-   `Effect.runPromiseExit` return always a fulfilled Promise with the `Exit` type, which is a union of `Failure<E, A> | Success<E, A>`
+
+We can write a test to check that a calendar event is created when there's a new football match:
+
+```ts title="src/football-match-events-handler.test.ts" showLineNumbers /Effect.runPromiseExit/#error
+import { expect, test } from "vitest"
+import * as Effect from "effect/Effect"
+import { footballMatchEventsHandler } from "./football-match-events-handler"
+
+test("create football match event", async () => {
+    const result = await F.pipe(
+        // keep new line
+        footballMatchEventsHandler(anyTeam),
+        Effect.runPromiseExit,
+    )
+
+    expect(Exit.isSuccess(result)).toBeTruthy()
+})
+
+const anyTeam = 1
+```
+
+There's something wrong, we got a type error at `Effect.runPromiseExit`!
+
+```text {4}
+Argument of type '<E, A>(effect: Effect<never, E, A>) => Promise<Exit<E, A>>' is not assignable to parameter of type '(a: Effect<Deps, never, void>) => Promise<Exit<never, void>>'.
+  Types of parameters 'effect' and 'a' are incompatible.
+    Type 'Effect<Deps, never, void>' is not assignable to type 'Effect<never, never, void>'.
+      Type 'Deps' is not assignable to type 'never'.ts(2345)
+```
+
+Do you remember earlier we sad that the Effect returned by `footballMatchEventsHandler` needs requirements (`Deps`) to be executed? This error warns us about that!
+
+We need to provide an implementation of `Deps` _and then_ we can call `Effect.runPromiseExit`.
+
+```ts showLineNumbers
+import { expect, test, vi } from "vitest"
+import { Deps, footballMatchEventsHandler } from "./football-match-events-handler"
+
+test("create football match event", async () => {
+    const createCalendarEvent = vi.fn(() => Effect.unit)
+    //                             👆 create a spy function
+
+    // We create a stub implementation of `Deps`.
+    // The convention is to call it <Tag>Test and the real implementation <Tag>Live
+    const DepsTest = Deps.of({
+        loadMatchesByTeam: () => Effect.succeed([anyFootballMatch]),
+        loadCalendarEventsByTeam: () => Effect.succeed([]),
+        createCalendarEvent,
+        updateCalendarEvent: () => Effect.unit,
+    })
+
+    const result = await F.pipe(
+        footballMatchEventsHandler(anyTeam),
+        Effect.provideService(Deps, DepsTest),
+        //     👆 we provide the implementation of the tag Deps
+        Effect.runPromiseExit,
+    )
+
+    expect(Exit.isSuccess(result)).toBeTruthy()
+    expect(createCalendarEvent).toHaveBeenCalledOnce()
+})
+
+declare const anyFootballMatch: FootballMatch
+```
+
+<Alert variant="info">
+    In alternative, for more complex scenarios you should use
+    [layers](https://www.effect.website/docs/context-management/layers)
+</Alert>
+
+And the test is green 🎉!
+
+```
+ ✓ src/football-match-events-handler.test.ts (1)
+   ✓ create football match event
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+```
+
+## Source code
+
+<details>
+    <summary>Expand to see full source code</summary>
+
+```ts showLineNumbers
+import * as Effect from "effect/Effect"
+import * as Context from "effect/Context"
+import * as F from "effect/Function"
+import * as Match from "effect/Match"
+import * as ROA from "effect/ReadonlyArray"
+
+export type Deps = {
+    loadMatchesByTeam: (teamId: number) => Effect.Effect<never, never, readonly FootballMatch[]>
+    loadCalendarEventsByTeam: (
+        teamId: number,
+    ) => Effect.Effect<never, never, readonly CalendarEvent[]>
+    createCalendarEvent: (command: CreateFootballMatchEvent) => Effect.Effect<never, never, void>
+    updateCalendarEvent: (command: UpdateFootballMatchEvent) => Effect.Effect<never, never, void>
+}
+export const Deps = Context.Tag<Deps>()
+
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+    F.pipe(
+        Deps,
+        Effect.flatMap(
+            ({
+                loadMatchesByTeam,
+                loadCalendarEventsByTeam,
+                createCalendarEvent,
+                updateCalendarEvent,
+            }) =>
+                F.pipe(
+                    Effect.all(
+                        {
+                            matches: loadMatchesByTeam(teamId),
+                            calendarEvents: loadCalendarEventsByTeam(teamId),
+                        },
+                        { concurrency: 2 },
+                    ),
+                    Effect.map(elaborateData),
+                    Effect.tap((commands) =>
+                        F.pipe(
+                            Effect.logInfo("Commands to execute"),
+                            Effect.annotateLogs(toSummary(commands)),
+                        ),
+                    ),
+                    Effect.map(filterCreateOrUpdateEvents),
+                    Effect.flatMap((commands) => {
+                        const effects = ROA.map(
+                            commands,
+                            createOrUpdate(createCalendarEvent, updateCalendarEvent),
+                        )
+                        return Effect.all(effects, { discard: true, concurrency: 5 })
+                    }),
+                ),
+        ),
+    )
+
+type FootballMatchEvent =
+    | CreateFootballMatchEvent
+    | UpdateFootballMatchEvent
+    | NothingChangedFootballMatchEvent
+
+declare const elaborateData: (_: {
+    matches: readonly FootballMatch[]
+    calendarEvents: readonly CalendarEvent[]
+}) => readonly FootballMatchEvent[]
+
+type Summary = { create: number; update: number; nothingChanged: number }
+declare const toSummary: (commands: readonly FootballMatchEvent[]) => Summary
+
+type CreateOrUpdateEvent = Exclude<FootballMatchEvent, { _tag: "NOTHING_CHANGED" }>
+declare const filterCreateOrUpdateEvents: (
+    events: readonly FootballMatchEvent[],
+) => CreateOrUpdateEvent[]
+
+const createOrUpdate = (create: Deps["createCalendarEvent"], update: Deps["updateCalendarEvent"]) =>
+    F.pipe(
+        Match.type<CreateOrUpdateEvent>(),
+        Match.tag("CREATE", (x) => create(x)),
+        Match.tag("UPDATE", (x) => update(x)),
+        Match.exhaustive,
+    )
+```
+
+</details>
+
+I modified the code we wrote in this article to make it simpler to understand and remove domain implementation details.
+
+You can find maintained and up-to-date code in the `main` branch inside [devmatteini/football-calendar](https://github.com/devmatteini/football-calendar) repository. If you want to explore more, this is the right place to start!
+
+## Conclusion
+
+We started exploring Effect and there is a lot more to see and try.
+
+What we just did is a very common workflow: retrieve data from external sources, do some business logic and save the results to a database.
+
+What I like about Effect is that you can experiment, iterate and refactor with confidence that your application won't break.
+Effect leverage the type system to make things explicit: errors and requirements. Although we only covered the requirements part, you should check out [error handling](https://www.effect.website/docs/error-management/two-error-types).
+
+The learning curve may seem high at first, but from my experience I can say that it was worth it because I enjoy writing TypeScript with Effect much more.
+
+## Effect resources
+
+Here's a list of resources I recommend if you want to learn more about Effect:
+
+-   [Official documentation](https://www.effect.website/)
+-   [Stefano Pigozzi's Effect crashcourse](https://github.com/pigoz/effect-crashcourse)
+-   [Antoine Coulon's Effect introduction](https://github.com/antoine-coulon/effect-introduction)
+-   [Effect for Beginners by Ethan Niser](https://youtu.be/fTN8BX5qj6s?si=fTQV4gU8Aq9bnvmY) (video)
+-   [Introduction to Effect, Michael Arnaldi, WorkerConf 2022 Dornbirn](https://www.youtube.com/watch?v=zrNr3JVUc8I) (video)
+-   [Effect Community Discord](https://discord.gg/effect-ts)
+
+If you're coming from `fp-ts`, this is a repository I created while experimenting with Effect: [devmatteini/from-fp-ts-to-effect-ts](https://github.com/devmatteini/from-fp-ts-to-effect-ts)
