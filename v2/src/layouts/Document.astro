@@ -4,6 +4,7 @@ import "@fontsource-variable/inter"
 import Container from "../components/Container.astro"
 import Footer from "../components/Footer.astro"
 import { websiteDomain, websiteUrl } from "../shared/metadata"
+import { ViewTransitions } from 'astro:transitions'
 
 type MetaTagImage = {
     src: string
@@ -60,6 +61,8 @@ const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : 
         <meta name="twitter:description" content={metadata.description} />
         <meta name="twitter:image" content={metadata.image.src} />
         <meta name="twitter:image:alt" content={metadata.image.alt} />
+
+        <ViewTransitions/>
     </head>
     <body class="bg-black text-white">
         {/* This <div> with flex is needed for sticky footer */}
