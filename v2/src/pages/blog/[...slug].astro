@@ -7,8 +7,7 @@ import { formatDate } from "../../shared/date"
 import { publishedPosts, type Post, findPost } from "../../shared/posts"
 import Comments from "../../components/blog/Comments.astro"
 import NextPrevPosts from "../../components/blog/NextPrevPosts.astro"
-import Image from "../../components/mdx/Image.astro"
-import Alert from "../../components/Alert.astro"
+import Markdown from "../../components/Markdown.astro"
 
 export async function getStaticPaths() {
     const posts = await publishedPosts()
@@ -49,8 +48,7 @@ const { Content } = await post.render()
                 </HeaderTag>
             </div>
         </header>
-        <!-- TODO: add custom MDX components -->
-        <Content components={{ Image: Image, Alert: Alert }} />
+        <Markdown Content={Content} />
         <hr class="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
         <footer class="mb-2">
             {current.status === "published" && <Comments post={current} />}

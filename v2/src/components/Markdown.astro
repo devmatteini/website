@@ -1,0 +1,11 @@
+---
+import Image from "./mdx/Image.astro";
+import Alert from "./Alert.astro";
+
+// TODO: add other custom MDX components
+const components = { Image: Image, Alert: Alert }
+
+const {Content} = Astro.props
+---
+
+<Content components={components} />
