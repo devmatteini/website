@@ -7,20 +7,18 @@ import Footer from "../components/Footer.astro"
 
 <!doctype html>
 <html lang="en">
-    <html lang="en">
-        <head>
-            <link href="https://hachyderm.io/@cosimomatteini" rel="me" />
-            <meta charset="utf-8" />
-        </head>
-        <body class="bg-black text-white">
-            {/* This <div> with flex is needed for sticky footer */}
-            <div class="flex flex-col min-h-screen">
-                <main class="flex-grow mt-8">
-                    <Container><slot /></Container>
-                    <!-- TODO: <Analytics debug={process.env.ANALYTICS_DEBUG === "true"} /> -->
-                </main>
-                <Footer />
-            </div>
-        </body>
-    </html>
+    <head>
+        <link href="https://hachyderm.io/@cosimomatteini" rel="me" />
+        <meta charset="utf-8" />
+    </head>
+    <body class="bg-black text-white">
+        {/* This <div> with flex is needed for sticky footer */}
+        <div class="flex flex-col min-h-screen">
+            <main class="flex-grow mt-8">
+                <Container><slot /></Container>
+                <!-- TODO: <Analytics debug={process.env.ANALYTICS_DEBUG === "true"} /> -->
+            </main>
+            <Footer />
+        </div>
+    </body>
 </html>
