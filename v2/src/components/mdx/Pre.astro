@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types"
+import CopyButton from "./CopyButton.astro"
+
+type Props = HTMLAttributes<"pre"> & { __rawContent__?: string }
+
+const { __rawContent__, ...props } = Astro.props
+---
+
+<div class="mt-1 relative">
+    <pre {...props}><slot /></pre>
+    {__rawContent__ && <CopyButton className="absolute right-2 top-2" text={__rawContent__} />}
+</div>
