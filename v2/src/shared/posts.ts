@@ -38,15 +38,14 @@ export const publishedPosts = async (): Promise<Post[]> => {
 export const firstN = (n: number) => (posts: Post[]) => posts.slice(0, n)
 export const first3 = firstN(3)
 
-export const findPost = <T extends Post>(
-    slug: string,
+export const findPrevNextPosts = <T extends Post>(
+    currentSlug: string,
     posts: T[],
-): { previous: T | undefined; current: T | undefined; next: T | undefined } => {
-    const currentIndex = posts.findIndex((x) => x.slug === slug)
+): { previous: T | undefined; next: T | undefined } => {
+    const currentIndex = posts.findIndex((x) => x.slug === currentSlug)
 
-    const current = posts[currentIndex]
     const previous = posts[currentIndex + 1]
     const next = posts[currentIndex - 1]
 
-    return { previous, current, next }
+    return { previous, next }
 }
