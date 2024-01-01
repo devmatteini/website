@@ -24,12 +24,7 @@ I like that this library provides you all the building blocks to create your app
 
 The image below summarize some of the core features part of the ecosystem:
 
-<Image
-    src="/blog/build-applications-with-effect/effect-features.webp"
-    alt="Map of Effect features"
-    width={864}
-    height={435}
-/>
+![Map of Effect features](@blog-images/build-applications-with-effect/effect-features.webp)
 
 On this article I'm going to focus on `Concurrency`, `Dependency Injection` and a little bit of `Observability`.
 
@@ -47,12 +42,7 @@ The workflow of the app is:
 -   Elaborate those data and produce a list of commands (for example, to create a new calendar event or update an existing one)
 -   Execute the commands to update the database
 
-<Image
-    src="/blog/build-applications-with-effect/football-calendar-architecture.webp"
-    alt="Map of Effect features"
-    width={864}
-    height={250}
-/>
+![Football calendar app workflow](@blog-images/build-applications-with-effect/football-calendar-architecture.webp)
 
 Let's start from an empty function, `footballMatchEventsHandler`, that given a `teamId` will execute the workflow of the app:
 

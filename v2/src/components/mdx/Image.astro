@@ -1,8 +1,45 @@
 ---
-import { Image } from "astro:assets"
-import { cn } from "../../shared/cn"
+import { Image as AstroImage } from "astro:assets"
+import type { ImageMetadata } from "astro"
+import { match, P } from "ts-pattern"
 
+// NOTE: this type was inspected from runtime value with `console.log(Astro.props)`
+type Props = {
+    src: string | ImageMetadata
+    alt: string
+}
 const props = Astro.props
+
+const publicOrRemoteImage = P.string
+
+const responsiveSizes = {
+    // Same values as next.js image component (https://nextjs.org/docs/pages/api-reference/components/image#devicesizes)
+    widths: [640, 828, 1080, 1920, 2048],
+    sizes: "(max-width: 640px) 640px,(max-width: 828px) 828px,(max-width: 1080px) 1080px,(max-width: 1920px) 1920px,2048px",
+}
 ---
 
-<Image {...props} class={cn("mb-4", props.class)} />
+<div class="mb-4">
+    {
+        match(props.src)
+            .with(publicOrRemoteImage, (src) => (
+                // TODO: review size default values
+                <img
+                    src={src}
+                    alt={props.alt}
+                    width={864}
+                    height={435}
+                    loading="lazy"
+                    decoding="async"
+                />
+            ))
+            .otherwise((image) => (
+                <AstroImage
+                    src={image}
+                    alt={props.alt}
+                    widths={responsiveSizes.widths}
+                    sizes={responsiveSizes.sizes}
+                />
+            ))
+    }
+</div>
