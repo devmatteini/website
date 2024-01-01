@@ -10,8 +10,8 @@
         "typecheck:w": "npm run typecheck -- --watch",
         "check": "astro check",
         "check:w": "npm run check -- --watch",
-        "format": "prettier -w .",
-        "format:check": "prettier --check **/*.{js,ts,tsx,astro}",
+        "format": "prettier -w src config",
+        "format:check": "prettier --check src/**/*.{js,ts,tsx,astro} config/**/*.ts",
         "lint": "eslint --ext .js,.ts,.tsx,.astro ."
     },
     "dependencies": {
