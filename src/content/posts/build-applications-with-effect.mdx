@@ -116,7 +116,7 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, 
 
 If we run the application, we can see that `loadMatchesByTeam` is executed!
 
-```
+```text
 {"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:31:45.178Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
 {"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:31:46.186Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
 ```
@@ -177,7 +177,7 @@ In TypeScript you would have used `Promise.all`, but with `Effect.all` you gain 
 
 Now if we run the application, both football matches and calendar events are retrieved.
 
-```
+```text
 {"message":"start loadMatchesByTeam","timestamp":"2023-11-05T15:40:50.688Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
 {"message":"loadMatchesByTeam done","timestamp":"2023-11-05T15:40:51.715Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
 {"message":"start loadCalendarEventsByTeam","timestamp":"2023-11-05T15:40:51.715Z","level":"DEBUG","fiberId":"#0","teamId":"502"}
@@ -385,7 +385,7 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, 
 
 Finally we can see that we are creating new calendar events!
 
-```
+```text
 {"message":"Calendar event created","timestamp":"2023-11-05T15:55:14.599Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-12T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Bologna","matchId":"1052363"}
 {"message":"Calendar event created","timestamp":"2023-11-05T15:55:15.524Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-11-26T00:00:00.000Z","competition":"Serie A","teamId":"502","match":"AC Milan-Fiorentina","matchId":"1052380"}
 {"message":"Calendar event created","timestamp":"2023-11-05T15:55:16.747Z","level":"DEBUG","fiberId":"#0","matchDate":"2023-12-03T14:00:00.000Z","competition":"Serie A","teamId":"502","match":"Fiorentina-Salernitana","matchId":"1052383"}
@@ -517,7 +517,7 @@ declare const anyFootballMatch: FootballMatch
 
 And the test is green 🎉!
 
-```
+```text
  ✓ src/football-match-events-handler.test.ts (1)
    ✓ create football match event
 

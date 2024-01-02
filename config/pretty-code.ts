@@ -24,8 +24,8 @@ const extractContentFromCodeBlocks = (tree: any) => {
 
 const injectCodeBlocksWithContentAfterSyntaxHighlight = (tree: any) => {
     visit(tree, (node) => {
-        if (!(isElementType(node) && isDivTag(node))) return
-        if (!("data-rehype-pretty-code-fragment" in node.properties)) return
+        if (!(isElementType(node) && isFigureTag(node))) return
+        if (!("data-rehype-pretty-code-figure" in node.properties)) return
 
         for (const child of node.children) {
             if (isPreTag(child)) {
@@ -46,5 +46,5 @@ const isType = (node: any, expectedType: string) => node?.type === expectedType
 const isElementType = (node: any) => isType(node, "element")
 const isTagName = (node: any, expectedTagName: string) => node?.tagName === expectedTagName
 const isPreTag = (node: any) => isTagName(node, "pre")
-const isDivTag = (node: any) => isTagName(node, "div")
+const isFigureTag = (node: any) => isTagName(node, "figure")
 const isCodeTag = (node: any) => isTagName(node, "code")

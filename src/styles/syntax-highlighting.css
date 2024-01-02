@@ -6,7 +6,7 @@
 /* ------------Code block------------ */
 
 /* Code block wrapper */
-div[data-rehype-pretty-code-fragment] {
+figure[data-rehype-pretty-code-figure] {
     overflow: hidden;
 
     background-color: rgb(var(--code-bg-color));
@@ -14,7 +14,7 @@ div[data-rehype-pretty-code-fragment] {
     border-radius: 0.25rem;
 }
 
-div[data-rehype-pretty-code-fragment] pre {
+figure[data-rehype-pretty-code-figure] pre {
     /* Enable horizontal scrolling for long lines of code */
     overflow-x: auto;
 
@@ -23,14 +23,14 @@ div[data-rehype-pretty-code-fragment] pre {
 }
 
 /* Ensures spans fill the full width of a horizontally-scrollable code block */
-div[data-rehype-pretty-code-fragment] code {
+figure[data-rehype-pretty-code-figure] code {
     display: grid;
     /* This prevents to show background-color set for inline code */
     background-color: transparent;
 }
 
 /* Title */
-div[data-rehype-pretty-code-title] {
+figcaption[data-rehype-pretty-code-title] {
     margin-bottom: 0.125rem;
     background-color: #161b22;
     padding: 0.25rem 0.75rem;
