@@ -30,11 +30,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build content
-        run: npm run build:content
-
       - name: Typecheck
-        run: npm run typecheck
+        run: npm run check
 
       - name: Build
         run: npm run build

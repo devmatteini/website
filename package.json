@@ -5,14 +5,16 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro preview",
-        "build": "astro check && astro build",
+        "build": "astro build",
         "typecheck": "tsc --noEmit",
         "typecheck:w": "npm run typecheck -- --watch",
         "check": "astro check",
         "check:w": "npm run check -- --watch",
         "format": "prettier -w src config",
         "format:check": "prettier --check src/**/*.{js,ts,tsx,astro} config/**/*.ts",
-        "lint": "eslint --ext .js,.ts,.tsx,.astro src config"
+        "lint": "eslint --ext .js,.ts,.tsx,.astro src config",
+        "ci:setup-vercel": "vercel pull --yes --environment production --token \"$VERCEL_TOKEN\"",
+        "ci:deploy": "vercel deploy --prebuilt --prod --token \"$VERCEL_TOKEN\""
     },
     "dependencies": {
         "@astrojs/mdx": "2.0.3",
@@ -40,6 +42,7 @@
         "prettier": "3.1.1",
         "prettier-plugin-astro": "0.12.3",
         "tailwindcss": "3.4.0",
-        "typescript": "5.3.3"
+        "typescript": "5.3.3",
+        "vercel": "33.0.1"
     }
 }

@@ -3,7 +3,6 @@ name: CI/CD
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  NEXT_TELEMETRY_DISABLED: 1
 
 on:
   workflow_dispatch:
@@ -36,11 +35,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Build content
-        run: npm run build:content
-
       - name: Typecheck
-        run: npm run typecheck
+        run: npm run check
 
       - name: Pull Vercel Environment Information
         env:
@@ -48,9 +44,7 @@ jobs:
         run: npm run ci:setup-vercel
 
       - name: Build
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: npm run ci:build
+        run: npm run build
 
       - name: Deploy to Vercel
         env:
