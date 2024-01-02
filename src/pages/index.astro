@@ -1,9 +1,9 @@
 ---
-import Header from "../components/Header.astro"
-import Document from "../layouts/Document.astro"
+import Header from "@components/Header.astro"
+import Document from "@layouts/Document.astro"
 import { Icon } from "astro-icon/components"
-import { first3, publishedPosts } from "../shared/posts"
-import PostCard from "../components/blog/PostCard.astro"
+import { first3, publishedPosts } from "@shared/posts"
+import PostCard from "@components/blog/PostCard.astro"
 
 const posts = await publishedPosts()
 ---

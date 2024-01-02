@@ -7,7 +7,16 @@
         "paths": {
             "@blog-images/*": [
                 "src/assets/blog/*"
-            ]
+            ],
+            "@shared/*": [
+                "src/shared/*"
+            ],
+            "@components/*": [
+                "src/components/*"
+            ],
+            "@layouts/*": [
+                "src/layouts/*"
+            ],
         }
     }
 }

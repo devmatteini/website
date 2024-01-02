@@ -1,13 +1,13 @@
 ---
 import { Icon } from "astro-icon/components"
-import Header from "../../components/Header.astro"
-import HeaderTag from "../../components/blog/HeaderTag.astro"
-import Document from "../../layouts/Document.astro"
-import { formatDate } from "../../shared/date"
-import { publishedPosts, type Post, findPrevNextPosts } from "../../shared/posts"
-import Comments from "../../components/blog/Comments.astro"
-import NextPrevPosts from "../../components/blog/NextPrevPosts.astro"
-import Markdown from "../../components/Markdown.astro"
+import Header from "@components/Header.astro"
+import HeaderTag from "@components/blog/HeaderTag.astro"
+import Document from "@layouts/Document.astro"
+import { formatDate } from "@shared/date"
+import { publishedPosts, type Post, findPrevNextPosts } from "@shared/posts"
+import Comments from "@components/blog/Comments.astro"
+import NextPrevPosts from "@components/blog/NextPrevPosts.astro"
+import Markdown from "@components/Markdown.astro"
 
 export async function getStaticPaths() {
     const posts = await publishedPosts()
