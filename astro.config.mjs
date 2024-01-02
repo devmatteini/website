@@ -12,6 +12,7 @@ const isAnalyticsEnabled = import.meta.env.DEV ? process.env.ANALYTICS_DEBUG ===
 
 // https://astro.build/config
 export default defineConfig({
+    site: "https://cosimomatteini.com",
     markdown: {
         syntaxHighlight: false,
         rehypePlugins: [
