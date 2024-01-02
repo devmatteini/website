@@ -8,6 +8,8 @@ import rehypeSlug from "rehype-slug"
 import { prettyCodePlugins } from "./config/pretty-code"
 import vercel from "@astrojs/vercel/static"
 
+const isAnalyticsEnabled = import.meta.env.DEV ? process.env.ANALYTICS_DEBUG === "true" : true
+
 // https://astro.build/config
 export default defineConfig({
     markdown: {
@@ -22,10 +24,10 @@ export default defineConfig({
     output: "static",
     adapter: vercel({
         webAnalytics: {
-            enabled: true,
+            enabled: isAnalyticsEnabled,
         },
         speedInsights: {
-            enabled: true,
+            enabled: isAnalyticsEnabled,
         },
     }),
 })
