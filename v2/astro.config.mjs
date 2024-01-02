@@ -6,6 +6,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { autoLinkHeadingOptions } from "./config/rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import { prettyCodePlugins } from "./config/pretty-code"
+import vercel from "@astrojs/vercel/static"
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,4 +19,13 @@ export default defineConfig({
         ],
     },
     integrations: [tailwind(), icon(), mdx()],
+    output: "static",
+    adapter: vercel({
+        webAnalytics: {
+            enabled: true,
+        },
+        speedInsights: {
+            enabled: true,
+        },
+    }),
 })
