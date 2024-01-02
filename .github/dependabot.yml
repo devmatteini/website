@@ -9,14 +9,6 @@ updates:
       timezone: Europe/Rome
     open-pull-requests-limit: 5
     groups:
-      contentlayer:
-        patterns:
-          - "contentlayer"
-          - "next-contentlayer"
-      react:
-        patterns:
-          - "react"
-          - "react-dom"
       typescript-eslint:
         patterns:
           - "@typescript-eslint/eslint-plugin"
@@ -24,8 +16,6 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-      - dependency-name: "next"
-      - dependency-name: "eslint-config-next"
   - package-ecosystem: github-actions
     directory: /
     schedule:
