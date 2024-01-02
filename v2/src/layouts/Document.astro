@@ -69,7 +69,6 @@ const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : 
         <div class="flex flex-col min-h-screen">
             <main class="flex-grow mt-8">
                 <Container><slot /></Container>
-                <!-- TODO: <Analytics debug={process.env.ANALYTICS_DEBUG === "true"} /> -->
             </main>
             <Footer />
         </div>
