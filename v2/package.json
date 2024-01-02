@@ -12,7 +12,7 @@
         "check:w": "npm run check -- --watch",
         "format": "prettier -w src config",
         "format:check": "prettier --check src/**/*.{js,ts,tsx,astro} config/**/*.ts",
-        "lint": "eslint --ext .js,.ts,.tsx,.astro ."
+        "lint": "eslint --ext .js,.ts,.tsx,.astro src config"
     },
     "dependencies": {
         "@astrojs/mdx": "2.0.3",
