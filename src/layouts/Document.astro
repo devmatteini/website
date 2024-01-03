@@ -47,6 +47,7 @@ const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : 
 
         <title>{title}</title>
         <meta name="description" content={metadata.description} />
+        <meta name="keywords" content={metadata.keywords.join(",")} />
 
         <!-- Open Graph -->
         <meta property="og:title" content={title} />
