@@ -4,7 +4,7 @@ import Header from "@components/Header.astro"
 import HeaderTag from "@components/blog/HeaderTag.astro"
 import Document from "@layouts/Document.astro"
 import { formatDate } from "@shared/date"
-import { publishedPosts, type Post, findPrevNextPosts } from "@shared/posts"
+import { publishedPosts, type Post, findPrevNextPosts, uniqueKeywords } from "@shared/posts"
 import Comments from "@components/blog/Comments.astro"
 import NextPrevPosts from "@components/blog/NextPrevPosts.astro"
 import Markdown from "@components/Markdown.astro"
@@ -30,7 +30,7 @@ const { Content } = await post.render()
     metadata={{
         title: current.title,
         description: current.description,
-        keywords: current.tags,
+        keywords: uniqueKeywords(current),
     }}
 >
     <Header />

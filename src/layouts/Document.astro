@@ -20,7 +20,7 @@ type Metadata = {
     description: string
     image?: MetaTagImage
     showFullTitle?: boolean
-    keywords?: string[]
+    keywords?: Set<string>
 }
 
 type Props = {
@@ -30,12 +30,13 @@ type Props = {
 const withDefaults = (metadata: Metadata): Required<Metadata> => ({
     ...metadata,
     showFullTitle: metadata.showFullTitle ?? true,
-    keywords: metadata.keywords ?? [],
+    keywords: metadata.keywords ?? new Set<string>(),
     image: metadata.image ?? defaultImage,
 })
 
 const metadata = withDefaults(Astro.props.metadata)
 const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : metadata.title
+const keywords = Array.from(metadata.keywords).join(",")
 ---
 
 <!doctype html>
@@ -52,7 +53,7 @@ const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : 
 
         <title>{title}</title>
         <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords.join(",")} />
+        <meta name="keywords" content={keywords} />
         <meta name="generator" content={Astro.generator} />
 
         <!-- Open Graph -->

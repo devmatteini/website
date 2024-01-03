@@ -49,3 +49,5 @@ export const findPrevNextPosts = <T extends Post>(
 
     return { previous, next }
 }
+
+export const uniqueKeywords = (post: Post["data"]) => new Set([...post.tags, ...post.seoKeywords])

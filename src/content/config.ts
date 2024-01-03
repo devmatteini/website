@@ -9,6 +9,7 @@ const posts = defineCollection({
         status: z.enum(["draft", "published"]),
         description: z.string(),
         tags: z.array(z.string()).default([]),
+        seoKeywords: z.array(z.string()).default([]),
     }),
 })
 
