@@ -45,9 +45,15 @@ const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://hachyderm.io/@cosimomatteini" rel="me" />
 
+        <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
         <title>{title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords.join(",")} />
+        <meta name="generator" content={Astro.generator} />
 
         <!-- Open Graph -->
         <meta property="og:title" content={title} />
