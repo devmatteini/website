@@ -5,6 +5,8 @@ import Container from "@components/Container.astro"
 import Footer from "@components/Footer.astro"
 import { websiteDomain, websiteUrl } from "@shared/metadata"
 import { ViewTransitions } from "astro:transitions"
+import SpeedInsights from "@vercel/speed-insights/astro"
+import { isAnalyticsEnabled } from "@config/analytics"
 
 type MetaTagImage = {
     src: string
@@ -71,6 +73,7 @@ const keywords = Array.from(metadata.keywords).join(",")
         <meta name="twitter:image:alt" content={metadata.image.alt} />
 
         <ViewTransitions />
+        <SpeedInsights debug={isAnalyticsEnabled} />
     </head>
     <body class="bg-black text-white">
         {/* This <div> with flex is needed for sticky footer */}
