@@ -6,9 +6,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { autoLinkHeadingOptions } from "./config/rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import { prettyCodePlugins } from "./config/pretty-code"
+import { isAnalyticsEnabled } from "./config/analytics"
 import vercel from "@astrojs/vercel/static"
-
-const isAnalyticsEnabled = import.meta.env.DEV ? process.env.ANALYTICS_DEBUG === "true" : true
 
 // https://astro.build/config
 export default defineConfig({
