@@ -27,7 +27,7 @@
         "reading-time": "1.5.0",
         "rehype-autolink-headings": "7.1.0",
         "shikiji": "0.9.17",
-        "rehype-pretty-code": "0.12.3",
+        "rehype-pretty-code": "0.12.6",
         "rehype-slug": "6.0.0",
         "tailwind-merge": "2.2.1",
         "ts-pattern": "5.0.6",
