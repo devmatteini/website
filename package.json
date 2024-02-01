@@ -32,7 +32,7 @@
         "tailwind-merge": "2.2.0",
         "ts-pattern": "5.0.6",
         "unist-util-visit": "5.0.0",
-        "@vercel/speed-insights": "1.0.4"
+        "@vercel/speed-insights": "1.0.9"
     },
     "devDependencies": {
         "@astrojs/check": "0.3.4",
