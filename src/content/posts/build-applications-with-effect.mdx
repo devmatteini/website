@@ -1,6 +1,7 @@
 ---
 title: Build applications with Effect
 date: 2023-11-16
+updatedOn: 2024-02-12
 status: published
 description: "An introduction to Effect, a TypeScript library for creating complex and composable applications"
 tags:
@@ -14,6 +15,8 @@ Since the beginning of the year, I've been using a new TypeScript library called
 Effect solves common problems we face every day in software development, such as concurrency, composability, and making things explicit with the power of TypeScript type system.
 
 I wrote this article based on the [talk](https://github.com/devmatteini/socrates-2023/blob/9f9c4348caeddecbf23fcb1325ddd036f97770af/effect-talk/build-applications-with-effect.pdf) I presented at [SoCraTes Italy 2023](https://www.socrates-conference.it/).
+
+_This article has been updated after Effect [2.3](https://effect.website/blog/release-2.3) release changes._
 
 ## What is Effect?
 
@@ -52,22 +55,22 @@ export const footballMatchEventsHandler = (teamId: number) => {
 }
 ```
 
-What should be the return type of this function? The `Effect<R, E, A>` type!
+What should be the return type of this function? The `Effect<A, E, R>` type!
 
 ### The `Effect` type
 
-`Effect<R, E, A>` type is lazy and immutable description of a workflow.
+`Effect<A, E, R>` type is lazy and immutable description of a workflow.
 
--   `R` or `Requirements` type parameter: the dependencies that the Effect needs to be executed
--   `E` or `Error` type parameter: the expected errors that this Effect may produce
 -   `A` or `Value` type parameter: the value of the succeeded Effect
+-   `E` or `Error` type parameter: the expected errors that this Effect may produce. Default is `never`
+-   `R` or `Requirements` type parameter: the dependencies that the Effect needs to be executed. Default is `never`
 
-We can say that `footballMatchEventsHandler` function returns a `Effect<never, never, void>` which means that this effect has no requirements (`R = never`), doesn't produce any expected error (`E = never`) and also doesn't return any value (`A = void`).
+We can say that `footballMatchEventsHandler` function returns a `Effect<void>` which means that it doesn't return any value (`A = void`), doesn't produce any expected error (`E = never`) and has no requirements (`R = never`).
 
 ```ts showLineNumbers
 import * as Effect from "effect/Effect"
 
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<never, never, void> => {
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void> => {
     throw new Error("TBI")
 }
 ```
@@ -80,7 +83,7 @@ We need to create a type or interface where we can define all requirements.
 
 ```ts showLineNumbers
 export type Deps = {
-    loadMatchesByTeam: (teamId: number) => Effect.Effect<never, never, readonly FootballMatch[]>
+    loadMatchesByTeam: (teamId: number) => Effect.Effect<readonly FootballMatch[]>
 }
 ```
 
@@ -90,27 +93,27 @@ Then we need to create a representation of `Deps` at value-level using a `Tag`:
 import * as Context from "effect/Context"
 
 export type Deps = {...}
-export const Deps = Context.Tag<Deps>()
+export const Deps = Context.GenericTag<Deps>("Deps")
 ```
 
 Now that we have defined the `Deps` type, let's change the return type of `footballMatchEventsHandler`
 
 ```ts showLineNumbers /Deps/
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> => {
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> => {
     throw new Error("TBI")
 }
 ```
 
-To use the requirements we have to start our pipeline (in alternative you can use [generators](https://www.effect.website/docs/essentials/using-generators)) to extract and invoke `loadMatchesByTeam`:
+To use the requirements we have to start our pipeline (in alternative you can use [generators](https://effect.website/docs/guides/essentials/using-generators)) to extract and invoke `loadMatchesByTeam`:
 
 ```ts showLineNumbers
 import * as F from "effect/Function"
 
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps, // 👈 Tags can be used as an Effect
         Effect.flatMap(({ loadMatchesByTeam }) => loadMatchesByTeam(teamId)),
-        //     👆 flatMap allows to access the `A` of the previous `Effect` and return an new `Effect<R | R1, E | E1, B>`
+        //     👆 flatMap allows to access the `A` of the previous `Effect` and return an new `Effect<B, E | E1, R | R1>`
     )
 ```
 
@@ -122,9 +125,8 @@ If we run the application, we can see that `loadMatchesByTeam` is executed!
 ```
 
 <Alert variant="info">
-    I'm using a [custom
-    logger](https://www.effect.website/docs/observability/logging#custom-loggers) to have structured
-    logs in json
+    I'm using a [custom logger](https://effect.website/docs/guides/observability/logging) to have
+    structured logs in json
 </Alert>
 
 ## Retrieve calendar events
@@ -135,17 +137,15 @@ First we add `loadCalendarEventsByTeam` function to `Deps`.
 
 ```ts showLineNumbers
 export type Deps = {
-    loadMatchesByTeam: (teamId: number) => Effect.Effect<never, never, readonly FootballMatch[]>
-    loadCalendarEventsByTeam: (
-        teamId: number,
-    ) => Effect.Effect<never, never, readonly CalendarEvent[]>
+    loadMatchesByTeam: (teamId: number) => Effect.Effect<readonly FootballMatch[]>
+    loadCalendarEventsByTeam: (teamId: number) => Effect.Effect<readonly CalendarEvent[]>
 }
 ```
 
 Then to always have the requirements in scope we have to create a _second pipeline_.
 
 ```ts {5} showLineNumbers /loadCalendarEventsByTeam/
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps,
         Effect.flatMap(({ loadMatchesByTeam, loadCalendarEventsByTeam }) =>
@@ -159,7 +159,7 @@ We are already invoking `loadMatchesByTeam` but we also want to invoke `loadCale
 How can we combine many effects into one? Using `Effect.all`.
 
 ```ts {6-9} showLineNumbers
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps,
         Effect.flatMap(({ loadMatchesByTeam, loadCalendarEventsByTeam }) =>
@@ -327,8 +327,8 @@ To create or update calendar events we need two new requirements: `createCalenda
 ```ts showLineNumbers
 export type Deps = {
     // ...
-    createCalendarEvent: (command: CreateFootballMatchEvent) => Effect.Effect<never, never, void>
-    updateCalendarEvent: (command: UpdateFootballMatchEvent) => Effect.Effect<never, never, void>
+    createCalendarEvent: (command: CreateFootballMatchEvent) => Effect.Effect<void>
+    updateCalendarEvent: (command: UpdateFootballMatchEvent) => Effect.Effect<void>
 }
 ```
 
@@ -355,7 +355,7 @@ And inside `footballMatchEventsHandler` we can use it like this:
 import * as ROA from "effect/ReadonlyArray"
 //          👆 Shorthand for ReadonlyArray (coming from fp-ts, old habits die hard 😄)
 
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps,
         Effect.flatMap(
@@ -369,7 +369,7 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, 
                     // ...
                     Effect.map(filterCreateOrUpdateEvents),
                     Effect.flatMap((commands) => {
-                        // Effect.Effect<never, never, void>[]
+                        // Effect.Effect<void>[]
                         const effects = ROA.map(
                             commands,
                             createOrUpdate(createCalendarEvent, updateCalendarEvent),
@@ -412,13 +412,13 @@ F.pipe(
 
 Let's run the application and see how much time it takes.
 
-```json /Error: Rate Limit Exceeded/#red
+```json /google calendar event: Error: Rate Limit Exceeded/#red
 {"message":"Commands to execute","timestamp":"2023-11-05T16:02:52.022Z","level":"INFO","fiberId":"#0","create":"31","update":"0","teamId":"502","nothingChanged":"0"}
 {
     "message": "Unexpected application error",
     "timestamp": "2023-11-05T16:02:52.664Z",
     "level": "ERROR",
-    "cause": "Error: Unable to insert google calendar event: Error: Rate Limit Exceeded (...omitting stack trace...)",
+    "cause": "[...] google calendar event: Error: Rate Limit Exceeded [...]",
     "teamId": 502
 }
 ```
@@ -429,7 +429,7 @@ We can say that using concurrency `unbounded` can be a double-edged sword and we
 We can fix this issue in two way:
 
 1. Using controlled concurrency
-2. Using the [Scheduling](https://www.effect.website/docs/scheduling/introduction) module, [retrying](https://www.effect.website/docs/error-management/retrying) to insert/update a calendar event following a policy we define (for example with exponential backoff when we exceed the rate limit)
+2. Using the [Scheduling](https://effect.website/docs/guides/scheduling/introduction) module, [retrying](https://effect.website/docs/guides/error-management/retrying) to insert/update a calendar event following a policy we define (for example with exponential backoff when we exceed the rate limit)
 
 Since this application is simple I chose option 1, as having 5 concurrent effects is absolutely fine for this scenario.
 
@@ -444,7 +444,7 @@ I'll try to answer some of those questions by writing a test.
 To run an Effect we can use:
 
 -   `Effect.runPromise` returns a Promise that may reject if the Effect produce an error
--   `Effect.runPromiseExit` return always a fulfilled Promise with the `Exit` type, which is a union of `Failure<E, A> | Success<E, A>`
+-   `Effect.runPromiseExit` return always a fulfilled Promise with the `Exit` type, which is a union of ` Success<A, E> | Failure<A, E>`
 
 We can write a test to check that a calendar event is created when there's a new football match:
 
@@ -469,9 +469,9 @@ const anyTeam = 1
 There's something wrong, we got a type error at `Effect.runPromiseExit`!
 
 ```text {4}
-Argument of type '<E, A>(effect: Effect<never, E, A>) => Promise<Exit<E, A>>' is not assignable to parameter of type '(a: Effect<Deps, never, void>) => Promise<Exit<never, void>>'.
+Argument of type '<A, E>(effect: Effect<A, E, never>) => Promise<Exit<A, E>>' is not assignable to parameter of type '(a: Effect<void, never, Deps>) => Promise<Exit<void, never>>'.
   Types of parameters 'effect' and 'a' are incompatible.
-    Type 'Effect<Deps, never, void>' is not assignable to type 'Effect<never, never, void>'.
+    Type 'Effect<void, never, Deps>' is not assignable to type 'Effect<void, never, never>'.
       Type 'Deps' is not assignable to type 'never'.ts(2345)
 ```
 
@@ -512,7 +512,7 @@ declare const anyFootballMatch: FootballMatch
 
 <Alert variant="info">
     In alternative, for more complex scenarios you should use
-    [layers](https://www.effect.website/docs/context-management/layers)
+    [layers](https://effect.website/docs/guides/context-management/layers)
 </Alert>
 
 And the test is green 🎉!
@@ -538,16 +538,14 @@ import * as Match from "effect/Match"
 import * as ROA from "effect/ReadonlyArray"
 
 export type Deps = {
-    loadMatchesByTeam: (teamId: number) => Effect.Effect<never, never, readonly FootballMatch[]>
-    loadCalendarEventsByTeam: (
-        teamId: number,
-    ) => Effect.Effect<never, never, readonly CalendarEvent[]>
-    createCalendarEvent: (command: CreateFootballMatchEvent) => Effect.Effect<never, never, void>
-    updateCalendarEvent: (command: UpdateFootballMatchEvent) => Effect.Effect<never, never, void>
+    loadMatchesByTeam: (teamId: number) => Effect.Effect<readonly FootballMatch[]>
+    loadCalendarEventsByTeam: (teamId: number) => Effect.Effect<readonly CalendarEvent[]>
+    createCalendarEvent: (command: CreateFootballMatchEvent) => Effect.Effect<void>
+    updateCalendarEvent: (command: UpdateFootballMatchEvent) => Effect.Effect<void>
 }
-export const Deps = Context.Tag<Deps>()
+export const Deps = Context.GenericTag<Deps>("Deps")
 
-export const footballMatchEventsHandler = (teamId: number): Effect.Effect<Deps, never, void> =>
+export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps,
         Effect.flatMap(
@@ -624,7 +622,7 @@ We started exploring Effect and there is a lot more to see and try.
 What we just did is a very common workflow: retrieve data from external sources, do some business logic and save the results to a database.
 
 What I like about Effect is that you can experiment, iterate and refactor with confidence that your application won't break.
-Effect leverage the type system to make things explicit: errors and requirements. Although we only covered the requirements part, you should check out [error handling](https://www.effect.website/docs/error-management/two-error-types).
+Effect leverage the type system to make things explicit: errors and requirements. Although we only covered the requirements part, you should check out [error handling](https://effect.website/docs/guides/error-management/two-error-types).
 
 The learning curve may seem high at first, but from my experience I can say that it was worth it because I enjoy writing TypeScript with Effect much more.
 
