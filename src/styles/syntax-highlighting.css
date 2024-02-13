@@ -27,6 +27,7 @@ figure[data-rehype-pretty-code-figure] code {
     display: grid;
     /* This prevents to show background-color set for inline code */
     background-color: transparent;
+    @apply text-sm;
 }
 
 /* Title */
