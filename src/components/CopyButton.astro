@@ -4,13 +4,11 @@ import { cn } from "@shared/cn"
 
 type Props = {
     text: string
-    className?: string
 }
 
-const { text, className } = Astro.props
+const { text } = Astro.props
 const baseStyles = cn(
-    className,
-    "z-20 w-6 h-6 items-center justify-center transition-all rounded-md hover:border focus:outline-none",
+    "w-6 h-6 items-center justify-center transition-all rounded-md hover:border focus:outline-none",
 )
 ---
 
