@@ -26,9 +26,5 @@ export default defineConfig({
         webAnalytics: {
             enabled: isAnalyticsEnabled,
         },
-        speedInsights: {
-            // TODO: try to use new @vercel/speed-insights
-            enabled: false,
-        },
     }),
 })
