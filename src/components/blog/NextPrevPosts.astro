@@ -1,4 +1,5 @@
 ---
+import Link from "@components/Link.astro"
 import type { Post } from "@shared/posts"
 
 type Props = {
@@ -10,19 +11,7 @@ const { previous, next } = Astro.props
 
 <div class="flex gap-2 items-center">
     {(previous || next) && <>&#8227;</>}
-    {
-        previous && (
-            <a class="border-b-0" href={previous.url}>
-                cd previous
-            </a>
-        )
-    }
+    {previous && <Link href={previous.url}>cd previous</Link>}
     {previous && next && <span>&#47;</span>}
-    {
-        next && (
-            <a class="border-b-0" href={next.url}>
-                cd next
-            </a>
-        )
-    }
+    {next && <Link href={next.url}>cd next</Link>}
 </div>

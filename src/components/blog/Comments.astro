@@ -1,4 +1,6 @@
 ---
+import ExternalLink from "@components/ExternalLink.astro"
+import Link from "@components/Link.astro"
 import { websiteUrl } from "@shared/metadata"
 import type { Post } from "@shared/posts"
 
@@ -24,11 +26,7 @@ const { post } = Astro.props
 
 <div class="flex gap-2 items-center">
     &#8227; <span>comment on</span>
-    <a class="border-b-0" href={buildMastodonUrl(post)} target="_blank" rel="noopener noreferrer">
-        mastodon
-    </a>
+    <ExternalLink href={buildMastodonUrl(post)}> mastodon </ExternalLink>
     /
-    <a class="border-b-0" href={buildTwitterUrl(post)} target="_blank" rel="noopener noreferrer">
-        twitter
-    </a>
+    <ExternalLink href={buildTwitterUrl(post)}> twitter </ExternalLink>
 </div>
