@@ -9,7 +9,6 @@ export default {
                 sans: ["Inter Variable", "Inter", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                black: "#202229",
                 darkBlue: "#18181e",
                 orange2: "#ffa657",
                 inlineCode: "#37393f",
