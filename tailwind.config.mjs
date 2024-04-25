@@ -14,6 +14,15 @@ export default {
                 orange2: "#ffa657",
                 inlineCode: "#37393f",
                 gray2: "#BBBBBB",
+
+                // iceland inspired colors
+                blackSand: {
+                    500: "#131418", // base color
+                    600: "#0f1013",
+                },
+                volcanoOrange: "#ff5a22",
+                iceBlue: "#40afcc",
+                grayRock: "#424346",
             },
         },
     },
