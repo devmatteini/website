@@ -1,7 +1,6 @@
 ---
 import { formatDate } from "@shared/date"
 import type { Post } from "@shared/posts"
-import { ellipse } from "@shared/string"
 import Tags from "./Tags.astro"
 
 type Props = {
@@ -29,7 +28,7 @@ const status = statusLabel[post.status]
                 <p class="mb-0">{formatDate(post.date)}</p>
             </a>
         </header>
-        <p class="mt-2 break-words">{ellipse(post.description, 100)}</p>
+        <p class="mt-2 break-words">{post.description}</p>
         <Tags tags={post.tags} />
     </article>
 </div>
