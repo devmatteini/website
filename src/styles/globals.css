@@ -59,7 +59,7 @@ hr {
 }
 
 article a {
-    @apply border-b-2 border-b-volcanoOrange;
+    @apply underline underline-offset-4 decoration-2 decoration-volcanoOrange;
 }
 
 a:hover {

@@ -20,7 +20,7 @@ const status = statusLabel[post.status]
     <span class="p-[2px] bg-gradient-to-b from-volcanoOrange to-blackSand-500"></span>
     <article class="px-2 bg-blackSand-500">
         <header>
-            <a href={post.url}>
+            <a class="no-underline" href={post.url}>
                 <p class="text-xl my-0 font-bold">
                     {post.title}
                     {status && <span class="ml-2">{status}</span>}
