@@ -59,11 +59,11 @@ hr {
 }
 
 article a {
-    @apply border-b-2 border-b-orange2;
+    @apply border-b-2 border-b-volcanoOrange;
 }
 
 a:hover {
-    @apply text-orange2;
+    @apply text-volcanoOrange;
 }
 
 details {
