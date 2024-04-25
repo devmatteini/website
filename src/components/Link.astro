@@ -1,18 +1,15 @@
 ---
 import { cn } from "@shared/cn"
 import type { HTMLAttributes } from "astro/types"
+import { type Variant, linkStyles } from "./link-styles"
 
-export type Variant = "default" | "underline"
 type Props = HTMLAttributes<"a"> & { variant?: Variant }
 
-const stylesByVariant: Record<Variant, string> = {
-    default: "",
-    underline: "underline underline-offset-4 decoration-2 decoration-volcanoOrange",
-}
-
 const { variant = "default", class: className, ...rest } = Astro.props
+
+const styles = linkStyles(variant)
 ---
 
-<a class={cn(className, stylesByVariant[variant], "hover:text-volcanoOrange")} {...rest}>
+<a class={cn(className, styles)} {...rest}>
     <slot />
 </a>
