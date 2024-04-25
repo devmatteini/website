@@ -1,9 +1,11 @@
 ---
+import { linkStyles } from "@components/link-styles"
+import { cn } from "@shared/cn"
 import type { HTMLAttributes } from "astro/types"
 
 type Props = HTMLAttributes<"a">
 
-const props = Astro.props
+const { class: className, ...props } = Astro.props
 
 const href = props.href?.toString() || ""
 
@@ -11,4 +13,4 @@ const isInternalLink = href.startsWith("/") || href.startsWith("#")
 const [target, rel] = isInternalLink ? [] : ["_blank", "noopener noreferrer"]
 ---
 
-<a {...props} target={target} rel={rel}><slot /></a>
+<a {...props} class={cn(linkStyles("underline"), className)} target={target} rel={rel}><slot /></a>

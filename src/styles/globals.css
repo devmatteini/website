@@ -58,14 +58,6 @@ hr {
     @apply border-t-2 pb-8;
 }
 
-article a {
-    @apply underline underline-offset-4 decoration-2 decoration-volcanoOrange;
-}
-
-a:hover {
-    @apply text-volcanoOrange;
-}
-
 details {
     @apply mb-4;
 }
