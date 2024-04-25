@@ -4,6 +4,7 @@ import Document from "@layouts/Document.astro"
 import { Icon } from "astro-icon/components"
 import { first3, publishedPosts } from "@shared/posts"
 import PostCard from "@components/blog/PostCard.astro"
+import Link from "@components/Link.astro"
 
 const posts = await publishedPosts()
 ---
@@ -25,9 +26,9 @@ const posts = await publishedPosts()
     <h3 class="mt-8">Recent posts</h3>
     {first3(posts).map((post) => <PostCard post={post.data} />)}
     <h3>
-        <a href="/blog" class="flex items-center">
+        <Link href="/blog" class="flex items-center">
             All posts
             <Icon name="box-arrow-in-right" class="ml-2" />
-        </a>
+        </Link>
     </h3>
 </Document>

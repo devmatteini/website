@@ -2,6 +2,7 @@
 import { formatDate } from "@shared/date"
 import type { Post } from "@shared/posts"
 import Tags from "./Tags.astro"
+import Link from "@components/Link.astro"
 
 type Props = {
     post: Post["data"]
@@ -20,13 +21,13 @@ const status = statusLabel[post.status]
     <span class="p-[2px] bg-gradient-to-b from-volcanoOrange to-blackSand-500"></span>
     <article class="px-2 bg-blackSand-500">
         <header>
-            <a class="no-underline" href={post.url}>
+            <Link href={post.url}>
                 <p class="text-xl my-0 font-bold">
                     {post.title}
                     {status && <span class="ml-2">{status}</span>}
                 </p>
                 <p class="mb-0">{formatDate(post.date)}</p>
-            </a>
+            </Link>
         </header>
         <p class="mt-2 break-words">{post.description}</p>
         <Tags tags={post.tags} />
