@@ -9,7 +9,6 @@ export default {
                 sans: ["Inter Variable", "Inter", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                darkBlue: "#18181e",
                 orange2: "#ffa657",
                 inlineCode: "#37393f",
                 gray2: "#BBBBBB",
@@ -18,6 +17,7 @@ export default {
                 blackSand: {
                     500: "#131418", // base color
                     600: "#0f1013",
+                    700: "#0b0c0e",
                 },
                 volcanoOrange: "#ff5a22",
                 iceBlue: "#40afcc",
