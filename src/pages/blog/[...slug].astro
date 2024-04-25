@@ -5,7 +5,7 @@ import HeaderTag from "@components/blog/HeaderTag.astro"
 import Document from "@layouts/Document.astro"
 import { formatDate } from "@shared/date"
 import { publishedPosts, type Post, findPrevNextPosts, uniqueKeywords } from "@shared/posts"
-import Comments from "@components/blog/Comments.astro"
+import Share from "@components/blog/Share.astro"
 import NextPrevPosts from "@components/blog/NextPrevPosts.astro"
 import Markdown from "@components/Markdown.astro"
 
@@ -56,7 +56,7 @@ const { Content } = await post.render()
         <Markdown Content={Content} />
         <hr class="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
         <footer class="mb-2">
-            {current.status === "published" && <Comments post={current} />}
+            {current.status === "published" && <Share post={current} />}
             <NextPrevPosts previous={previous?.data} next={next?.data} />
         </footer>
     </article>
