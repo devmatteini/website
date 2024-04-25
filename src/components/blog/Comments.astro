@@ -22,7 +22,7 @@ const buildMastodonUrl = (post: Post["data"]) => {
 const { post } = Astro.props
 ---
 
-<div class="flex gap-2 items-center text-gray2">
+<div class="flex gap-2 items-center">
     &#8227; <span>comment on</span>
     <a class="border-b-0" href={buildMastodonUrl(post)} target="_blank" rel="noopener noreferrer">
         mastodon

@@ -9,9 +9,6 @@ export default {
                 sans: ["Inter Variable", "Inter", ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                inlineCode: "#37393f",
-                gray2: "#BBBBBB",
-
                 // iceland inspired colors
                 blackSand: {
                     500: "#131418", // base color

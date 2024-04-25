@@ -8,7 +8,7 @@ type Props = {
 const { previous, next } = Astro.props
 ---
 
-<div class="flex gap-2 items-center text-gray2">
+<div class="flex gap-2 items-center">
     {(previous || next) && <>&#8227;</>}
     {
         previous && (
