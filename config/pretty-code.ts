@@ -9,6 +9,9 @@ const __rawContent__ = "__rawContent__"
 const prettyCodeOptions: Partial<Options> = {
     theme: "github-dark",
     keepBackground: false,
+    defaultLang: {
+        block: "text",
+    },
 }
 
 const extractContentFromCodeBlocks = (tree: any) => {
