@@ -1,5 +1,5 @@
 :root {
-    --code-bg-color: 13, 17, 23;
+    --code-bg-color: 22, 27, 34;
     --line-highlighted-color: 255, 255, 255;
 }
 
@@ -33,7 +33,7 @@ figure[data-rehype-pretty-code-figure] code {
 /* Title */
 figcaption[data-rehype-pretty-code-title] {
     margin-bottom: 0.125rem;
-    background-color: #161b22;
+    @apply bg-grayRock;
     padding: 0.25rem 0.75rem;
     line-height: 1rem;
 }
