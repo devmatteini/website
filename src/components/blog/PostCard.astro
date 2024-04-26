@@ -15,6 +15,8 @@ const statusLabel: Record<Post["data"]["status"], string | null> = {
     draft: "[DRAFT]",
 }
 const status = statusLabel[post.status]
+
+const postDate = post.updatedOn ? `Updated on ${formatDate(post.updatedOn)}` : formatDate(post.date)
 ---
 
 <div class="mb-6 flex">
@@ -26,7 +28,7 @@ const status = statusLabel[post.status]
                     {post.title}
                     {status && <span class="ml-2">{status}</span>}
                 </p>
-                <p class="mb-0">{formatDate(post.date)}</p>
+                <p class="mb-0">{postDate}</p>
             </Link>
         </header>
         <p class="mt-2 break-words">{post.description}</p>

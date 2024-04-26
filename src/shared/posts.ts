@@ -11,7 +11,10 @@ type EnrichedPostData = RawPost["data"] & {
 
 export type Post = Omit<RawPost, "data"> & { data: EnrichedPostData }
 
-const byMostRecentDate = (a: Post, b: Post): number => b.data.date.getTime() - a.data.date.getTime()
+const mostRecentDate = (x: Post) => (x.data.updatedOn ? x.data.updatedOn : x.data.date)
+
+const byMostRecentDate = (a: Post, b: Post): number =>
+    mostRecentDate(b).getTime() - mostRecentDate(a).getTime()
 
 const readyToPublish = (isDev: boolean) => (x: RawPost) => {
     if (isDev) return x.data.status === "draft" || x.data.status === "published"
