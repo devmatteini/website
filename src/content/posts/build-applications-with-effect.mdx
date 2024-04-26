@@ -1,7 +1,7 @@
 ---
 title: Build applications with Effect
 date: 2023-11-16
-updatedOn: 2024-02-12
+updatedOn: 2024-04-26
 status: published
 description: "An introduction to Effect, a TypeScript library for creating complex and composable applications"
 tags:
@@ -16,7 +16,7 @@ Effect solves common problems we face every day in software development, such as
 
 I wrote this article based on the [talk](https://github.com/devmatteini/socrates-2023/blob/9f9c4348caeddecbf23fcb1325ddd036f97770af/effect-talk/build-applications-with-effect.pdf) I presented at [SoCraTes Italy 2023](https://www.socrates-conference.it/).
 
-_This article has been updated after Effect [2.3](https://effect.website/blog/release-2.3) release changes._
+_This article has been updated after Effect [3.0](https://effect.website/blog/effect-3.0) stable release 🎉._
 
 ## What is Effect?
 
@@ -352,9 +352,6 @@ const createOrUpdate = (create: Deps["createCalendarEvent"], update: Deps["updat
 And inside `footballMatchEventsHandler` we can use it like this:
 
 ```ts showLineNumbers {11-12,17-26}
-import * as ROA from "effect/ReadonlyArray"
-//          👆 Shorthand for ReadonlyArray (coming from fp-ts, old habits die hard 😄)
-
 export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps,
@@ -370,8 +367,7 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, 
                     Effect.map(filterCreateOrUpdateEvents),
                     Effect.flatMap((commands) => {
                         // Effect.Effect<void>[]
-                        const effects = ROA.map(
-                            commands,
+                        const effects = commands.map(
                             createOrUpdate(createCalendarEvent, updateCalendarEvent),
                         )
                         // You can also pass an array of Effects instead of an object to `Effect.all`
@@ -404,7 +400,7 @@ F.pipe(
     // ...
     Effect.map(filterCreateOrUpdateEvents),
     Effect.flatMap((commands) => {
-        const effects = ROA.map(commands, createOrUpdate(createCalendarEvent, updateCalendarEvent))
+        const effects = commands.map(createOrUpdate(createCalendarEvent, updateCalendarEvent))
         return Effect.all(effects, { discard: true, concurrency: "unbounded" })
     }),
 )
@@ -451,6 +447,8 @@ We can write a test to check that a calendar event is created when there's a new
 ```ts title="src/football-match-events-handler.test.ts" showLineNumbers /Effect.runPromiseExit/#error
 import { expect, test } from "vitest"
 import * as Effect from "effect/Effect"
+import * as Exit from "effect/Exit"
+import * as F from "effect/Function"
 import { footballMatchEventsHandler } from "./football-match-events-handler"
 
 test("create football match event", async () => {
@@ -484,7 +482,7 @@ import { expect, test, vi } from "vitest"
 import { Deps, footballMatchEventsHandler } from "./football-match-events-handler"
 
 test("create football match event", async () => {
-    const createCalendarEvent = vi.fn(() => Effect.unit)
+    const createCalendarEvent = vi.fn(() => Effect.void)
     //                             👆 create a spy function
 
     // We create a stub implementation of `Deps`.
@@ -493,7 +491,7 @@ test("create football match event", async () => {
         loadMatchesByTeam: () => Effect.succeed([anyFootballMatch]),
         loadCalendarEventsByTeam: () => Effect.succeed([]),
         createCalendarEvent,
-        updateCalendarEvent: () => Effect.unit,
+        updateCalendarEvent: () => Effect.void,
     })
 
     const result = await F.pipe(
@@ -535,7 +533,6 @@ import * as Effect from "effect/Effect"
 import * as Context from "effect/Context"
 import * as F from "effect/Function"
 import * as Match from "effect/Match"
-import * as ROA from "effect/ReadonlyArray"
 
 export type Deps = {
     loadMatchesByTeam: (teamId: number) => Effect.Effect<readonly FootballMatch[]>
@@ -572,8 +569,7 @@ export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, 
                     ),
                     Effect.map(filterCreateOrUpdateEvents),
                     Effect.flatMap((commands) => {
-                        const effects = ROA.map(
-                            commands,
+                        const effects = commands.map(
                             createOrUpdate(createCalendarEvent, updateCalendarEvent),
                         )
                         return Effect.all(effects, { discard: true, concurrency: 5 })
