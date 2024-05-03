@@ -10,5 +10,5 @@ const { __rawContent__, ...props } = Astro.props
 
 <div class="mt-1 flex flex-row">
     <pre {...props} class={cn(props.class, "flex-grow")}><slot /></pre>
-    {__rawContent__ && <CopyButton text={__rawContent__} />}
+    <!-- {__rawContent__ && <CopyButton text={__rawContent__} />} -->
 </div>
