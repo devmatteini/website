@@ -351,7 +351,7 @@ const createOrUpdate = (create: Deps["createCalendarEvent"], update: Deps["updat
 
 And inside `footballMatchEventsHandler` we can use it like this:
 
-```ts showLineNumbers {11-12,17-26}
+```ts showLineNumbers {8-9,14-22}
 export const footballMatchEventsHandler = (teamId: number): Effect.Effect<void, never, Deps> =>
     F.pipe(
         Deps,
