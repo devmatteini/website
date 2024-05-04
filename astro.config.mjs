@@ -17,7 +17,7 @@ export default defineConfig({
         rehypePlugins: [
             rehypeSlug,
             [rehypeAutolinkHeadings, autoLinkHeadingOptions],
-            ...prettyCodePlugins,
+            prettyCodePlugins,
         ],
     },
     integrations: [tailwind(), icon(), mdx()],

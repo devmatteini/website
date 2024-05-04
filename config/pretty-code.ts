@@ -10,4 +10,4 @@ const prettyCodeOptions: Partial<Options> = {
     },
 }
 
-export const prettyCodePlugins = [[prettyCode, prettyCodeOptions]]
+export const prettyCodePlugins = [prettyCode, prettyCodeOptions]
