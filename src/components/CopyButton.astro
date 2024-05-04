@@ -38,7 +38,7 @@ const baseStyles = cn(
         constructor() {
             super()
 
-            const text = this.querySelector("pre")?.innerText || ""
+            const text = this.querySelector("code")?.innerText || ""
             const copyButton: HTMLButtonElement | null = this.querySelector("[data-type=btn-copy]")
             const copiedButton: HTMLButtonElement | null =
                 this.querySelector("[data-type=btn-copied]")
