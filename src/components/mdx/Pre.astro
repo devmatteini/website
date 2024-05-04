@@ -8,7 +8,6 @@ type Props = HTMLAttributes<"pre"> & { __rawContent__?: string }
 const { __rawContent__, ...props } = Astro.props
 ---
 
-<div class="mt-1 flex flex-row">
+<CopyButton>
     <pre {...props} class={cn(props.class, "flex-grow")}><slot /></pre>
-    <!-- {__rawContent__ && <CopyButton text={__rawContent__} />} -->
-</div>
+</CopyButton>
