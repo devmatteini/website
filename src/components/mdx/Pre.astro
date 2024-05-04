@@ -3,9 +3,8 @@ import type { HTMLAttributes } from "astro/types"
 import CopyButton from "../CopyButton.astro"
 import { cn } from "@shared/cn"
 
-type Props = HTMLAttributes<"pre"> & { __rawContent__?: string }
-
-const { __rawContent__, ...props } = Astro.props
+type Props = HTMLAttributes<"pre">
+const props = Astro.props
 ---
 
 <CopyButton>
