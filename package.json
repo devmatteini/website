@@ -34,7 +34,7 @@
         "@vercel/speed-insights": "1.0.10"
     },
     "devDependencies": {
-        "@astrojs/check": "0.7.0",
+        "@astrojs/check": "0.9.3",
         "@typescript-eslint/eslint-plugin": "7.18.0",
         "@typescript-eslint/parser": "7.18.0",
         "eslint": "8.57.0",
