@@ -7,6 +7,7 @@ const prettyCodeOptions: Partial<Options> = {
     keepBackground: false,
     defaultLang: {
         block: "text",
+        inline: "text",
     },
 }
 

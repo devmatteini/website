@@ -100,7 +100,7 @@ code[data-line-numbers] > [data-line]::before {
 
 /* Inline code (e.g `this is inline code`) */
 code {
-    padding: 0.2rem 0.4rem;
+    padding: 0.1rem;
     @apply bg-grayRock;
     border-radius: 0.25rem;
 }

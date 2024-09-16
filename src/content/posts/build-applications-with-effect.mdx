@@ -440,7 +440,7 @@ I'll try to answer some of those questions by writing a test.
 To run an Effect we can use:
 
 -   `Effect.runPromise` returns a Promise that may reject if the Effect produce an error
--   `Effect.runPromiseExit` return always a fulfilled Promise with the `Exit` type, which is a union of ` Success<A, E> | Failure<A, E>`
+-   `Effect.runPromiseExit` return always a fulfilled Promise with the `Exit` type, which is a union of `Success<A, E> | Failure<A, E>`
 
 We can write a test to check that a calendar event is created when there's a new football match:
 
