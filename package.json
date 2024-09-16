@@ -21,7 +21,7 @@
         "@astrojs/tailwind": "5.1.0",
         "@astrojs/vercel": "7.8.1",
         "@fontsource-variable/inter": "5.0.18",
-        "@vercel/speed-insights": "1.0.10",
+        "@vercel/speed-insights": "1.0.12",
         "astro": "4.15.6",
         "astro-icon": "1.1.1",
         "clsx": "2.1.1",
@@ -44,6 +44,6 @@
         "prettier-plugin-astro": "0.14.1",
         "tailwindcss": "3.4.1",
         "typescript": "5.5.4",
-        "vercel": "35.2.4"
+        "vercel": "37.4.2"
     }
 }
