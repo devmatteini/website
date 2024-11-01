@@ -31,7 +31,7 @@
         "rehype-slug": "6.0.0",
         "shiki": "1.21.0",
         "tailwind-merge": "2.5.2",
-        "ts-pattern": "5.4.0"
+        "ts-pattern": "5.5.0"
     },
     "devDependencies": {
         "@astrojs/check": "0.9.4",
