@@ -21,11 +21,26 @@ const buildMastodonUrl = (post: Post["data"]) => {
     return `https://toot.kytta.dev?text=${encodeURIComponent(text)}`
 }
 
+const buildBlueskyUrl = (post: Post["data"]) => {
+    const url = websiteUrl(post.url)
+    const text = `${post.title} by @cosimomatteini.com ${url}`
+    // DOCS: https://docs.bsky.app/docs/advanced-guides/intent-links#compose-post
+    return `https://bsky.app/intent/compose?text=${encodeURIComponent(text)}`
+}
+
 const { post } = Astro.props
 ---
 
 <div class="flex gap-2 items-center">
     <span>Share on</span>
+
+    <ExternalLink
+        className="flex items-center gap-x-2 text-xl"
+        href={buildTwitterUrl(post)}
+        ariaLabel="Share on Twitter"
+    >
+        <Icon name="twitter" />
+    </ExternalLink>
 
     <ExternalLink
         className="flex items-center gap-x-2 text-xl"
@@ -37,9 +52,9 @@ const { post } = Astro.props
 
     <ExternalLink
         className="flex items-center gap-x-2 text-xl"
-        href={buildTwitterUrl(post)}
-        ariaLabel="Share on Twitter"
+        href={buildBlueskyUrl(post)}
+        ariaLabel="Share on Bluesky"
     >
-        <Icon name="twitter" />
+        <Icon name="bluesky" />
     </ExternalLink>
 </div>
