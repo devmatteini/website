@@ -1,0 +1,121 @@
+---
+title: Automate Ubuntu Desktop installation
+date: 2024-12-27
+status: draft
+description: "Automate Ubuntu Desktop installation to quickly set up a new environment with Ubuntu autoinstall format file"
+tags:
+    - Ubuntu
+    - Automation
+seoKeywords:
+    - ubuntu autoinstall
+    - ubuntu unattended installation
+---
+
+Starting from Ubuntu 23.04 you can automate the desktop installation using the [autoinstall format file](https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html).
+
+Ubuntu autoinstall allows to almost fully automate the setup of a new development environment. When combined with my [dotfiles bootstrap script](https://github.com/devmatteini/dotfiles#installation), this process takes less than 30 minutes.
+
+## Autoinstall format file
+
+Below is an example autoinstall file from my setup. It uses Ubuntu Desktop minimal with disk encryption and automatically install codecs, drivers and update the system packages.
+
+You can customize the configuration using the [autoinstall reference documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html).
+
+```yaml
+version: 1
+locale: "en_US.UTF-8"
+keyboard:
+    layout: "us"
+source:
+    id: "ubuntu-desktop-minimal"
+    search_drivers: true
+storage:
+    layout:
+        name: "lvm"
+        # Note: the storage encryption password is plain text!
+        password: "1234"
+identity:
+    hostname: "<hostname>"
+    realname: "<your name>"
+    username: "<your username>"
+    # Note: encrypted password `5678` with `openssl passwd -6`
+    password: "$6$Wp1H2wLCo8FTq.ce$8SzG8CE5DKopD1fnpwKzJJj/Rr7KDlfho8HQMCtjKo3EGid2hKZkQAXeV/VFHOya0Ctx29.g5Bei8tR/cRZNc/"
+codecs:
+    install: true
+drivers:
+    install: true
+oem:
+    install: "auto"
+packages:
+    - "git"
+timezone: "Europe/Rome"
+updates: "all"
+shutdown: "reboot"
+```
+
+### Passwords
+
+The storage encryption password (`storage.layout.password`) is plain text so avoid to commit this file to version control.
+
+[User password](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html#password) (`identity.password`) must be encrypted instead. Use `openssl passwd -6` command to generate a SHA512-based encrypted password.
+
+### Interactive sections
+
+There is one important configuration missing from the above file: **network**.
+
+When you boot the Live Ubuntu image, you need to configure the network before starting the autoinstall so it was omitted from my configuration file.
+
+## Securing the autoinstall file
+
+To avoid committing sensitive information (like storage encryption password), I created a bash script to generate the autoinstall file. This approach allows versioning without exposing sensitive data.
+
+You can find my [ubuntu-autoinstall.sh script](https://github.com/devmatteini/dotfiles/blob/b966eece8d41a2537b0c76610d8f61e701d2f9bd/bootstrap/ubuntu-autoinstall.sh) in my dotfiles. If you plan to use it, remember to update the hardcoded configuration options according to your preferences.
+
+## How to use the autoinstall file
+
+1. Boot into Live Ubuntu image
+2. Configure Language, Accessibility, Keyboard, Network and then select **Try Ubuntu**
+3. Verify that the system works as expected
+4. Download/create the autoinstall file or [generated it with the above script](https://github.com/devmatteini/dotfiles#ubuntu-autoinstall)
+5. Open **Install Ubuntu** app and proceed to **Type of installation** section
+6. Select **Automated Install** and provide the autoinstall file URI (e.g `file:///home/ubuntu/ubuntu-autoinstall.yaml`)
+7. Wait for validation, review the configuration file and proceed with the installation
+
+## Bonus: validate autoinstall format file
+
+You can [validate the autoinstall file](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-validation.html) before booting Live Ubuntu image, using subiquity's `validate-autoinstall-user-data.py` script.
+Note that the validation process has limitations, as mentioned in the [Validator Limitations](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-validation.html#validator-limitations) section of the documentation.
+
+I created a Docker container to run the script:
+
+```dockerfile title="Dockerfile.subiquity"
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y sudo git build-essential
+RUN git clone https://github.com/canonical/subiquity.git /app
+WORKDIR /app
+RUN make install_deps
+# Fix 1: systemd and docker don't play well together, let's fake timedatectl command which is used inside the script
+RUN mkdir -p /run/systemd/ && touch /run/systemd/system
+RUN rm -f /usr/bin/timedatectl
+RUN cat > /usr/bin/timedatectl <<EOL
+#!/usr/bin/env bash
+python3 -c "import pytz; print('\n'.join(pytz.all_timezones))"
+EOL
+RUN chmod +x /usr/bin/timedatectl
+ENTRYPOINT [ "./scripts/validate-autoinstall-user-data.py" ]
+```
+
+Build the Docker image:
+
+```bash
+docker build -f Dockerfile.subiquity -t subiquity .
+```
+
+Generate the autoinstall file and then validate it by running the Docker container:
+
+```bash
+docker run -v "$PWD":/configs subiquity --no-expect-cloudconfig -vvv /configs/ubuntu-autoinstall.yaml
+#          ^ we need to share the current directory with the container
+#                                                                             ^ this is the autoinstall file name on the host filesystem
+# Note: `-vvv` flag is for maximum verbosity, otherwise error messages are not very helpful
+```
