@@ -2,9 +2,9 @@ import type { CollectionEntry } from "astro:content"
 import { getCollection } from "astro:content"
 import readingTime from "reading-time"
 
-type RawPost = Omit<CollectionEntry<"posts">, "body"> & { body: string }
+type RawPost = Omit<CollectionEntry<"blog">, "body"> & { body: string }
 
-const isValidPost = (x: CollectionEntry<"posts">): x is RawPost =>
+const isValidPost = (x: CollectionEntry<"blog">): x is RawPost =>
     x.body !== undefined && x.body !== null
 
 type EnrichedPostData = RawPost["data"] & {
@@ -34,7 +34,7 @@ const enrichPost = (x: RawPost): Post => ({
 })
 
 export const publishedPosts = async (): Promise<Post[]> => {
-    const posts = await getCollection("posts")
+    const posts = await getCollection("blog")
     return posts
         .filter(isValidPost)
         .filter(readyToPublish(import.meta.env.DEV))

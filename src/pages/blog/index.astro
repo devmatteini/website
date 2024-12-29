@@ -2,7 +2,7 @@
 import Header from "@components/Header.astro"
 import PostCard from "@components/blog/PostCard.astro"
 import Document from "@layouts/Document.astro"
-import { publishedPosts } from "@shared/posts"
+import { publishedPosts } from "@shared/blog"
 
 const posts = await publishedPosts()
 ---
