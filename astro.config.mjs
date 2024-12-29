@@ -7,11 +7,14 @@ import { autoLinkHeadingOptions } from "./config/rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import { prettyCodePlugins } from "./config/pretty-code"
 import { isAnalyticsEnabled } from "./config/analytics"
-import vercel from "@astrojs/vercel/static"
+import vercel from "@astrojs/vercel"
 
 // https://astro.build/config
 export default defineConfig({
     site: "https://cosimomatteini.com",
+    legacy: {
+        collections: true,
+    },
     markdown: {
         syntaxHighlight: false,
         rehypePlugins: [
