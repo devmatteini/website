@@ -2,7 +2,10 @@ import type { CollectionEntry } from "astro:content"
 import { getCollection } from "astro:content"
 import readingTime from "reading-time"
 
-type RawPost = CollectionEntry<"posts">
+type RawPost = Omit<CollectionEntry<"posts">, "body"> & { body: string }
+
+const isValidPost = (x: CollectionEntry<"posts">): x is RawPost =>
+    x.body !== undefined && x.body !== null
 
 type EnrichedPostData = RawPost["data"] & {
     url: string
@@ -25,7 +28,7 @@ const enrichPost = (x: RawPost): Post => ({
     ...x,
     data: {
         ...x.data,
-        url: `/blog/${x.slug}`,
+        url: `/blog/${x.id}`,
         readingTime: readingTime(x.body).text,
     },
 })
@@ -33,6 +36,7 @@ const enrichPost = (x: RawPost): Post => ({
 export const publishedPosts = async (): Promise<Post[]> => {
     const posts = await getCollection("posts")
     return posts
+        .filter(isValidPost)
         .filter(readyToPublish(import.meta.env.DEV))
         .map(enrichPost)
         .sort(byMostRecentDate)
@@ -42,10 +46,10 @@ export const firstN = (n: number) => (posts: Post[]) => posts.slice(0, n)
 export const first3 = firstN(3)
 
 export const findPrevNextPosts = <T extends Post>(
-    currentSlug: string,
+    currentId: string,
     posts: T[],
 ): { previous: T | undefined; next: T | undefined } => {
-    const currentIndex = posts.findIndex((x) => x.slug === currentSlug)
+    const currentIndex = posts.findIndex((x) => x.id === currentId)
 
     const previous = posts[currentIndex + 1]
     const next = posts[currentIndex - 1]

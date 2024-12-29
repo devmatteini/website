@@ -8,11 +8,12 @@ import { publishedPosts, type Post, findPrevNextPosts, uniqueKeywords } from "@s
 import Share from "@components/blog/Share.astro"
 import NextPrevPosts from "@components/blog/NextPrevPosts.astro"
 import Markdown from "@components/Markdown.astro"
+import { render } from "astro:content"
 
 export async function getStaticPaths() {
     const posts = await publishedPosts()
     return posts.map((post) => ({
-        params: { slug: post.slug },
+        params: { id: post.id },
         props: post,
     }))
 }
@@ -22,8 +23,8 @@ const posts = await publishedPosts()
 
 const post = Astro.props
 const current = post.data
-const { previous, next } = findPrevNextPosts(post.slug, posts)
-const { Content } = await post.render()
+const { previous, next } = findPrevNextPosts(post.id, posts)
+const { Content } = await render(post)
 ---
 
 <Document

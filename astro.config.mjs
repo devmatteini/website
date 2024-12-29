@@ -12,9 +12,6 @@ import vercel from "@astrojs/vercel"
 // https://astro.build/config
 export default defineConfig({
     site: "https://cosimomatteini.com",
-    legacy: {
-        collections: true,
-    },
     markdown: {
         syntaxHighlight: false,
         rehypePlugins: [
