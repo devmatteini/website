@@ -9,6 +9,7 @@ import { prettyCodePlugins } from "./config/pretty-code"
 import { isAnalyticsEnabled } from "./config/analytics"
 import vercel from "@astrojs/vercel"
 import sitemap from "@astrojs/sitemap"
+import { fixAstroVercelSitemap } from "./fix-astro-vercel-sitemap"
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +22,7 @@ export default defineConfig({
             prettyCodePlugins,
         ],
     },
-    integrations: [tailwind(), icon(), mdx(), sitemap()],
+    integrations: [tailwind(), icon(), mdx(), sitemap(), fixAstroVercelSitemap()],
     output: "static",
     adapter: vercel({
         webAnalytics: {
