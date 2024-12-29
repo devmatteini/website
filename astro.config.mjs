@@ -8,6 +8,7 @@ import rehypeSlug from "rehype-slug"
 import { prettyCodePlugins } from "./config/pretty-code"
 import { isAnalyticsEnabled } from "./config/analytics"
 import vercel from "@astrojs/vercel"
+import sitemap from "@astrojs/sitemap"
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +21,7 @@ export default defineConfig({
             prettyCodePlugins,
         ],
     },
-    integrations: [tailwind(), icon(), mdx()],
+    integrations: [tailwind(), icon(), mdx(), sitemap()],
     output: "static",
     adapter: vercel({
         webAnalytics: {

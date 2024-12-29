@@ -1,1 +1,4 @@
 User-agent: *
+Allow: /
+
+Sitemap: https://cosimomatteini.com/sitemap-index.xml
