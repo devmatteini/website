@@ -39,6 +39,7 @@ const withDefaults = (metadata: Metadata): Required<Metadata> => ({
 const metadata = withDefaults(Astro.props.metadata)
 const title = metadata.showFullTitle ? `${metadata.title} | ${websiteDomain}` : metadata.title
 const keywords = Array.from(metadata.keywords).join(",")
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 
 <!doctype html>
@@ -48,6 +49,7 @@ const keywords = Array.from(metadata.keywords).join(",")
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://hachyderm.io/@cosimomatteini" rel="me" />
         <link rel="sitemap" href="/sitemap-index.xml" />
+        <link rel="canonical" href={canonicalURL} />
 
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
