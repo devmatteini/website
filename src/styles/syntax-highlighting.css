@@ -3,8 +3,6 @@
     --line-highlighted-color: 255, 255, 255;
 }
 
-/* ------------Code block------------ */
-
 /* Code block wrapper */
 figure[data-rehype-pretty-code-figure] {
     overflow: hidden;
@@ -18,15 +16,13 @@ figure[data-rehype-pretty-code-figure] pre {
     /* Enable horizontal scrolling for long lines of code */
     overflow-x: auto;
 
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.25rem;
     line-height: 1.5rem;
 }
 
 /* Ensures spans fill the full width of a horizontally-scrollable code block */
 figure[data-rehype-pretty-code-figure] code {
     display: grid;
-    /* This prevents to show background-color set for inline code */
-    background-color: transparent;
     @apply text-sm;
 }
 
@@ -39,67 +35,70 @@ figcaption[data-rehype-pretty-code-title] {
 }
 
 /* Line highlighted  */
-[data-line] {
-    padding: 0 0.25rem;
-
-    border-left-width: 4px;
+figure[data-rehype-pretty-code-figure] [data-line] {
+    /* Create left border for each line so that the highlighted line are more clear and line numbers are always aligned */
+    border-left-width: 2px;
     border-left-color: transparent;
 }
 
-[data-highlighted-line] {
+figure[data-rehype-pretty-code-figure] [data-highlighted-line] {
     border-left-color: rgba(var(--line-highlighted-color), 0.7);
     background-color: rgba(var(--line-highlighted-color), 0.1);
 }
 
 /* Word highlighted */
-[data-highlighted-chars] {
+figure[data-rehype-pretty-code-figure] [data-line]:has([data-highlighted-chars]) {
+    /* Extra space needed when highlighted words are in consecutive lines */
+    padding-bottom: 0.1rem;
+}
+
+figure[data-rehype-pretty-code-figure] [data-highlighted-chars] {
     background-color: rgb(0 103 163 / 56%);
-    color: rgb(175 255 255 / 100%);
-    padding: 0.2rem;
+    color: inherit;
+    padding: 0.1rem;
     border-radius: 0.25rem;
 }
 
 /* Line numbers */
-code[data-line-numbers] {
+figure[data-rehype-pretty-code-figure] code[data-line-numbers] {
     counter-reset: lineNumber;
 }
 
-code[data-line-numbers] > [data-line]::before {
+figure[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
     counter-increment: lineNumber;
     content: counter(lineNumber);
     display: inline-block;
     text-align: right;
 
     margin-right: 0.5rem;
+    margin-left: 0.25rem;
     width: 1rem;
     color: #6e7681;
 }
 
 /* Group highlighted chars by id */
-[data-chars-id="purple"] {
+figure[data-rehype-pretty-code-figure] [data-chars-id="purple"] {
     @apply bg-purple-800/50;
 }
 
-[data-chars-id="yellow"] {
+figure[data-rehype-pretty-code-figure] [data-chars-id="yellow"] {
     @apply bg-yellow-600/50;
 }
 
-[data-chars-id="green"] {
+figure[data-rehype-pretty-code-figure] [data-chars-id="green"] {
     @apply bg-green-600/60;
 }
 
-[data-chars-id="red"] {
+figure[data-rehype-pretty-code-figure] [data-chars-id="red"] {
     @apply bg-red-700/80;
 }
 
-[data-highlighted-chars][data-chars-id="error"] {
+figure[data-rehype-pretty-code-figure] [data-chars-id="error"] {
     @apply bg-inherit underline decoration-wavy decoration-red-600;
 }
 
-/* ---------------------------------- */
-
 /* Inline code (e.g `this is inline code`) */
-code {
+span[data-rehype-pretty-code-figure] code {
     padding: 0.1rem;
     @apply bg-grayRock;
     border-radius: 0.25rem;
