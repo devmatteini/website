@@ -8,12 +8,6 @@ type Props = {
     post: Post["data"]
 }
 
-const buildTwitterUrl = (post: Post["data"]) => {
-    const url = websiteUrl(post.url)
-    const text = `${post.title} by @MatteiniCosimo ${url}`
-    return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`
-}
-
 const buildMastodonUrl = (post: Post["data"]) => {
     const url = websiteUrl(post.url)
     const text = `${post.title} by @cosimomatteini ${url}`
@@ -48,13 +42,5 @@ const { post } = Astro.props
         ariaLabel="Share on Mastodon"
     >
         <Icon name="mastodon" />
-    </ExternalLink>
-
-    <ExternalLink
-        className="flex items-center gap-x-2 text-xl"
-        href={buildTwitterUrl(post)}
-        ariaLabel="Share on Twitter"
-    >
-        <Icon name="twitter" />
     </ExternalLink>
 </div>
