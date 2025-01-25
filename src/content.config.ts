@@ -13,6 +13,7 @@ const blog = defineCollection({
             description: z.string(),
             tags: z.array(z.string()).default([]),
             seoKeywords: z.array(z.string()).default([]),
+            tableOfContents: z.boolean().default(false),
         })
         .superRefine((data, ctx) => {
             if (data.updatedOn && data.updatedOn <= data.date) {

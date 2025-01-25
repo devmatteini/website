@@ -9,6 +9,7 @@ import Share from "@components/blog/Share.astro"
 import NextPrevPosts from "@components/blog/NextPrevPosts.astro"
 import Markdown from "@components/Markdown.astro"
 import { render } from "astro:content"
+import TableOfContent from "@components/blog/TableOfContent.astro"
 
 export async function getStaticPaths() {
     const posts = await publishedPosts()
@@ -24,7 +25,9 @@ const posts = await publishedPosts()
 const post = Astro.props
 const current = post.data
 const { previous, next } = findPrevNextPosts(post.id, posts)
-const { Content } = await render(post)
+const { Content, headings } = await render(post)
+
+const separatorStyle = "my-5 pb-0 border-t-[1px] border-dashed border-t-gray-500"
 ---
 
 <Document
@@ -38,7 +41,7 @@ const { Content } = await render(post)
     <article>
         <header class="mb-6">
             <h1 class="mb-3 font-bold">{current.title}</h1>
-            <div class="flex gap-2 text-sm items-center flex-wrap">
+            <div class="flex gap-2 text-sm items-center flex-wrap mb-3">
                 <HeaderTag text={formatDate(current.date)}>
                     <Icon slot="icon" name="calendar" />
                 </HeaderTag>
@@ -53,9 +56,11 @@ const { Content } = await render(post)
                     <Icon slot="icon" name="clock" />
                 </HeaderTag>
             </div>
+            {current.tableOfContents && <TableOfContent headings={headings} />}
+            <hr class={separatorStyle} />
         </header>
         <Markdown Content={Content} />
-        <hr class="my-5 pb-0 border-t-3 border-dashed border-t-gray-500" />
+        <hr class={separatorStyle} />
         <footer class="mb-2">
             {current.status === "published" && <Share post={current} />}
             <NextPrevPosts previous={previous?.data} next={next?.data} />
