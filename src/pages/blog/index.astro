@@ -1,5 +1,4 @@
 ---
-import Header from "@components/Header.astro"
 import PostCard from "@components/blog/PostCard.astro"
 import Document from "@layouts/Document.astro"
 import { publishedPosts } from "@shared/blog"
@@ -13,7 +12,6 @@ const posts = await publishedPosts()
         description: "All blog posts",
     }}
 >
-    <Header />
     <h1 class="font-bold mb-5">Blog</h1>
     <div>
         {posts.map((post) => <PostCard post={post.data} />)}

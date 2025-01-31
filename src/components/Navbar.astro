@@ -1,0 +1,22 @@
+---
+import { cn } from "@shared/cn"
+import Link from "./Link.astro"
+import Container from "./Container.astro"
+---
+
+<nav class="mt-8">
+    <Container>
+        <h1 class={"mt-0 font-bold text-xl"}>
+            <Link href="/" class={"flex items-center"}>
+                <img
+                    class={"rounded-full mr-3 w-12 h-12"}
+                    src="/profile.webp"
+                    alt=""
+                    width="80"
+                    height="80"
+                />
+                Cosimo Matteini
+            </Link>
+        </h1>
+    </Container>
+</nav>

@@ -1,5 +1,4 @@
 ---
-import Header from "@components/Header.astro"
 import Document from "@layouts/Document.astro"
 import { Icon } from "astro-icon/components"
 import { first3, publishedPosts } from "@shared/blog"
@@ -16,8 +15,7 @@ const posts = await publishedPosts()
         description: "Software developer. Experiments, automates, and builds things for fun.",
     }}
 >
-    <Header size="medium" />
-    <div class="mt-5 text-center md:text-left">
+    <div class="text-center md:text-left">
         <h2 class="my-0 text-2xl">
             Software developer. Experiments, automates, and builds things for fun.
         </h2>

@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components"
-import Header from "@components/Header.astro"
 import HeaderTag from "@components/blog/HeaderTag.astro"
 import Document from "@layouts/Document.astro"
 import { formatDate } from "@shared/date"
@@ -37,7 +36,6 @@ const separatorStyle = "my-5 pb-0 border-t-[1px] border-dashed border-t-gray-500
         keywords: uniqueKeywords(current),
     }}
 >
-    <Header />
     <article>
         <header class="mb-6">
             <h1 class="mb-3 font-bold">{current.title}</h1>

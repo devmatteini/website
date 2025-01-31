@@ -7,6 +7,7 @@ import { websiteDomain, websiteUrl } from "@shared/metadata"
 import { ClientRouter } from "astro:transitions"
 import SpeedInsights from "@vercel/speed-insights/astro"
 import { isAnalyticsEnabled } from "@config/analytics"
+import Navbar from "../components/Navbar.astro"
 
 type MetaTagImage = {
     src: string
@@ -88,7 +89,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     <body class="bg-blackSand-500 text-white">
         {/* This <div> with flex is needed for sticky footer */}
         <div class="flex flex-col min-h-screen">
-            <main class="flex-grow mt-8">
+            <Navbar />
+            <main class="flex-grow">
                 <Container><slot /></Container>
             </main>
             <Footer />
