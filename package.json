@@ -19,6 +19,7 @@
     "dependencies": {
         "@astrojs/mdx": "4.0.3",
         "@astrojs/sitemap": "3.2.1",
+        "@astrojs/rss": "4.0.11",
         "@astrojs/tailwind": "5.1.4",
         "@astrojs/vercel": "8.0.1",
         "@fontsource-variable/inter": "5.1.1",
