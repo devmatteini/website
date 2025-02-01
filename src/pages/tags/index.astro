@@ -1,0 +1,24 @@
+---
+import Document from "@layouts/Document.astro"
+import { publishedTags } from "@shared/tags"
+
+const tags = await publishedTags()
+---
+
+<Document
+    metadata={{
+        title: "Tags",
+        description: "Tags",
+    }}
+>
+    <h1 class="font-bold mb-5">Tags</h1>
+    <div>
+        {
+            tags.map((tag) => (
+                <a href={tag.url} class="mx-2">
+                    {tag.name} ({tag.entries.length})
+                </a>
+            ))
+        }
+    </div>
+</Document>
