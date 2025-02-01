@@ -1,4 +1,4 @@
-import { type Post, publishedPosts } from "@shared/blog"
+import { byMostRecentDate, type Post, publishedPosts } from "@shared/blog"
 
 export type TagEntry = Post
 
@@ -25,8 +25,7 @@ export const tagUrl = (tag: string) => `/tags/${tag}`
 const enrichTag = (tag: string, entries: TagEntry[]): Tag => ({
     name: tag,
     url: tagUrl(tag),
-    // TODO: sort by byMostRecentDate
-    entries,
+    entries: entries.sort(byMostRecentDate),
 })
 
 const byName = (a: Tag, b: Tag): number => a.name.localeCompare(b.name)

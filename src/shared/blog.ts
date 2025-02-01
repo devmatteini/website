@@ -16,7 +16,7 @@ export type Post = Omit<RawPost, "data"> & { data: EnrichedPostData }
 
 const mostRecentDate = (x: Post) => (x.data.updatedOn ? x.data.updatedOn : x.data.date)
 
-const byMostRecentDate = (a: Post, b: Post): number =>
+export const byMostRecentDate = (a: Post, b: Post): number =>
     mostRecentDate(b).getTime() - mostRecentDate(a).getTime()
 
 const readyToPublish = (isDev: boolean) => (x: RawPost) => {
