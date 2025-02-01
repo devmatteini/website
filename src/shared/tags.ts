@@ -20,9 +20,11 @@ const groupBy = <T>(array: T[], key: (value: T) => string) =>
 const expandPostsByTag = (posts: Post[]) =>
     posts.flatMap((post) => post.data.tags.map((tag) => ({ ...post, tag })))
 
+export const tagUrl = (tag: string) => `/tags/${tag}`
+
 const enrichTag = (tag: string, entries: TagEntry[]): Tag => ({
     name: tag,
-    url: `/tags/${tag}`,
+    url: tagUrl(tag),
     entries,
 })
 
