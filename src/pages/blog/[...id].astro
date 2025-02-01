@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components"
 import HeaderTag from "@components/blog/HeaderTag.astro"
-import Link from "@components/Link.astro"
 import Document from "@layouts/Document.astro"
 import { formatDate } from "@shared/date"
 import { publishedPosts, type Post, findPrevNextPosts, uniqueKeywords } from "@shared/blog"
@@ -10,7 +9,7 @@ import NextPrevPosts from "@components/blog/NextPrevPosts.astro"
 import Markdown from "@components/Markdown.astro"
 import { render } from "astro:content"
 import TableOfContent from "@components/blog/TableOfContent.astro"
-import { tagUrl } from "../../shared/tags"
+import Tags from "@components/blog/Tags.astro"
 
 export async function getStaticPaths() {
     const posts = await publishedPosts()
@@ -60,7 +59,7 @@ const separatorStyle = "my-5 pb-0 border-t-[1px] border-dashed border-t-gray-500
                 </HeaderTag>
             </div>
             <div class="mb-3 flex flex-wrap items-center gap-2">
-                {current.tags.map((tag) => <Link href={tagUrl(tag)}>#{tag}</Link>)}
+                <Tags tags={current.tags} />
             </div>
             {current.tableOfContents && <TableOfContent headings={headings} />}
             <hr class={separatorStyle} />
