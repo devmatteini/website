@@ -40,18 +40,21 @@ const separatorStyle = "my-5 pb-0 border-t-[1px] border-dashed border-t-gray-500
         <header class="mb-6">
             <h1 class="mb-3 font-bold">{current.title}</h1>
             <div class="flex gap-2 text-sm items-center flex-wrap mb-3">
-                <HeaderTag text={formatDate(current.date)}>
+                <HeaderTag>
                     <Icon slot="icon" name="calendar" />
+                    {formatDate(current.date)}
                 </HeaderTag>
                 {
                     current.updatedOn && (
-                        <HeaderTag text={`Updated on ${formatDate(current.updatedOn)}`}>
+                        <HeaderTag>
                             <Icon slot="icon" name="pencil-square" />
+                            Updated on {formatDate(current.updatedOn)}
                         </HeaderTag>
                     )
                 }
-                <HeaderTag text={current.readingTime}>
+                <HeaderTag>
                     <Icon slot="icon" name="clock" />
+                    {current.readingTime}
                 </HeaderTag>
             </div>
             {current.tableOfContents && <TableOfContent headings={headings} />}
