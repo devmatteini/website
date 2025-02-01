@@ -6,9 +6,10 @@ import Link from "@components/Link.astro"
 
 type Props = {
     post: Post["data"]
+    showTags?: boolean
 }
 
-const { post } = Astro.props
+const { post, showTags = true } = Astro.props
 
 const statusLabel: Record<Post["data"]["status"], string | null> = {
     published: null,
@@ -32,6 +33,6 @@ const postDate = post.updatedOn ? `Updated on ${formatDate(post.updatedOn)}` : f
             </Link>
         </header>
         <p class="mt-2 break-words">{post.description}</p>
-        <Tags tags={post.tags} />
+        {showTags && <Tags tags={post.tags} />}
     </article>
 </div>

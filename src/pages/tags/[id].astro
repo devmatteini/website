@@ -1,6 +1,7 @@
 ---
 import Document from "@layouts/Document.astro"
 import { publishedTags, type Tag } from "@shared/tags"
+import PostCard from "@components/blog/PostCard.astro"
 
 export async function getStaticPaths() {
     const tags = await publishedTags()
@@ -23,7 +24,7 @@ const tag = Astro.props
         Entries tagged <span class="text-volcanoOrange">{tag.name}</span>
     </h1>
 
-    <div>
-        {tag.entries.map((entry) => <p>{entry.data.title}</p>)}
+    <div class="mb-5">
+        {tag.entries.map((entry) => <PostCard post={entry.data} showTags={false} />)}
     </div>
 </Document>
