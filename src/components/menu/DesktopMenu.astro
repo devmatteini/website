@@ -1,0 +1,31 @@
+---
+import { menuItems } from "./menu-items"
+import { match } from "ts-pattern"
+import Link from "../Link.astro"
+import ExternalLink from "../ExternalLink.astro"
+import { Icon } from "astro-icon/components"
+---
+
+<ul class="list-none flex flex-wrap items-center gap-5 m-0">
+    {
+        menuItems.map((item) => (
+            <li class="menu-item text-xl">
+                {match(item)
+                    .with({ type: "page" }, (page) => <Link href={page.route}>{page.label}</Link>)
+                    .with({ type: "social" }, (social) => (
+                        <ExternalLink href={social.link} ariaLabel={social.label}>
+                            <Icon name={social.icon} />
+                        </ExternalLink>
+                    ))
+                    .exhaustive()}
+            </li>
+        ))
+    }
+</ul>
+
+<style>
+    /* This is need to override ul styles space-y-3 in global.css */
+    .menu-item {
+        margin-top: 0 !important;
+    }
+</style>

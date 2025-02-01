@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components"
+---
+
+<button class="text-3xl" aria-label="Open menu" id={"open-menu"}>
+    <Icon name="menu" />
+</button>
+
+<button class="text-3xl hidden" aria-label="Open menu" id={"close-menu"}>
+    <Icon name="close" />
+</button>
+
+<script>
+    const initializeMenuActions = () => {
+        // TODO: extract these constants into a shared file for all components and them import it here https://docs.astro.build/en/guides/client-side-scripts/#client-side-scripts
+        const openMenuButton = document.getElementById("open-menu")
+        const closeMenuButton = document.getElementById("close-menu")
+        const menuContentButton = document.getElementById("mobile-menu-content")
+
+        openMenuButton?.addEventListener("click", () => {
+            openMenuButton?.classList.toggle("hidden")
+            closeMenuButton?.classList.toggle("hidden")
+            menuContentButton?.classList.toggle("hidden")
+        })
+
+        closeMenuButton?.addEventListener("click", () => {
+            closeMenuButton?.classList.toggle("hidden")
+            openMenuButton?.classList.toggle("hidden")
+            menuContentButton?.classList.toggle("hidden")
+        })
+    }
+
+    // NOTE: needed when View Transition is enabled, otherwise it will attach event listeners once and not when changing route
+    document.addEventListener("astro:page-load", initializeMenuActions)
+</script>
