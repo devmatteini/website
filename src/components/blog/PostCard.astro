@@ -27,7 +27,7 @@ const postDate = post.updatedOn ? `Updated on ${formatDate(post.updatedOn)}` : f
             <Link href={post.url}>
                 <p class="text-xl my-0 font-bold">
                     {post.title}
-                    {status && <span class="ml-2">{status}</span>}
+                    {status && <span class="ml-1">{status}</span>}
                 </p>
                 <p class="mb-0">{postDate}</p>
             </Link>
