@@ -25,6 +25,7 @@ export const tagUrl = (tag: string) => `/tags/${tag}`
 const enrichTag = (tag: string, entries: TagEntry[]): Tag => ({
     name: tag,
     url: tagUrl(tag),
+    // TODO: sort by byMostRecentDate
     entries,
 })
 

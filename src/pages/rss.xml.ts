@@ -4,6 +4,7 @@ import type { APIRoute } from "astro"
 
 export const GET: APIRoute = async (context) => {
     const blog = await publishedPosts()
+    // TODO: extract default url to @config
     const site = context.site ?? new URL("https://cosimomatteini.com")
 
     return rss({
