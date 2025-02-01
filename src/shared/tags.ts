@@ -26,8 +26,12 @@ const enrichTag = (tag: string, entries: TagEntry[]): Tag => ({
     entries,
 })
 
+const byName = (a: Tag, b: Tag): number => a.name.localeCompare(b.name)
+
 export const publishedTags = async (): Promise<Tag[]> => {
     const source = await publishedPosts()
     const tags = groupBy(expandPostsByTag(source), (x) => x.tag)
-    return Object.entries(tags).map(([tag, entries]) => enrichTag(tag, entries))
+    return Object.entries(tags)
+        .map(([tag, entries]) => enrichTag(tag, entries))
+        .sort(byName)
 }
