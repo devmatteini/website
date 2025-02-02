@@ -12,24 +12,21 @@ import { openMenuId, closeMenuId, mobileMenuContentId } from "./menu-ids"
 </button>
 
 <script is:inline define:vars={{ openMenuId, closeMenuId, mobileMenuContentId }}>
-    const initializeMenuActions = () => {
-        const openMenuButton = document.getElementById(openMenuId)
-        const closeMenuButton = document.getElementById(closeMenuId)
-        const menuContentButton = document.getElementById(mobileMenuContentId)
-
-        openMenuButton?.addEventListener("click", () => {
-            openMenuButton?.classList.toggle("hidden")
-            closeMenuButton?.classList.toggle("hidden")
-            menuContentButton?.classList.toggle("active")
+    function init() {
+        const openBtn = document.getElementById(openMenuId)
+        const closeBtn = document.getElementById(closeMenuId)
+        const menu = document.getElementById(mobileMenuContentId)
+        openBtn?.addEventListener("click", () => {
+            openBtn?.classList.toggle("hidden")
+            closeBtn?.classList.toggle("hidden")
+            menu?.classList.toggle("active")
         })
-
-        closeMenuButton?.addEventListener("click", () => {
-            closeMenuButton?.classList.toggle("hidden")
-            openMenuButton?.classList.toggle("hidden")
-            menuContentButton?.classList.toggle("active")
+        closeBtn?.addEventListener("click", () => {
+            closeBtn?.classList.toggle("hidden")
+            openBtn?.classList.toggle("hidden")
+            menu?.classList.toggle("active")
         })
     }
-
     // NOTE: needed when View Transition is enabled, otherwise it will attach event listeners once and not when changing route
-    document.addEventListener("astro:page-load", initializeMenuActions)
+    document.addEventListener("astro:page-load", init)
 </script>
