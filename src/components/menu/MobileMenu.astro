@@ -1,21 +1,21 @@
 ---
 import { Icon } from "astro-icon/components"
+import { openMenuId, closeMenuId, mobileMenuContentId } from "./menu-ids"
 ---
 
-<button aria-label="Open menu" id={"open-menu"}>
+<button aria-label="Open menu" id={openMenuId}>
     <Icon name="menu" size={30} />
 </button>
 
-<button class="hidden" aria-label="Open menu" id={"close-menu"}>
+<button class="hidden" aria-label="Open menu" id={closeMenuId}>
     <Icon name="close" size={30} />
 </button>
 
-<script>
+<script is:inline define:vars={{ openMenuId, closeMenuId, mobileMenuContentId }}>
     const initializeMenuActions = () => {
-        // TODO: extract these constants into a shared file for all components and them import it here https://docs.astro.build/en/guides/client-side-scripts/#client-side-scripts
-        const openMenuButton = document.getElementById("open-menu")
-        const closeMenuButton = document.getElementById("close-menu")
-        const menuContentButton = document.getElementById("mobile-menu-content")
+        const openMenuButton = document.getElementById(openMenuId)
+        const closeMenuButton = document.getElementById(closeMenuId)
+        const menuContentButton = document.getElementById(mobileMenuContentId)
 
         openMenuButton?.addEventListener("click", () => {
             openMenuButton?.classList.toggle("hidden")
