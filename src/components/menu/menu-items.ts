@@ -14,6 +14,11 @@ export type MenuItem =
 export const menuItems: readonly MenuItem[] = [
     {
         type: "page",
+        route: "/",
+        label: "/home",
+    },
+    {
+        type: "page",
         route: "/blog",
         label: "/blog",
     },
