@@ -2,12 +2,12 @@
 import { Icon } from "astro-icon/components"
 ---
 
-<button class="text-3xl" aria-label="Open menu" id={"open-menu"}>
-    <Icon name="menu" />
+<button aria-label="Open menu" id={"open-menu"}>
+    <Icon name="menu" size={30} />
 </button>
 
-<button class="text-3xl hidden" aria-label="Open menu" id={"close-menu"}>
-    <Icon name="close" />
+<button class="hidden" aria-label="Open menu" id={"close-menu"}>
+    <Icon name="close" size={30} />
 </button>
 
 <script>
@@ -20,13 +20,13 @@ import { Icon } from "astro-icon/components"
         openMenuButton?.addEventListener("click", () => {
             openMenuButton?.classList.toggle("hidden")
             closeMenuButton?.classList.toggle("hidden")
-            menuContentButton?.classList.toggle("hidden")
+            menuContentButton?.classList.toggle("active")
         })
 
         closeMenuButton?.addEventListener("click", () => {
             closeMenuButton?.classList.toggle("hidden")
             openMenuButton?.classList.toggle("hidden")
-            menuContentButton?.classList.toggle("hidden")
+            menuContentButton?.classList.toggle("active")
         })
     }
 

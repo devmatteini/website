@@ -1,9 +1,8 @@
 ---
 import Link from "./Link.astro"
 import Container from "./Container.astro"
-import DesktopMenu from "./menu/DesktopMenu.astro"
+import Menu from "./menu/Menu.astro"
 import MobileMenu from "./menu/MobileMenu.astro"
-import MobileMenuContent from "./menu/MobileMenuContent.astro"
 ---
 
 <nav class="mt-8">
@@ -26,9 +25,11 @@ import MobileMenuContent from "./menu/MobileMenuContent.astro"
                 <MobileMenu />
             </div>
             <div class="hidden md:block">
-                <DesktopMenu />
+                <Menu variant="desktop" />
             </div>
         </div>
-        <MobileMenuContent />
+        <div class="md:hidden">
+            <Menu id="mobile-menu-content" variant="mobile" />
+        </div>
     </Container>
 </nav>
