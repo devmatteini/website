@@ -5,7 +5,7 @@ import { baseUrl } from "@config/site"
 
 export const GET: APIRoute = async (context) => {
     const blog = await publishedPosts()
-    const site = context.site ?? new URL(baseUrl())
+    const site = context.site ?? new URL(baseUrl)
 
     return rss({
         title: "Cosimo Matteini's Blog",

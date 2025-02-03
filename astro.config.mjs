@@ -14,7 +14,7 @@ import { baseUrl } from "./config/site"
 
 // https://astro.build/config
 export default defineConfig({
-    site: baseUrl(),
+    site: baseUrl,
     markdown: {
         syntaxHighlight: false,
         rehypePlugins: [
