@@ -3,6 +3,7 @@ import ExternalLink from "@components/ExternalLink.astro"
 import { websiteUrl } from "@config/site"
 import type { Post } from "@shared/blog"
 import { Icon } from "astro-icon/components"
+import { iconSize } from "@shared/icon"
 
 type Props = {
     post: Post["data"]
@@ -23,8 +24,6 @@ const buildBlueskyUrl = (post: Post["data"]) => {
 }
 
 const { post } = Astro.props
-
-const iconSize = 22
 ---
 
 <div class="flex gap-2 items-center">
@@ -35,7 +34,7 @@ const iconSize = 22
         href={buildBlueskyUrl(post)}
         ariaLabel="Share on Bluesky"
     >
-        <Icon name="bluesky" size={iconSize} />
+        <Icon name="bluesky" size={iconSize.lg} />
     </ExternalLink>
 
     <ExternalLink
@@ -43,6 +42,6 @@ const iconSize = 22
         href={buildMastodonUrl(post)}
         ariaLabel="Share on Mastodon"
     >
-        <Icon name="mastodon" size={iconSize} />
+        <Icon name="mastodon" size={iconSize.lg} />
     </ExternalLink>
 </div>

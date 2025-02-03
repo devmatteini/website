@@ -3,8 +3,7 @@ import Container from "./Container.astro"
 import ExternalLink from "./ExternalLink.astro"
 import { Icon } from "astro-icon/components"
 import Link from "./Link.astro"
-
-const socialIconSize = 22
+import { iconSize } from "@shared/icon"
 ---
 
 <footer class="bg-blackSand-600 py-4">
@@ -16,28 +15,28 @@ const socialIconSize = 22
             </div>
             <div class="flex gap-4">
                 <Link href="/rss.xml" aria-label="Subscribe via RSS Feed">
-                    <Icon name="rss" size={socialIconSize} />
+                    <Icon name="rss" size={iconSize.lg} />
                 </Link>
                 <ExternalLink href="https://github.com/devmatteini/" ariaLabel="GitHub">
-                    <Icon name="github" size={socialIconSize} />
+                    <Icon name="github" size={iconSize.lg} />
                 </ExternalLink>
                 <ExternalLink
                     href="https://bsky.app/profile/cosimomatteini.com"
                     ariaLabel="Bluesky"
                 >
-                    <Icon name="bluesky" size={socialIconSize} />
+                    <Icon name="bluesky" size={iconSize.lg} />
                 </ExternalLink>
                 <ExternalLink href="https://hachyderm.io/@cosimomatteini" ariaLabel="Mastodon">
-                    <Icon name="mastodon" size={socialIconSize} />
+                    <Icon name="mastodon" size={iconSize.lg} />
                 </ExternalLink>
                 <ExternalLink
                     href="https://www.linkedin.com/in/cosimo-matteini-138a22188"
                     ariaLabel="Linkedin"
                 >
-                    <Icon name="linkedin" size={socialIconSize} />
+                    <Icon name="linkedin" size={iconSize.lg} />
                 </ExternalLink>
                 <ExternalLink href="https://twitter.com/MatteiniCosimo" ariaLabel="Twitter">
-                    <Icon name="twitter" size={socialIconSize} />
+                    <Icon name="twitter" size={iconSize.lg} />
                 </ExternalLink>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components"
 import { first3, publishedPosts } from "@shared/blog"
 import PostCard from "@components/blog/PostCard.astro"
 import Link from "@components/Link.astro"
+import { iconSize } from "@shared/icon"
 
 const posts = await publishedPosts()
 ---
@@ -25,7 +26,7 @@ const posts = await publishedPosts()
     <h3>
         <Link href="/blog" class="flex items-center">
             All posts
-            <Icon name="box-arrow-in-right" class="ml-2" size={30} />
+            <Icon name="box-arrow-in-right" class="ml-2" size={iconSize.xl} />
         </Link>
     </h3>
 </Document>

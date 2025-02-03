@@ -2,13 +2,13 @@
 import { Icon } from "astro-icon/components"
 import { cn } from "@shared/cn"
 import { match } from "ts-pattern"
+import { iconSize } from "@shared/icon"
 
 type Props = {
     variant: "info" | "warning"
 }
 
 const { variant } = Astro.props
-const iconSize = 18
 ---
 
 <div
@@ -20,8 +20,8 @@ const iconSize = 18
     <div class="text-base mr-4">
         {
             match(variant)
-                .with("info", () => <Icon name="info-circle-fill" size={iconSize} />)
-                .with("warning", () => <Icon name="warning-fill" size={iconSize} />)
+                .with("info", () => <Icon name="info-circle-fill" size={iconSize.sm} />)
+                .with("warning", () => <Icon name="warning-fill" size={iconSize.sm} />)
                 .exhaustive()
         }
     </div>

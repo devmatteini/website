@@ -2,6 +2,7 @@
 import Link from "@components/Link.astro"
 import type { Post } from "@shared/blog"
 import { Icon } from "astro-icon/components"
+import { iconSize } from "@shared/icon"
 
 type Props = {
     previous: Post["data"] | undefined
@@ -10,21 +11,20 @@ type Props = {
 const { previous, next } = Astro.props
 
 const linkStyle = "flex items-center gap-2"
-const iconSize = 22
 ---
 
 <div class="mt-3 flex flex-col sm:flex-row sm:justify-between gap-3">
     {
         previous && (
             <Link href={previous.url} class={linkStyle}>
-                <Icon name="arrow-left-square" size={iconSize} /> {previous.title}
+                <Icon name="arrow-left-square" size={iconSize.lg} /> {previous.title}
             </Link>
         )
     }
     {
         next && (
             <Link href={next.url} class={linkStyle}>
-                {next.title} <Icon name="arrow-right-square" size={iconSize} />
+                {next.title} <Icon name="arrow-right-square" size={iconSize.lg} />
             </Link>
         )
     }

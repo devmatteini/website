@@ -4,6 +4,7 @@ import ExternalLink from "../ExternalLink.astro"
 import { Icon } from "astro-icon/components"
 import { cn } from "@shared/cn"
 import { mobileMenuContentId } from "./menu-ids"
+import { iconSize } from "@shared/icon"
 
 type Props = {
     variant: "mobile" | "desktop"
@@ -40,7 +41,7 @@ const idByVariant: Record<Props["variant"], string | undefined> = {
     </li>
     <li class="menu-item">
         <ExternalLink href={"https://github.com/devmatteini/"} ariaLabel={"GitHub"}>
-            <Icon name={"github"} size={22} />
+            <Icon name={"github"} size={iconSize.lg} />
         </ExternalLink>
     </li>
 </ul>
