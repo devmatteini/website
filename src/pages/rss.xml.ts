@@ -1,11 +1,11 @@
 import rss from "@astrojs/rss"
 import { publishedPosts } from "@shared/blog"
 import type { APIRoute } from "astro"
+import { baseUrl } from "@config/site"
 
 export const GET: APIRoute = async (context) => {
     const blog = await publishedPosts()
-    // TODO: extract default url to @config
-    const site = context.site ?? new URL("https://cosimomatteini.com")
+    const site = context.site ?? new URL(baseUrl())
 
     return rss({
         title: "Cosimo Matteini's Blog",

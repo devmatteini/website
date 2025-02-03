@@ -10,10 +10,11 @@ import { isAnalyticsEnabled } from "./config/analytics"
 import vercel from "@astrojs/vercel"
 import sitemap from "@astrojs/sitemap"
 import { fixAstroVercelSitemap } from "./fix-astro-vercel-sitemap"
+import { baseUrl } from "./config/site"
 
 // https://astro.build/config
 export default defineConfig({
-    site: "https://cosimomatteini.com",
+    site: baseUrl(),
     markdown: {
         syntaxHighlight: false,
         rehypePlugins: [
