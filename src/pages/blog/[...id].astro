@@ -28,6 +28,7 @@ const { previous, next } = findPrevNextPosts(post.id, posts)
 const { Content, headings } = await render(post)
 
 const separatorStyle = "my-5 pb-0 border-t-[1px] border-dashed border-t-gray-500"
+const headerIconSize = 16
 ---
 
 <Document
@@ -42,19 +43,19 @@ const separatorStyle = "my-5 pb-0 border-t-[1px] border-dashed border-t-gray-500
             <h1 class="mb-3 font-bold">{current.title}</h1>
             <div class="flex gap-2 text-sm items-center flex-wrap mb-3">
                 <HeaderTag>
-                    <Icon slot="icon" name="calendar" />
+                    <Icon slot="icon" name="calendar" size={headerIconSize} />
                     {formatDate(current.date)}
                 </HeaderTag>
                 {
                     current.updatedOn && (
                         <HeaderTag>
-                            <Icon slot="icon" name="pencil-square" />
+                            <Icon slot="icon" name="pencil-square" size={headerIconSize} />
                             Updated on {formatDate(current.updatedOn)}
                         </HeaderTag>
                     )
                 }
                 <HeaderTag>
-                    <Icon slot="icon" name="clock" />
+                    <Icon slot="icon" name="clock" size={headerIconSize} />
                     {current.readingTime}
                 </HeaderTag>
             </div>

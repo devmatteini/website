@@ -10,21 +10,21 @@ type Props = {
 const { previous, next } = Astro.props
 
 const linkStyle = "flex items-center gap-2"
-const iconStyle = "text-xl"
+const iconSize = 22
 ---
 
-<div class="mt-3 flex flex-col sm:flex-row sm:justify-between gap-2">
+<div class="mt-3 flex flex-col sm:flex-row sm:justify-between gap-3">
     {
         previous && (
             <Link href={previous.url} class={linkStyle}>
-                <Icon name="arrow-left-square" class={iconStyle} /> {previous.title}
+                <Icon name="arrow-left-square" size={iconSize} /> {previous.title}
             </Link>
         )
     }
     {
         next && (
             <Link href={next.url} class={linkStyle}>
-                {next.title} <Icon name="arrow-right-square" class={iconStyle} />
+                {next.title} <Icon name="arrow-right-square" size={iconSize} />
             </Link>
         )
     }

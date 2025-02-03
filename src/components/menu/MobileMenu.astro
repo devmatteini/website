@@ -1,14 +1,16 @@
 ---
 import { Icon } from "astro-icon/components"
 import { openMenuId, closeMenuId, mobileMenuContentId } from "./menu-ids"
+
+const iconSize = 30
 ---
 
 <button aria-label="Open menu" id={openMenuId}>
-    <Icon name="menu" size={30} />
+    <Icon name="menu" size={iconSize} />
 </button>
 
 <button class="hidden" aria-label="Open menu" id={closeMenuId}>
-    <Icon name="close" size={30} />
+    <Icon name="close" size={iconSize} />
 </button>
 
 <script is:inline define:vars={{ openMenuId, closeMenuId, mobileMenuContentId }}>

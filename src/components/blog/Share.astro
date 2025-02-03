@@ -23,24 +23,26 @@ const buildBlueskyUrl = (post: Post["data"]) => {
 }
 
 const { post } = Astro.props
+
+const iconSize = 22
 ---
 
 <div class="flex gap-2 items-center">
     <span>Share on</span>
 
     <ExternalLink
-        className="flex items-center gap-x-2 text-xl"
+        className="flex items-center gap-x-2"
         href={buildBlueskyUrl(post)}
         ariaLabel="Share on Bluesky"
     >
-        <Icon name="bluesky" />
+        <Icon name="bluesky" size={iconSize} />
     </ExternalLink>
 
     <ExternalLink
-        className="flex items-center gap-x-2 text-xl"
+        className="flex items-center gap-x-2"
         href={buildMastodonUrl(post)}
         ariaLabel="Share on Mastodon"
     >
-        <Icon name="mastodon" />
+        <Icon name="mastodon" size={iconSize} />
     </ExternalLink>
 </div>

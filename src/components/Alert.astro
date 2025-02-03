@@ -8,6 +8,7 @@ type Props = {
 }
 
 const { variant } = Astro.props
+const iconSize = 18
 ---
 
 <div
@@ -19,8 +20,8 @@ const { variant } = Astro.props
     <div class="text-base mr-4">
         {
             match(variant)
-                .with("info", () => <Icon name="info-circle-fill" />)
-                .with("warning", () => <Icon name="warning-fill" />)
+                .with("info", () => <Icon name="info-circle-fill" size={iconSize} />)
+                .with("warning", () => <Icon name="warning-fill" size={iconSize} />)
                 .exhaustive()
         }
     </div>
