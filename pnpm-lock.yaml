@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@astrojs/mdx':
         specifier: 4.1.0
-        version: 4.1.0(astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))
+        version: 4.1.0(astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))
       '@astrojs/rss':
         specifier: 4.0.11
         version: 4.0.11
@@ -19,10 +19,10 @@ importers:
         version: 3.2.1
       '@astrojs/tailwind':
         specifier: 5.1.5
-        version: 5.1.5(astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3)))(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3))
+        version: 5.1.5(astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3)))(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3))
       '@astrojs/vercel':
         specifier: 8.1.0
-        version: 8.1.0(astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(rollup@4.37.0)
+        version: 8.1.0(astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(rollup@4.37.0)
       '@fontsource-variable/inter':
         specifier: 5.1.1
         version: 5.1.1
@@ -31,7 +31,7 @@ importers:
         version: 1.1.0
       astro:
         specifier: 5.4.1
-        version: 5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
+        version: 5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
       astro-icon:
         specifier: 1.1.5
         version: 1.1.5
@@ -50,6 +50,9 @@ importers:
       rehype-slug:
         specifier: 6.0.0
         version: 6.0.0
+      sharp:
+        specifier: 0.33.5
+        version: 0.33.5
       shiki:
         specifier: 1.29.2
         version: 1.29.2
@@ -69,6 +72,9 @@ importers:
       '@types/eslint__js':
         specifier: 8.42.3
         version: 8.42.3
+      '@types/node':
+        specifier: 22.13.11
+        version: 22.13.11
       eslint:
         specifier: 9.21.0
         version: 9.21.0(jiti@1.21.7)
@@ -86,7 +92,7 @@ importers:
         version: 0.14.1
       tailwindcss:
         specifier: 3.4.17
-        version: 3.4.17(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3))
+        version: 3.4.17(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3))
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -3956,12 +3962,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.1.0(astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))':
+  '@astrojs/mdx@4.1.0(astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))':
     dependencies:
       '@astrojs/markdown-remark': 6.2.0
       '@mdx-js/mdx': 3.1.0(acorn@8.14.1)
       acorn: 8.14.1
-      astro: 5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
+      astro: 5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
       es-module-lexer: 1.6.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -3990,13 +3996,13 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.2
 
-  '@astrojs/tailwind@5.1.5(astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3)))(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3))':
+  '@astrojs/tailwind@5.1.5(astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3)))(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3))':
     dependencies:
-      astro: 5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
+      astro: 5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
       autoprefixer: 10.4.21(postcss@8.5.3)
       postcss: 8.5.3
-      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3))
-      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3))
+      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3))
+      tailwindcss: 3.4.17(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3))
     transitivePeerDependencies:
       - ts-node
 
@@ -4012,14 +4018,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/vercel@8.1.0(astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(rollup@4.37.0)':
+  '@astrojs/vercel@8.1.0(astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0))(rollup@4.37.0)':
     dependencies:
       '@astrojs/internal-helpers': 0.6.0
       '@vercel/analytics': 1.5.0
       '@vercel/edge': 1.2.1
       '@vercel/nft': 0.29.2(rollup@4.37.0)
       '@vercel/routing-utils': 5.0.4
-      astro: 5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
+      astro: 5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0)
       esbuild: 0.25.1
       tinyglobby: 0.2.12
     transitivePeerDependencies:
@@ -4612,7 +4618,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 22.13.11
 
   '@types/tar@6.1.13':
     dependencies:
@@ -5059,7 +5065,7 @@ snapshots:
       - debug
       - supports-color
 
-  astro@5.4.1(@types/node@16.18.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0):
+  astro@5.4.1(@types/node@22.13.11)(jiti@1.21.7)(rollup@4.37.0)(typescript@5.7.3)(yaml@2.7.0):
     dependencies:
       '@astrojs/compiler': 2.11.0
       '@astrojs/internal-helpers': 0.6.0
@@ -5111,8 +5117,8 @@ snapshots:
       unist-util-visit: 5.0.0
       unstorage: 1.15.0
       vfile: 6.0.3
-      vite: 6.2.2(@types/node@16.18.11)(jiti@1.21.7)(yaml@2.7.0)
-      vitefu: 1.0.6(vite@6.2.2(@types/node@16.18.11)(jiti@1.21.7)(yaml@2.7.0))
+      vite: 6.2.2(@types/node@22.13.11)(jiti@1.21.7)(yaml@2.7.0)
+      vitefu: 1.0.6(vite@6.2.2(@types/node@22.13.11)(jiti@1.21.7)(yaml@2.7.0))
       which-pm: 3.0.1
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
@@ -5347,13 +5353,11 @@ snapshots:
     dependencies:
       color-name: 1.1.4
       simple-swizzle: 0.2.2
-    optional: true
 
   color@4.2.3:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
-    optional: true
 
   combined-stream@1.0.8:
     dependencies:
@@ -6259,8 +6263,7 @@ snapshots:
       is-alphabetical: 2.0.1
       is-decimal: 2.0.1
 
-  is-arrayish@0.3.2:
-    optional: true
+  is-arrayish@0.3.2: {}
 
   is-binary-path@2.1.0:
     dependencies:
@@ -7195,13 +7198,13 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.5.3
 
-  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3)):
+  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3)):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.7.0
     optionalDependencies:
       postcss: 8.5.3
-      ts-node: 10.9.1(@types/node@16.18.11)(typescript@5.7.3)
+      ts-node: 10.9.1(@types/node@22.13.11)(typescript@5.7.3)
 
   postcss-nested@6.2.0(postcss@8.5.3):
     dependencies:
@@ -7571,7 +7574,6 @@ snapshots:
       '@img/sharp-wasm32': 0.33.5
       '@img/sharp-win32-ia32': 0.33.5
       '@img/sharp-win32-x64': 0.33.5
-    optional: true
 
   shebang-command@2.0.0:
     dependencies:
@@ -7599,7 +7601,6 @@ snapshots:
   simple-swizzle@0.2.2:
     dependencies:
       is-arrayish: 0.3.2
-    optional: true
 
   sisteransi@1.0.5: {}
 
@@ -7720,7 +7721,7 @@ snapshots:
 
   tailwind-merge@2.6.0: {}
 
-  tailwindcss@3.4.17(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3)):
+  tailwindcss@3.4.17(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -7739,7 +7740,7 @@ snapshots:
       postcss: 8.5.3
       postcss-import: 15.1.0(postcss@8.5.3)
       postcss-js: 4.0.1(postcss@8.5.3)
-      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3))
+      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3))
       postcss-nested: 6.2.0(postcss@8.5.3)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -7837,14 +7838,14 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  ts-node@10.9.1(@types/node@16.18.11)(typescript@5.7.3):
+  ts-node@10.9.1(@types/node@22.13.11)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 16.18.11
+      '@types/node': 22.13.11
       acorn: 8.14.1
       acorn-walk: 8.3.4
       arg: 4.1.3
@@ -8033,20 +8034,20 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@6.2.2(@types/node@16.18.11)(jiti@1.21.7)(yaml@2.7.0):
+  vite@6.2.2(@types/node@22.13.11)(jiti@1.21.7)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3
       rollup: 4.37.0
     optionalDependencies:
-      '@types/node': 16.18.11
+      '@types/node': 22.13.11
       fsevents: 2.3.3
       jiti: 1.21.7
       yaml: 2.7.0
 
-  vitefu@1.0.6(vite@6.2.2(@types/node@16.18.11)(jiti@1.21.7)(yaml@2.7.0)):
+  vitefu@1.0.6(vite@6.2.2(@types/node@22.13.11)(jiti@1.21.7)(yaml@2.7.0)):
     optionalDependencies:
-      vite: 6.2.2(@types/node@16.18.11)(jiti@1.21.7)(yaml@2.7.0)
+      vite: 6.2.2(@types/node@22.13.11)(jiti@1.21.7)(yaml@2.7.0)
 
   volar-service-css@0.0.62(@volar/language-service@2.4.12):
     dependencies:
