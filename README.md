@@ -6,37 +6,37 @@
 
 ```shell
 git clone https://github.com/devmatteini/website
-npm install
+pnpm install
 ```
 
 ## Usage
 
 ```shell
 # start web server http://localhost:4321
-npm run dev
+pnpm run dev
 
 # checks for astro files and typecheck typescript files
-npm run check
+pnpm run check
 
-npm run lint
-npm run format
+pnpm run lint
+pnpm run format
 ```
 
 ## Built with
 
 Core:
 
--   [Astro](https://astro.build/)
--   [tailwindcss](https://tailwindcss.com/)
+- [Astro](https://astro.build/)
+- [tailwindcss](https://tailwindcss.com/)
 
 Content management for blog:
 
--   [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
 
 Hosting:
 
--   [Vercel](https://vercel.com/)
+- [Vercel](https://vercel.com/)
 
 Analytics:
 
--   [Vercel Web Analytics](https://vercel.com/docs/analytics)
+- [Vercel Web Analytics](https://vercel.com/docs/analytics)

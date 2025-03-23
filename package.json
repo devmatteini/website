@@ -7,9 +7,9 @@
         "start": "astro preview",
         "build": "astro build",
         "typecheck": "tsc --noEmit",
-        "typecheck:w": "npm run typecheck -- --watch",
+        "typecheck:w": "pnpm run typecheck --watch",
         "check": "astro check",
-        "check:w": "npm run check -- --watch",
+        "check:w": "pnpm run check --watch",
         "format": "prettier -w src config",
         "format:check": "prettier --check src/**/*.{js,ts,tsx,astro} config/**/*.ts",
         "lint": "eslint src config",
@@ -48,5 +48,6 @@
         "typescript": "5.7.3",
         "typescript-eslint": "8.22.0",
         "vercel": "39.4.2"
-    }
+    },
+    "packageManager": "pnpm@9.15.4"
 }
