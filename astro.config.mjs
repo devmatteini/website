@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config"
-import tailwind from "@astrojs/tailwind"
+import tailwindcss from "@tailwindcss/vite"
 import icon from "astro-icon"
 import mdx from "@astrojs/mdx"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
@@ -13,6 +13,9 @@ import { baseUrl } from "./config/site"
 
 // https://astro.build/config
 export default defineConfig({
+    vite: {
+        plugins: [tailwindcss()],
+    },
     site: baseUrl,
     markdown: {
         syntaxHighlight: false,
@@ -22,7 +25,7 @@ export default defineConfig({
             prettyCodePlugins,
         ],
     },
-    integrations: [tailwind(), icon(), mdx(), sitemap(), fixAstroVercelSitemap()],
+    integrations: [icon(), mdx(), sitemap(), fixAstroVercelSitemap()],
     output: "static",
     adapter: vercel(),
 })

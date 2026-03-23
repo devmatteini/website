@@ -1,67 +1,87 @@
+@import "tailwindcss";
 @import "./syntax-highlighting.css";
 
+@theme {
+    --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --color-blackSand-500: #131418;
+    --color-blackSand-600: #0f1013;
+    --color-blackSand-700: #0b0c0e;
+    --color-volcanoOrange: #ff5a22;
+    --color-iceBlue: #40afcc;
+    --color-grayRock: #424346;
+}
+
 /* Global styles for basic elements */
-h1 {
-    @apply text-5xl;
-}
-h2 {
-    @apply text-4xl;
-}
-h3 {
-    @apply text-3xl;
-}
-h4 {
-    @apply text-2xl;
-}
-h5 {
-    @apply text-xl;
-}
-h6 {
-    @apply text-lg;
-}
+@layer base {
+    h1 {
+        @apply text-5xl;
+    }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    @apply mt-6 mb-4;
-}
+    h2 {
+        @apply text-4xl;
+    }
 
-p {
-    @apply mb-4;
-}
+    h3 {
+        @apply text-3xl;
+    }
 
-blockquote {
-    @apply mb-4 border-l-4 border-gray-300 text-gray-300 pl-4 text-xl;
-}
+    h4 {
+        @apply text-2xl;
+    }
 
-blockquote p {
-    margin-bottom: 0;
-}
+    h5 {
+        @apply text-xl;
+    }
 
-ol {
-    @apply list-decimal space-y-3 pl-8;
-}
+    h6 {
+        @apply text-lg;
+    }
 
-ul {
-    @apply list-disc space-y-3 pl-8;
-}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply mt-6 mb-4;
+    }
 
-ol,
-ul {
-    @apply mb-4;
-}
+    p {
+        @apply mb-4;
+    }
 
-hr {
-    @apply border-t-2 pb-8;
-}
+    blockquote {
+        @apply mb-4 border-l-4 border-gray-300 text-gray-300 pl-4 text-xl;
+    }
 
-details {
-    @apply mb-4;
-}
+    blockquote p {
+        margin-bottom: 0;
+    }
 
-details summary {
-    @apply cursor-pointer;
+    ol {
+        @apply list-decimal space-y-3 pl-8;
+    }
+
+    ul {
+        @apply list-disc space-y-3 pl-8;
+    }
+
+    ol,
+    ul {
+        @apply mb-4;
+    }
+
+    hr {
+        @apply border-t-2 pb-8;
+    }
+
+    details {
+        @apply mb-4;
+    }
+
+    details summary {
+        @apply cursor-pointer;
+    }
 }
