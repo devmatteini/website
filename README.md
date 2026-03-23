@@ -36,7 +36,3 @@ Content management for blog:
 Hosting:
 
 - [Vercel](https://vercel.com/)
-
-Analytics:
-
-- [Vercel Web Analytics](https://vercel.com/docs/analytics)
