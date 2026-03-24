@@ -35,4 +35,4 @@ Content management for blog:
 
 Hosting:
 
-- [Vercel](https://vercel.com/)
+- [Netlify](https://www.netlify.com/)

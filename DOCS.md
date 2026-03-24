@@ -1,17 +1,13 @@
 # DOCS
 
-## Vercel
+## Netlify
 
 ### Setup
 
-1. Install [vercel cli](https://vercel.com/docs/cli#installing-vercel-cli)
-2. Login with `vercel login`
-3. Create new project with `vercel link`
-4. Add `.vercel/` to `.gitignore`
-5. Inside `.vercel/project.json` you can find projectId and orgId
-6. Create [access token](https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token#creating-an-access-token)
-7. Add Secrets to Github Repository `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `VERCEL_TOKEN`
-
-### Deploy
-
-https://vercel.com/guides/how-can-i-use-github-actions-with-vercel
+1. Run `pnpm install`
+2. Login with `pnpm netlify login`
+3. Create new empty project with `pnpm netlify sites:create --name <name>`
+4. Add `.netlify` to `.gitignore`
+5. Inside `.netlify/state.json` you can find siteId
+6. Create access token: Netlify dashboard → User settings → Personal access tokens
+7. Add Secrets to Github Repository `NETLIFY_SITE_ID`, `NETLIFY_AUTH_TOKEN`

@@ -1,9 +1,5 @@
 name: CI/CD
 
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
 on:
   workflow_dispatch:
   push:
@@ -41,15 +37,11 @@ jobs:
       - name: Typecheck
         run: pnpm run check
 
-      - name: Pull Vercel Environment Information
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: pnpm run ci:setup-vercel
-
       - name: Build
         run: pnpm run build
 
-      - name: Deploy to Vercel
+      - name: Deploy to Netlify
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: pnpm run ci:deploy
