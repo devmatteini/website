@@ -4,11 +4,11 @@ import { openMenuId, closeMenuId, mobileMenuContentId } from "./menu-ids"
 import { iconSize } from "@shared/icon"
 ---
 
-<button aria-label="Open menu" id={openMenuId}>
+<button aria-label="Open menu" id={openMenuId} class="cursor-pointer">
     <Icon name="menu" size={iconSize.xl} />
 </button>
 
-<button class="hidden" aria-label="Open menu" id={closeMenuId}>
+<button class="cursor-pointer hidden" aria-label="Open menu" id={closeMenuId}>
     <Icon name="close" size={iconSize.xl} />
 </button>
 
