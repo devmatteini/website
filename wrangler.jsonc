@@ -1,8 +1,0 @@
-{
-    "name": "website",
-    "compatibility_date": "2026-03-23",
-    "assets": {
-        "directory": "./dist",
-        "not_found_handling": "404-page"
-    }
-}

@@ -13,12 +13,14 @@
         "format": "prettier -w src config",
         "format:check": "prettier --check src/**/*.{js,ts,tsx,astro} config/**/*.ts",
         "lint": "eslint src config",
-        "deploy": "wrangler deploy"
+        "ci:setup-vercel": "vercel pull --yes --environment production --token \"$VERCEL_TOKEN\"",
+        "ci:deploy": "vercel deploy --prebuilt --prod --token \"$VERCEL_TOKEN\""
     },
     "dependencies": {
         "@astrojs/mdx": "5.0.2",
         "@astrojs/rss": "4.0.17",
         "@astrojs/sitemap": "3.7.1",
+        "@astrojs/vercel": "10.0.2",
         "@fontsource-variable/inter": "5.2.8",
         "astro": "6.0.8",
         "astro-icon": "1.1.5",
@@ -44,8 +46,8 @@
         "tailwindcss": "4.2.2",
         "typescript": "5.7.3",
         "typescript-eslint": "8.57.2",
-        "@types/node": "24.12.0",
-        "wrangler": "4.76.0"
+        "vercel": "39.4.2",
+        "@types/node": "24.12.0"
     },
     "packageManager": "pnpm@10.32.1"
 }

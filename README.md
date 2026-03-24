@@ -35,4 +35,4 @@ Content management for blog:
 
 Hosting:
 
-- [Cloudflare](https://www.cloudflare.com/)
+- [Vercel](https://vercel.com/)
